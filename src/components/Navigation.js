@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectToken } from '../store/user/selectors';
+import { selectToken, selectUser } from '../store/user/selectors';
 import { logOut } from '../store/user/slice';
 
 export const Navigation = () => {
@@ -10,6 +10,7 @@ export const Navigation = () => {
   const dispatch = useDispatch();
 
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
 
   return (
     <Nav>
@@ -21,15 +22,21 @@ export const Navigation = () => {
         <span />
         <span />
       </Hamburger>
-      <Menu open={open}>
-        {token ? (
-          <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
-        ) : (
+      {!token ? (
+        <Menu open={open}>
           <MenuLink href="/login">Login</MenuLink>
-        )}
-        <MenuLink href="/employee/creation">Create new Employee</MenuLink>
-        <MenuLink href="/styled">Empty 2</MenuLink>
-      </Menu>
+        </Menu>
+      ) : !user.isAdmin ? (
+        <Menu open={open}>
+          <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
+        </Menu>
+      ) : (
+        <Menu open={open}>
+          <MenuLink href="/employee/creation">Create new Employee</MenuLink>
+          <MenuLink href="/styled">Empty 2</MenuLink>
+          <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
+        </Menu>
+      )}
     </Nav>
   );
 };
