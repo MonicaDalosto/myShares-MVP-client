@@ -35,7 +35,7 @@ export const Navigation = () => {
         <Menu open={open}>
           <MenuLink href="/employee/settings">Employee Settings</MenuLink>
           <MenuLink href="/contract/settings">Contract Settings</MenuLink>
-          <MenuLink href="/styled">Empty 2</MenuLink>
+          <MenuLink href="/company/settings">Company Settings</MenuLink>
           <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
         </Menu>
       )}
