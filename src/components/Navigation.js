@@ -11,6 +11,7 @@ export const Navigation = () => {
 
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
+  const isAdmin = !user ? false : user.isAdmin;
 
   return (
     <Nav>
@@ -26,13 +27,14 @@ export const Navigation = () => {
         <Menu open={open}>
           <MenuLink href="/login">Login</MenuLink>
         </Menu>
-      ) : !user.isAdmin ? (
+      ) : !isAdmin ? (
         <Menu open={open}>
           <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
         </Menu>
       ) : (
         <Menu open={open}>
-          <MenuLink href="/employee/creation">Create new Employee</MenuLink>
+          <MenuLink href="/employee/settings">Employee Settings</MenuLink>
+          <MenuLink href="/contract/settings">Contract Settings</MenuLink>
           <MenuLink href="/styled">Empty 2</MenuLink>
           <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
         </Menu>
