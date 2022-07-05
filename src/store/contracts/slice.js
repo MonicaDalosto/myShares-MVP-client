@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  allEmployees: null
+  allEmployees: null,
+  employeeContractsSummary: null
 };
 
 export const employeeSlice = createSlice({
@@ -10,10 +11,14 @@ export const employeeSlice = createSlice({
   reducers: {
     setAllEmployees: (state, action) => {
       state.allEmployees = action.payload;
+    },
+    setEmployeeContractsSummary: (state, action) => {
+      state.employeeContractsSummary = action.payload;
     }
   }
 });
 
-export const { setAllEmployees } = employeeSlice.actions;
+export const { setAllEmployees, setEmployeeContractsSummary } =
+  employeeSlice.actions;
 
 export default employeeSlice.reducer;

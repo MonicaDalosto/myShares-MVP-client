@@ -9,6 +9,7 @@ import {
   CompanySettings,
   CreateContract,
   CreateEmployee,
+  EmployeeDashboard,
   Homepage,
   Login,
   SignUp
@@ -33,6 +34,7 @@ function App() {
         <Route path="/employee/settings" element={<CreateEmployee />} />
         <Route path="/contract/settings" element={<CreateContract />} />
         <Route path="/company/settings" element={<CompanySettings />} />
+        <Route path="/mydashboard" element={<EmployeeDashboard />} />
       </Routes>
     </div>
   );

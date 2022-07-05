@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectToken } from '../store/user/selectors';
 import { selectCompany } from '../store/company/selectors';
+import { updateCompanyData } from '../store/company/thunks';
 
 const CompanySettings = () => {
   const dispatch = useDispatch();
@@ -34,13 +35,13 @@ const CompanySettings = () => {
 
   const submitForm = event => {
     event.preventDefault();
-    // dispatch(
-    //   updateCompanyData(
-    //     name,
-    //     parseFloat(currentValuation),
-    //     Number(totalCompanyShares)
-    //   )
-    // );
+    dispatch(
+      updateCompanyData(
+        name,
+        Number(currentValuation),
+        Number(totalCompanyShares)
+      )
+    );
   };
 
   return (

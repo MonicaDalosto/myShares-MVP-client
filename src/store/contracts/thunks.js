@@ -1,7 +1,7 @@
 import { apiUrl } from '../../config/constants';
 import axios from 'axios';
 import { showMessageWithTimeout } from '../appState/thunks';
-import { setAllEmployees } from './slice';
+import { setAllEmployees, setEmployeeContractsSummary } from './slice';
 
 export const getAllEmployees = () => async (dispatch, getState) => {
   try {
@@ -46,3 +46,18 @@ export const createNewContract =
       console.log(error.response);
     }
   };
+
+export const getEmployeeContractsSummary = id => async (dispatch, getState) => {
+  try {
+    const token = getState().user.token;
+    // const userId = getState().user.profile.id;
+    const response = await axios.get(`${apiUrl}/employees/calculation/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    // console.log(response.data);
+    dispatch(setEmployeeContractsSummary(response.data));
+  } catch (error) {
+    console.log(error.message);
+  }
+};
