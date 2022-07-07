@@ -1,7 +1,11 @@
 import { apiUrl } from '../../config/constants';
 import axios from 'axios';
 import { showMessageWithTimeout } from '../appState/thunks';
-import { setAllEmployees, setEmployeeContractsSummary } from './slice';
+import {
+  setAllEmployees,
+  setEmployeeContractsSummary,
+  setAllEmployeeContractsSummary
+} from './slice';
 
 export const getAllEmployees = () => async (dispatch, getState) => {
   try {
@@ -50,14 +54,31 @@ export const createNewContract =
 export const getEmployeeContractsSummary = id => async (dispatch, getState) => {
   try {
     const token = getState().user.token;
-    // const userId = getState().user.profile.id;
     const response = await axios.get(`${apiUrl}/employees/calculation/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    // console.log(response.data);
+    // console.log('employee contracts summary: ', response.data);
     dispatch(setEmployeeContractsSummary(response.data));
   } catch (error) {
     console.log(error.message);
   }
 };
+
+export const getAllEmployeesContractsSummary =
+  () => async (dispatch, getState) => {
+    try {
+      const token = getState().user.token;
+
+      const response = await axios.get(
+        `${apiUrl}/employees/allemployeescalculation`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+      // console.log(response.data);
+      dispatch(setAllEmployeeContractsSummary(response.data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };

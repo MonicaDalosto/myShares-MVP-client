@@ -7,9 +7,9 @@ import { selectEmployeeContractsSummary } from '../store/contracts/selectors';
 const EmployeeDashboard = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const contracts = useSelector(selectEmployeeContractsSummary);
+  const contractsSummary = useSelector(selectEmployeeContractsSummary);
 
-  console.log('user from EmployeeDashboard: ', user);
+  // console.log('user from EmployeeDashboard: ', user);
 
   useEffect(() => {
     if (user) {
@@ -17,13 +17,15 @@ const EmployeeDashboard = () => {
     }
   }, [dispatch, user]);
 
-  if (!contracts) {
+  if (!contractsSummary) {
     return (
       <div>
         <h2>You don't have any contract...</h2>
       </div>
     );
   }
+
+  const { employeeContractsSummary, totalContractsSummary } = contractsSummary;
 
   return (
     <div>
@@ -40,7 +42,7 @@ const EmployeeDashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {contracts.map(contract => (
+          {employeeContractsSummary.map(contract => (
             <tr key={contract.id}>
               <td>{contract.signatureDate}</td>
               <td>{contract.grantedShares}</td>
