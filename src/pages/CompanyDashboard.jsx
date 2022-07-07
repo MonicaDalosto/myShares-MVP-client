@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllEmployeesContractsSummary } from '../store/contracts/thunks';
 import { selectAllEmployeeContractsSummary } from '../store/contracts/selectors';
 
-export const Homepage = () => {
+const CompanyDashboard = () => {
   const dispatch = useDispatch();
   const allEmployeeContracts = useSelector(selectAllEmployeeContractsSummary);
 
@@ -64,6 +64,8 @@ export const Homepage = () => {
     </Container>
   );
 };
+
+export { CompanyDashboard };
 
 const Container = styled.div`
   margin: 20px;

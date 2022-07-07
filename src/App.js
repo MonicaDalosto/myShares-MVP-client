@@ -6,11 +6,11 @@ import { getUserWithStoredToken } from './store/user/thunks';
 import { getCompany } from '../src/store/company/thunks';
 import { Navigation, MessageBox } from './components';
 import {
+  CompanyDashboard,
   CompanySettings,
-  CreateContract,
-  CreateEmployee,
+  ContractSettings,
   EmployeeDashboard,
-  Homepage,
+  EmployeeSettings,
   Login,
   SignUp
 } from './pages';
@@ -28,13 +28,13 @@ function App() {
       <Navigation />
       <MessageBox />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<EmployeeDashboard />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/employee/settings" element={<CreateEmployee />} />
-        <Route path="/contract/settings" element={<CreateContract />} />
+        <Route path="/employee/settings" element={<EmployeeSettings />} />
+        <Route path="/contract/settings" element={<ContractSettings />} />
         <Route path="/company/settings" element={<CompanySettings />} />
-        <Route path="/mydashboard" element={<EmployeeDashboard />} />
+        <Route path="/company/dashboard" element={<CompanyDashboard />} />
       </Routes>
     </div>
   );

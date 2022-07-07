@@ -7,7 +7,7 @@ import { getAllEmployees, createNewContract } from '../store/contracts/thunks';
 import { selectToken } from '../store/user/selectors';
 import { selectAllEmployees } from '../store/contracts/selectors';
 
-const CreateContract = () => {
+const ContractSettings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -134,7 +134,7 @@ const CreateContract = () => {
   );
 };
 
-export { CreateContract };
+export { ContractSettings };
 
 const Container = styled.div`
   display: 'flex';

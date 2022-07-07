@@ -29,12 +29,13 @@ export const Navigation = () => {
         </Menu>
       ) : !isAdmin ? (
         <Menu open={open}>
-          <MenuLink href="/mydashboard">Dashboard</MenuLink>
+          <MenuLink href="/">Dashboard</MenuLink>
           <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
         </Menu>
       ) : (
         <Menu open={open}>
-          <MenuLink href="/mydashboard">My Dashboard</MenuLink>
+          <MenuLink href="/">My Dashboard</MenuLink>
+          <MenuLink href="/company/dashboard">Company Dashboard</MenuLink>
           <MenuLink href="/employee/settings">Employee Settings</MenuLink>
           <MenuLink href="/contract/settings">Contract Settings</MenuLink>
           <MenuLink href="/company/settings">Company Settings</MenuLink>

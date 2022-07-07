@@ -71,7 +71,7 @@ export const getAllEmployeesContractsSummary =
       const token = getState().user.token;
 
       const response = await axios.get(
-        `${apiUrl}/employees/allemployeescalculation`,
+        `${apiUrl}/employees/all-employees-calculation`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }

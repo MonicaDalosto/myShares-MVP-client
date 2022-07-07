@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { signUp } from '../store/user/thunks';
 import { selectToken } from '../store/user/selectors';
 
-const CreateEmployee = () => {
+const EmployeeSettings = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [department, setDepartment] = useState('');
@@ -46,7 +46,6 @@ const CreateEmployee = () => {
           <label>
             Name
             <input
-              // placeholder="name"
               value={name}
               onChange={event => setName(event.target.value)}
             />
@@ -54,12 +53,10 @@ const CreateEmployee = () => {
           <label>
             Email
             <input
-              // placeholder="email"
               value={email}
               onChange={event => setEmail(event.target.value)}
             />
           </label>
-          {/* Change to selector, with pre-determined values */}
           <label>
             Department
             <select
@@ -77,12 +74,10 @@ const CreateEmployee = () => {
             Initial Password
             <input
               type="password"
-              // placeholder="password"
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
           </label>
-          {/* Change to checkbox, with false initial value */}
           <label>
             Access
             <input
@@ -92,12 +87,10 @@ const CreateEmployee = () => {
             />{' '}
             is Admin
           </label>
-          {/* Change to date input */}
           <label>
             Start Date
             <input
               type="date"
-              // placeholder="start date"
               value={startDate}
               onChange={event => setStartDate(event.target.value)}
             />
@@ -110,7 +103,7 @@ const CreateEmployee = () => {
   );
 };
 
-export { CreateEmployee };
+export { EmployeeSettings };
 
 const Container = styled.div`
   display: 'flex';
