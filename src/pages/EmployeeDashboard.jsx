@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { BarChartShares } from '../components/BarChartShares';
 import { getEmployeeContractsSummary } from '../store/contracts/thunks';
 import { selectUser } from '../store/user/selectors';
 import { selectEmployeeContractsSummary } from '../store/contracts/selectors';
@@ -54,6 +55,7 @@ const EmployeeDashboard = () => {
           ))}
         </tbody>
       </table>
+      <BarChartShares />
     </div>
   );
 };
