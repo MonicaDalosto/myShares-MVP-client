@@ -1,8 +1,43 @@
 import React from 'react';
-import { useTable, useSortBy } from 'react-table';
+import {
+  useTable,
+  useGlobalFilter,
+  useAsyncDebounce,
+  useSortBy
+} from 'react-table';
+
+function GlobalFilter({
+  preGlobalFilteredRows,
+  globalFilter,
+  setGlobalFilter
+}) {
+  const count = preGlobalFilteredRows.length;
+  const [value, setValue] = React.useState(globalFilter);
+  const onChange = useAsyncDebounce(value => {
+    setGlobalFilter(value || undefined);
+  }, 200);
+
+  return (
+    <span>
+      Search:{' '}
+      <input
+        value={value || ''}
+        onChange={e => {
+          setValue(e.target.value);
+          onChange(e.target.value);
+        }}
+        placeholder={`${count} records...`}
+        style={{
+          fontSize: '1.1rem',
+          border: '0'
+        }}
+      />
+    </span>
+  );
+}
 
 const CompanyTableShares = ({ contracts }) => {
-  const data = React.useMemo(() => [...contracts], []); // get the data from the parent component (props);
+  const data = React.useMemo(() => [...contracts], [contracts]); // get the data from the parent component (props);
 
   const columns = React.useMemo(
     () => [
@@ -46,7 +81,7 @@ const CompanyTableShares = ({ contracts }) => {
     []
   );
 
-  const tableInstance = useTable({ columns, data }, useSortBy);
+  const tableInstance = useTable({ columns, data }, useGlobalFilter, useSortBy);
 
   const {
     getTableProps,
@@ -54,15 +89,32 @@ const CompanyTableShares = ({ contracts }) => {
     headerGroups,
     rows,
     prepareRow,
-    footerGroups
+    footerGroups,
+    state,
+    visibleColumns,
+    preGlobalFilteredRows,
+    setGlobalFilter
   } = tableInstance;
 
   return (
     <div>
-      <h2>Summary table</h2>
       {/* apply the table props */}
       <table {...getTableProps()}>
         <thead>
+          <tr>
+            <th
+              colSpan={visibleColumns.length}
+              style={{
+                textAlign: 'left'
+              }}
+            >
+              <GlobalFilter
+                preGlobalFilteredRows={preGlobalFilteredRows}
+                globalFilter={state.globalFilter}
+                setGlobalFilter={setGlobalFilter}
+              />
+            </th>
+          </tr>
           {
             // Loop over the header rows
             headerGroups.map(headerGroup => (

@@ -34,6 +34,7 @@ const EmployeeDashboard = () => {
       <div>
         <BarChartShares data={grantedXOwnedShares} />
       </div>
+      <h2>Summary table</h2>
       <div>
         <EmployeeTableShares
           contracts={employeeContractsSummary}

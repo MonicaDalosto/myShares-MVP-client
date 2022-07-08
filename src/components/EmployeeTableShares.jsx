@@ -64,7 +64,6 @@ const EmployeeTableShares = ({ contracts }) => {
 
   return (
     <div>
-      <h2>Summary table</h2>
       {/* apply the table props */}
       <table {...getTableProps()}>
         <thead>
