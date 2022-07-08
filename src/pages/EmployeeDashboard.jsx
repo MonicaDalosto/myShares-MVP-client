@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BarChartShares } from '../components/BarChartShares';
 import { getEmployeeContractsSummary } from '../store/contracts/thunks';
 import { selectUser } from '../store/user/selectors';
 import { selectEmployeeContractsSummary } from '../store/contracts/selectors';
+import { BarChartShares, EmployeeTableShares } from '../components';
 
 const EmployeeDashboard = () => {
   const dispatch = useDispatch();
@@ -26,12 +26,21 @@ const EmployeeDashboard = () => {
     );
   }
 
-  const { employeeContractsSummary, totalContractsSummary } = contractsSummary;
+  const { employeeContractsSummary, grantedXOwnedShares } = contractsSummary;
 
   return (
     <div>
       <h2> Employee Dashboard </h2>
-      <table>
+      <div>
+        <BarChartShares data={grantedXOwnedShares} />
+      </div>
+      <div>
+        <EmployeeTableShares
+          contracts={employeeContractsSummary}
+          // total={totalContractsSummary}
+        />
+      </div>
+      {/* <table>
         <thead>
           <tr>
             <th>Signature Date</th>
@@ -54,8 +63,7 @@ const EmployeeDashboard = () => {
             </tr>
           ))}
         </tbody>
-      </table>
-      <BarChartShares />
+      </table> */}
     </div>
   );
 };
