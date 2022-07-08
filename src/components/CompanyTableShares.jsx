@@ -1,57 +1,52 @@
 import React from 'react';
-import { useTable } from 'react-table';
+import { useTable, useSortBy } from 'react-table';
 
-const EmployeeTableShares = ({ contracts }) => {
-  const data = React.useMemo(() => [...contracts], [contracts]); // get the data from the parent component (props);
+const CompanyTableShares = ({ contracts }) => {
+  const data = React.useMemo(() => [...contracts], []); // get the data from the parent component (props);
 
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Signature Date',
-        accessor: 'signatureDate', // accessor is the "key" in the data
+        Header: 'Employee',
+        accessor: 'name', // accessor is the "key" in the data
         Footer: 'Total'
       },
       {
+        Header: 'Department',
+        accessor: 'employee.department'
+      },
+      {
+        Header: 'Number of Contracts',
+        accessor: 'totalOfEmployeeShares.numberOfContracts',
+        Footer: number =>
+          number.rows.reduce(
+            (sum, row) => row.values.numberOfContracts + sum,
+            0
+          )
+      },
+      {
         Header: 'Granted Shares',
-        accessor: 'grantedShares',
-        Footer: grantedShares =>
-          grantedShares.rows.reduce(
-            (sum, row) => row.values.grantedShares + sum,
-            0
-          )
+        accessor: 'totalOfEmployeeShares.totalOfVirtualGrantedShares'
+        // Footer: grantedShares =>
+        //   grantedShares.rows.reduce((sum, row) => {
+        //     console.log(row.values)
+        //     return row.values.totalOfEmployeeShares.totalOfVirtualGrantedShares + sum;
+        //   }, 0)
       },
       {
-        Header: 'End Cliff Period',
-        accessor: 'cliffDate'
+        Header: 'Owned Shares',
+        accessor: 'totalOfEmployeeShares.totalOfVirtualOwnedShares'
       },
       {
-        Header: 'Months after Signature Date',
-        accessor: 'numberOfMonthsAfterSignatureDate'
-      },
-      {
-        Header: 'Virtual Owned Shares',
-        accessor: 'virtualOwnedShares',
-        Footer: ownedShares =>
-          ownedShares.rows.reduce(
-            (sum, row) => row.values.virtualOwnedShares + sum,
-            0
-          )
-      },
-      {
-        Header: 'Shares Value based on Current valuation',
-        accessor: 'sharesValueBasedCompanyCurrentValuation',
-        Footer: sharesValues =>
-          sharesValues.rows.reduce(
-            (sum, row) =>
-              row.values.sharesValueBasedCompanyCurrentValuation + sum,
-            0
-          )
+        Header: 'Current valuation',
+        accessor:
+          'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation'
       }
     ],
     []
   );
 
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable({ columns, data }, useSortBy);
 
   const {
     getTableProps,
@@ -77,11 +72,20 @@ const EmployeeTableShares = ({ contracts }) => {
                   // Loop over the headers in each row
                   headerGroup.headers.map(column => (
                     // Apply the header cell props
-                    <th {...column.getHeaderProps()}>
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                    >
                       {
                         // Render the header
                         column.render('Header')
                       }
+                      <span>
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? ' 🔽'
+                            : ' 🔼'
+                          : ''}
+                      </span>
                     </th>
                   ))
                 }
@@ -145,4 +149,4 @@ const EmployeeTableShares = ({ contracts }) => {
   );
 };
 
-export { EmployeeTableShares };
+export { CompanyTableShares };
