@@ -15,7 +15,7 @@ export const Navigation = () => {
 
   return (
     <Nav>
-      <Logo href="/">
+      <Logo href={isAdmin ? '/dashboard' : '/'}>
         myCompany<span>BV</span>
       </Logo>
       <Hamburger onClick={() => setOpen(!open)}>
@@ -35,10 +35,10 @@ export const Navigation = () => {
       ) : (
         <Menu open={open}>
           <MenuLink href="/">My Dashboard</MenuLink>
-          <MenuLink href="/company/dashboard">Company Dashboard</MenuLink>
-          <MenuLink href="/employee/settings">Employee Settings</MenuLink>
-          <MenuLink href="/contract/settings">Contract Settings</MenuLink>
-          <MenuLink href="/company/settings">Company Settings</MenuLink>
+          <MenuLink href="/dashboard">Dashboard</MenuLink>
+          <MenuLink href="/employee">Employee</MenuLink>
+          <MenuLink href="/contract">Contract</MenuLink>
+          <MenuLink href="/company">Company</MenuLink>
           <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
         </Menu>
       )}

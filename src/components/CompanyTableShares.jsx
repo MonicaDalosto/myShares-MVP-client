@@ -55,27 +55,45 @@ const CompanyTableShares = ({ contracts }) => {
         accessor: 'totalOfEmployeeShares.numberOfContracts',
         Footer: number =>
           number.rows.reduce(
-            (sum, row) => row.values.numberOfContracts + sum,
+            (sum, row) =>
+              row.values['totalOfEmployeeShares.numberOfContracts'] + sum,
             0
           )
       },
       {
         Header: 'Granted Shares',
-        accessor: 'totalOfEmployeeShares.totalOfVirtualGrantedShares'
-        // Footer: grantedShares =>
-        //   grantedShares.rows.reduce((sum, row) => {
-        //     console.log(row.values)
-        //     return row.values.totalOfEmployeeShares.totalOfVirtualGrantedShares + sum;
-        //   }, 0)
+        accessor: 'totalOfEmployeeShares.totalOfVirtualGrantedShares',
+        Footer: grantedShares =>
+          grantedShares.rows.reduce(
+            (sum, row) =>
+              row.values['totalOfEmployeeShares.totalOfVirtualGrantedShares'] +
+              sum,
+            0
+          )
       },
       {
         Header: 'Owned Shares',
-        accessor: 'totalOfEmployeeShares.totalOfVirtualOwnedShares'
+        accessor: 'totalOfEmployeeShares.totalOfVirtualOwnedShares',
+        Footer: ownedShares =>
+          ownedShares.rows.reduce(
+            (sum, row) =>
+              row.values['totalOfEmployeeShares.totalOfVirtualOwnedShares'] +
+              sum,
+            0
+          )
       },
       {
         Header: 'Current valuation',
         accessor:
-          'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation'
+          'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation',
+        Footer: currentValuation =>
+          currentValuation.rows.reduce(
+            (sum, row) =>
+              row.values[
+                'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation'
+              ] + sum,
+            0
+          )
       }
     ],
     []

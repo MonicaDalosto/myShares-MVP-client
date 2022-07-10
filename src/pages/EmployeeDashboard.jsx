@@ -10,12 +10,10 @@ const EmployeeDashboard = () => {
   const user = useSelector(selectUser);
   const contractsSummary = useSelector(selectEmployeeContractsSummary);
 
-  // console.log('user from EmployeeDashboard: ', user);
-
   useEffect(() => {
-    if (user) {
-      dispatch(getEmployeeContractsSummary(user.id));
-    }
+    // if (user) {
+    dispatch(getEmployeeContractsSummary());
+    // }
   }, [dispatch, user]);
 
   if (!contractsSummary) {

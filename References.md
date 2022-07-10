@@ -9,3 +9,9 @@ https://bobbyhadz.com/blog/javascript-get-sum-of-array-object-values
 # Table with footer, value calculated on the react component:
 
 https://react-table-v7.tanstack.com/docs/examples/footers
+
+# Axios GET request with more than one params field:
+
+https://stackoverflow.com/questions/42898009/multiple-fields-with-same-key-in-query-params-axios-request
+
+https://dev.to/oaraujocesar/multi-params-axios-request-5409

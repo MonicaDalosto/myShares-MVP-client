@@ -9,7 +9,10 @@ import {
 
 export const getAllEmployees = () => async (dispatch, getState) => {
   try {
-    const response = await axios.get(`${apiUrl}/employees`);
+    const token = getState().user.token;
+    const response = await axios.get(`${apiUrl}/employees`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     dispatch(setAllEmployees(response.data));
   } catch (error) {
     console.log(error.message);
@@ -51,14 +54,13 @@ export const createNewContract =
     }
   };
 
-export const getEmployeeContractsSummary = id => async (dispatch, getState) => {
+export const getEmployeeContractsSummary = () => async (dispatch, getState) => {
   try {
     const token = getState().user.token;
-    const response = await axios.get(`${apiUrl}/employees/calculation/${id}`, {
+    const response = await axios.get(`${apiUrl}/employees/calculation`, {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    // console.log('employee contracts summary: ', response.data);
     dispatch(setEmployeeContractsSummary(response.data));
   } catch (error) {
     console.log(error.message);
@@ -76,7 +78,6 @@ export const getAllEmployeesContractsSummary =
           headers: { Authorization: `Bearer ${token}` }
         }
       );
-      // console.log(response.data);
       dispatch(setAllEmployeeContractsSummary(response.data));
     } catch (error) {
       console.log(error.message);

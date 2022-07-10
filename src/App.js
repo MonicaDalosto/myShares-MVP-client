@@ -31,10 +31,10 @@ function App() {
         <Route path="/" element={<EmployeeDashboard />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/employee/settings" element={<EmployeeSettings />} />
-        <Route path="/contract/settings" element={<ContractSettings />} />
-        <Route path="/company/settings" element={<CompanySettings />} />
-        <Route path="/company/dashboard" element={<CompanyDashboard />} />
+        <Route path="/employee" element={<EmployeeSettings />} />
+        <Route path="/contract" element={<ContractSettings />} />
+        <Route path="/company" element={<CompanySettings />} />
+        <Route path="/dashboard" element={<CompanyDashboard />} />
       </Routes>
     </div>
   );

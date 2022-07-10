@@ -30,7 +30,7 @@ export const updateCompanyData =
         }
       );
 
-      console.log(response.data);
+      // console.log(response.data);
 
       dispatch(setCompany(response.data));
       dispatch(
