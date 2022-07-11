@@ -5,6 +5,8 @@ import {
   useAsyncDebounce,
   useSortBy
 } from 'react-table';
+import { Link } from 'react-router-dom';
+import { RiDeleteBin5Line } from 'react-icons/ri';
 
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -41,19 +43,6 @@ const ContractsList = ({ allEmployeeContracts }) => {
     () => [...allEmployeeContracts],
     [allEmployeeContracts]
   ); // get the data from the parent component (props);
-  console.log(allEmployeeContracts);
-
-  const teste = (data, key) => {
-    return data.reduce(
-      (result, item) => ({
-        ...result,
-        [item[key]]: [...(result[item[key]] || []), item]
-      }),
-      {}
-    );
-  };
-
-  console.log(teste, 'here');
 
   const columns = React.useMemo(
     () => [
@@ -69,41 +58,43 @@ const ContractsList = ({ allEmployeeContracts }) => {
         Header: 'Signature Date',
         accessor: 'signatureDate'
       },
-
+      {
+        Header: 'Cliff Date',
+        accessor: 'cliffDate'
+      },
       {
         Header: 'Granted Shares',
         accessor: 'grantedShares'
-        // Footer: grantedShares =>
-        //   grantedShares.rows.reduce(
-        //     (sum, row) =>
-        //       row.values['totalOfEmployeeShares.totalOfVirtualGrantedShares'] +
-        //       sum,
-        //     0
-        //   )
+      },
+      {
+        Header: 'Months After Signature',
+        accessor: 'numberOfMonthsAfterSignatureDate'
       },
       {
         Header: 'Owned Shares',
         accessor: 'virtualOwnedShares'
-        // Footer: ownedShares =>
-        //   ownedShares.rows.reduce(
-        //     (sum, row) =>
-        //       row.values['totalOfEmployeeShares.totalOfVirtualOwnedShares'] +
-        //       sum,
-        //     0
-        //   )
       },
       {
         Header: 'Current valuation',
-        accessor:
-          'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation',
-        Footer: currentValuation =>
-          currentValuation.rows.reduce(
-            (sum, row) =>
-              row.values[
-                'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation'
-              ] + sum,
-            0
-          )
+        accessor: 'sharesValueBasedCompanyCurrentValuation'
+      },
+      {
+        Header: 'Delete Contract',
+        Cell: ({ row }) => {
+          // console.log(row.original);
+          return (
+            <span>
+              <Link
+                to={{
+                  pathname: `/edit-employee/${row.original.contractId}`, // the path is not correct...
+                  state: { data: row }
+                }}
+              >
+                <RiDeleteBin5Line />
+              </Link>
+            </span>
+          );
+        }
       }
     ],
     []

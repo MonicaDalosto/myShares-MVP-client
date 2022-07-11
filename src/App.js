@@ -13,6 +13,7 @@ import {
   ContractSettings,
   EditEmployee,
   EmployeeDashboard,
+  EmployeeDetails,
   EmployeeSettings,
   Login,
   SignUp
@@ -42,6 +43,7 @@ function App() {
         <Route path="/edit-employee/:id" element={<EditEmployee />} />
         <Route path="/contract" element={<ContractSettings />} />
         <Route path="/company" element={<CompanySettings />} />
+        <Route path="/employee-details/:id" element={<EmployeeDetails />} />
         <Route path="/dashboard" element={<CompanyDashboard />} />
       </Routes>
     </div>

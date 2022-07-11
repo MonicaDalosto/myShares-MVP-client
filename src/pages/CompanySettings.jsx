@@ -24,7 +24,7 @@ const CompanySettings = () => {
 
   useEffect(() => {
     if (token === null) {
-      navigate('/');
+      navigate('/login');
     }
     if (company) {
       setName(company.name);

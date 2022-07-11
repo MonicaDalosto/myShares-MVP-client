@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   useTable,
   useGlobalFilter,
@@ -94,6 +95,24 @@ const CompanyTableShares = ({ contracts }) => {
               ] + sum,
             0
           )
+      },
+      {
+        Header: 'Details Page',
+        Cell: ({ row }) => {
+          // console.log(row);
+          return (
+            <span>
+              <Link
+                to={{
+                  pathname: `/employee-details/${row.original.totalOfEmployeeShares.userId}`,
+                  state: { data: row }
+                }}
+              >
+                See Details
+              </Link>
+            </span>
+          );
+        }
       }
     ],
     []

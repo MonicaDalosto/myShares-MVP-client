@@ -74,23 +74,17 @@ const ContractSettings = () => {
     );
   }
 
-  // console.log('allEmployeeContracts: ', allEmployeeContracts);
-
-  const contractsSummary = allEmployeeContracts.map(employee => {
-    // console.log(employee.employeeContractsSummary);
-    return employee.employeeContractsSummary.map(contract => {
-      return contract;
-    });
-  });
-
-  // console.log('contracts Summary: ', contractsSummary);
+  let contractsSummary = [];
+  allEmployeeContracts.map(item =>
+    contractsSummary.push(...item.employeeContractsSummary)
+  );
 
   return (
     <div style={{ textAlign: 'center' }}>
       <Container>
         <div>
           <Title>Contracts Settings</Title>
-          <ContractsList allEmployeeContracts={allEmployeeContracts} />
+          <ContractsList allEmployeeContracts={contractsSummary} />
         </div>
         <div>
           <Title>Create new contract</Title>

@@ -1,3 +1,6 @@
+export const selectMyContractsSummary = reduxState =>
+  reduxState.contracts.myContractsSummary;
+
 export const selectEmployeeContractsSummary = reduxState =>
   reduxState.contracts.employeeContractsSummary;
 

@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEmployeeContractsSummary } from '../store/contracts/thunks';
+import { getMyContractsSummary } from '../store/contracts/thunks';
 import { selectUser } from '../store/user/selectors';
-import { selectEmployeeContractsSummary } from '../store/contracts/selectors';
+import { selectMyContractsSummary } from '../store/contracts/selectors';
 import { BarChartShares, EmployeeTableShares } from '../components';
 
 const EmployeeDashboard = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const contractsSummary = useSelector(selectEmployeeContractsSummary);
+  const contractsSummary = useSelector(selectMyContractsSummary);
 
   useEffect(() => {
     // if (user) {
-    dispatch(getEmployeeContractsSummary());
+    dispatch(getMyContractsSummary());
     // }
-  }, [dispatch, user]);
+  }, [dispatch]);
 
   if (!contractsSummary) {
     return (
@@ -34,35 +34,8 @@ const EmployeeDashboard = () => {
       </div>
       <h2>Summary table</h2>
       <div>
-        <EmployeeTableShares
-          contracts={employeeContractsSummary}
-          // total={totalContractsSummary}
-        />
+        <EmployeeTableShares contracts={employeeContractsSummary} />
       </div>
-      {/* <table>
-        <thead>
-          <tr>
-            <th>Signature Date</th>
-            <th>Granted Shares</th>
-            <th>End Cliff Period</th>
-            <th>Number of Months after Signature Date</th>
-            <th>Virtual Shares Owned</th>
-            <th>Shares Value based on Current valuation</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employeeContractsSummary.map(contract => (
-            <tr key={contract.id}>
-              <td>{contract.signatureDate}</td>
-              <td>{contract.grantedShares}</td>
-              <td>{contract.cliffDate}</td>
-              <td>{contract.numberOfMonthsAfterSignatureDate}</td>
-              <td>{contract.virtualOwnedShares}</td>
-              <td>{contract.sharesValueBasedCompanyCurrentValuation}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
     </div>
   );
 };
