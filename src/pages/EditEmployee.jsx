@@ -5,3 +5,5 @@ const EditEmployee = () => {
     </div>
   );
 };
+
+export { EditEmployee };

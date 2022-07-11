@@ -76,17 +76,16 @@ const EmployeesList = ({ allEmployees }) => {
             <span>
               <Link
                 to={{
-                  pathname: `/foo/${row.original.id}`,
+                  pathname: `/edit-employee/${row.original.id}`,
                   state: { data: row }
                 }}
               >
                 <FaRegEdit />
-                {/* <BiEdit /> */}
               </Link>
               {''}
               <Link
                 to={{
-                  pathname: `/foo/${row.original.id}`,
+                  pathname: `/edit-employee/${row.original.id}`,
                   state: { data: row }
                 }}
               >
