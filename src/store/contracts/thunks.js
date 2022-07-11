@@ -61,6 +61,7 @@ export const getEmployeeContractsSummary = () => async (dispatch, getState) => {
       headers: { Authorization: `Bearer ${token}` }
     });
 
+    // console.log('all employees contracts inside the thunk: ', response.data);
     dispatch(setEmployeeContractsSummary(response.data));
   } catch (error) {
     console.log(error.message);
@@ -78,6 +79,8 @@ export const getAllEmployeesContractsSummary =
           headers: { Authorization: `Bearer ${token}` }
         }
       );
+      // console.log('all employees contracts inside the thunk: ', response.data);
+
       dispatch(setAllEmployeeContractsSummary(response.data));
     } catch (error) {
       console.log(error.message);

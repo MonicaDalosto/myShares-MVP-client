@@ -36,64 +36,34 @@ function GlobalFilter({
   );
 }
 
-const CompanyTableShares = ({ contracts }) => {
-  const data = React.useMemo(() => [...contracts], [contracts]); // get the data from the parent component (props);
+const EmployeesList = ({ allEmployees }) => {
+  const data = React.useMemo(() => [...allEmployees], [allEmployees]); // get the data from the parent component (props);
 
   const columns = React.useMemo(
     () => [
       {
         Header: 'Employee',
-        accessor: 'totalOfEmployeeShares.name', // accessor is the "key" in the data
-        Footer: 'Total'
+        accessor: 'name' // accessor is the "key" in the data
+      },
+      {
+        Header: 'Email',
+        accessor: 'email'
+      },
+      {
+        Header: 'Is Admin',
+        accessor: 'isAdmin'
       },
       {
         Header: 'Department',
-        accessor: 'totalOfEmployeeShares.department'
+        accessor: 'employee.department'
       },
       {
-        Header: 'Number of Contracts',
-        accessor: 'totalOfEmployeeShares.numberOfContracts',
-        Footer: number =>
-          number.rows.reduce(
-            (sum, row) =>
-              row.values['totalOfEmployeeShares.numberOfContracts'] + sum,
-            0
-          )
+        Header: 'Start Date',
+        accessor: 'employee.startDate'
       },
       {
-        Header: 'Granted Shares',
-        accessor: 'totalOfEmployeeShares.totalOfVirtualGrantedShares',
-        Footer: grantedShares =>
-          grantedShares.rows.reduce(
-            (sum, row) =>
-              row.values['totalOfEmployeeShares.totalOfVirtualGrantedShares'] +
-              sum,
-            0
-          )
-      },
-      {
-        Header: 'Owned Shares',
-        accessor: 'totalOfEmployeeShares.totalOfVirtualOwnedShares',
-        Footer: ownedShares =>
-          ownedShares.rows.reduce(
-            (sum, row) =>
-              row.values['totalOfEmployeeShares.totalOfVirtualOwnedShares'] +
-              sum,
-            0
-          )
-      },
-      {
-        Header: 'Current valuation',
-        accessor:
-          'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation',
-        Footer: currentValuation =>
-          currentValuation.rows.reduce(
-            (sum, row) =>
-              row.values[
-                'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation'
-              ] + sum,
-            0
-          )
+        Header: 'End Date',
+        accessor: 'employee.endDate'
       }
     ],
     []
@@ -219,4 +189,4 @@ const CompanyTableShares = ({ contracts }) => {
   );
 };
 
-export { CompanyTableShares };
+export { EmployeesList };
