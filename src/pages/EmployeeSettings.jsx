@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signUp } from '../store/user/thunks';
 import { selectToken } from '../store/user/selectors';
-import { getAllEmployees } from '../store/contracts/thunks';
-import { selectAllEmployees } from '../store/contracts/selectors';
+import { getAllEmployees } from '../store/employees/thunks';
+import { selectAllEmployees } from '../store/employees/selectors';
 import { EmployeesList } from '../components';
 
 const EmployeeSettings = () => {

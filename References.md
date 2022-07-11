@@ -15,3 +15,7 @@ https://react-table-v7.tanstack.com/docs/examples/footers
 https://stackoverflow.com/questions/42898009/multiple-fields-with-same-key-in-query-params-axios-request
 
 https://dev.to/oaraujocesar/multi-params-axios-request-5409
+
+# How to add a Link to a React table Cell:
+
+https://github.com/TanStack/table/issues/89

@@ -1,10 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   useTable,
   useGlobalFilter,
   useAsyncDebounce,
   useSortBy
 } from 'react-table';
+import { FaRegEdit } from 'react-icons/fa';
+import { RiDeleteBin5Line } from 'react-icons/ri';
 
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -64,6 +67,34 @@ const EmployeesList = ({ allEmployees }) => {
       {
         Header: 'End Date',
         accessor: 'employee.endDate'
+      },
+      {
+        Header: 'Edit Employee',
+        Cell: ({ row }) => {
+          // console.log(row.original);
+          return (
+            <span>
+              <Link
+                to={{
+                  pathname: `/foo/${row.original.id}`,
+                  state: { data: row }
+                }}
+              >
+                <FaRegEdit />
+                {/* <BiEdit /> */}
+              </Link>
+              {''}
+              <Link
+                to={{
+                  pathname: `/foo/${row.original.id}`,
+                  state: { data: row }
+                }}
+              >
+                <RiDeleteBin5Line />
+              </Link>
+            </span>
+          );
+        }
       }
     ],
     []

@@ -4,15 +4,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
-  getAllEmployees,
   createNewContract,
   getAllEmployeesContractsSummary
 } from '../store/contracts/thunks';
+import { getAllEmployees } from '../store/employees/thunks';
 import { selectToken } from '../store/user/selectors';
-import {
-  selectAllEmployees,
-  selectAllEmployeeContractsSummary
-} from '../store/contracts/selectors';
+import { selectAllEmployeeContractsSummary } from '../store/contracts/selectors';
+import { selectAllEmployees } from '../store/employees/selectors';
 import { ContractsList } from '../components';
 
 const ContractSettings = () => {
