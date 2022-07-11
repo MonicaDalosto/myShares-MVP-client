@@ -1,19 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  allEmployees: null
+  employeeContractsSummary: null,
+  allEmployeeContractsSummary: null
 };
 
-export const employeeSlice = createSlice({
-  name: 'employee',
+export const contractsSlice = createSlice({
+  name: 'contracts',
   initialState,
   reducers: {
-    setAllEmployees: (state, action) => {
-      state.allEmployees = action.payload;
+    setEmployeeContractsSummary: (state, action) => {
+      state.employeeContractsSummary = action.payload;
+    },
+    setAllEmployeeContractsSummary: (state, action) => {
+      state.allEmployeeContractsSummary = action.payload;
     }
   }
 });
 
-export const { setAllEmployees } = employeeSlice.actions;
+export const { setEmployeeContractsSummary, setAllEmployeeContractsSummary } =
+  contractsSlice.actions;
 
-export default employeeSlice.reducer;
+export default contractsSlice.reducer;

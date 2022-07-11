@@ -1,0 +1,70 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getEmployeeContractsSummary } from '../store/contracts/thunks';
+import { selectUser } from '../store/user/selectors';
+import { selectEmployeeContractsSummary } from '../store/contracts/selectors';
+import { BarChartShares, EmployeeTableShares } from '../components';
+
+const EmployeeDashboard = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const contractsSummary = useSelector(selectEmployeeContractsSummary);
+
+  useEffect(() => {
+    // if (user) {
+    dispatch(getEmployeeContractsSummary());
+    // }
+  }, [dispatch, user]);
+
+  if (!contractsSummary) {
+    return (
+      <div>
+        <h2>You don't have any contract...</h2>
+      </div>
+    );
+  }
+
+  const { employeeContractsSummary, grantedXOwnedShares } = contractsSummary;
+
+  return (
+    <div>
+      <h2> Employee Dashboard </h2>
+      <div>
+        <BarChartShares data={grantedXOwnedShares} />
+      </div>
+      <h2>Summary table</h2>
+      <div>
+        <EmployeeTableShares
+          contracts={employeeContractsSummary}
+          // total={totalContractsSummary}
+        />
+      </div>
+      {/* <table>
+        <thead>
+          <tr>
+            <th>Signature Date</th>
+            <th>Granted Shares</th>
+            <th>End Cliff Period</th>
+            <th>Number of Months after Signature Date</th>
+            <th>Virtual Shares Owned</th>
+            <th>Shares Value based on Current valuation</th>
+          </tr>
+        </thead>
+        <tbody>
+          {employeeContractsSummary.map(contract => (
+            <tr key={contract.id}>
+              <td>{contract.signatureDate}</td>
+              <td>{contract.grantedShares}</td>
+              <td>{contract.cliffDate}</td>
+              <td>{contract.numberOfMonthsAfterSignatureDate}</td>
+              <td>{contract.virtualOwnedShares}</td>
+              <td>{contract.sharesValueBasedCompanyCurrentValuation}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table> */}
+    </div>
+  );
+};
+
+export { EmployeeDashboard };

@@ -15,7 +15,7 @@ export const Navigation = () => {
 
   return (
     <Nav>
-      <Logo href="/">
+      <Logo href={isAdmin ? '/dashboard' : '/'}>
         myCompany<span>BV</span>
       </Logo>
       <Hamburger onClick={() => setOpen(!open)}>
@@ -29,13 +29,16 @@ export const Navigation = () => {
         </Menu>
       ) : !isAdmin ? (
         <Menu open={open}>
+          <MenuLink href="/">Dashboard</MenuLink>
           <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
         </Menu>
       ) : (
         <Menu open={open}>
-          <MenuLink href="/employee/settings">Employee Settings</MenuLink>
-          <MenuLink href="/contract/settings">Contract Settings</MenuLink>
-          <MenuLink href="/styled">Empty 2</MenuLink>
+          <MenuLink href="/">My Dashboard</MenuLink>
+          <MenuLink href="/dashboard">Dashboard</MenuLink>
+          <MenuLink href="/employee">Employee</MenuLink>
+          <MenuLink href="/contract">Contract</MenuLink>
+          <MenuLink href="/company">Company</MenuLink>
           <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
         </Menu>
       )}
