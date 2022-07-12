@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { selectToken } from '../store/user/selectors';
-import { getSpecificEmployee } from '../store/employees/thunks';
+// import { getSpecificEmployee } from '../store/employees/thunks';
 import { selectSpecificEmployee } from '../store/employees/selectors';
 
 const EditEmployee = () => {
@@ -12,7 +12,7 @@ const EditEmployee = () => {
   const { id } = useParams();
 
   const token = useSelector(selectToken);
-  const user = useSelector(selectSpecificEmployee);
+  const user = useSelector(selectSpecificEmployee(parseInt(id)));
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -31,7 +31,7 @@ const EditEmployee = () => {
     if (token === null) {
       navigate('/login');
     }
-    dispatch(getSpecificEmployee(id));
+    // dispatch(getSpecificEmployee(id));
 
     if (user) {
       setName(user.name);
@@ -102,8 +102,7 @@ const EditEmployee = () => {
           Access
           <input
             type="checkbox"
-            defaultChecked={isAdmin}
-            value={isAdmin}
+            checked={isAdmin}
             onChange={event => setIsAdmin(!isAdmin)}
           />{' '}
           is Admin
@@ -112,8 +111,7 @@ const EditEmployee = () => {
           State
           <input
             type="checkbox"
-            defaultChecked={isActive}
-            value={isActive}
+            checked={isActive}
             onChange={event => setIsActive(!isActive)}
           />{' '}
           is Active

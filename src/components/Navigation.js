@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectToken, selectUser } from '../store/user/selectors';
 import { logOut } from '../store/user/slice';
+import { Link } from 'react-router-dom';
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -36,7 +37,15 @@ export const Navigation = () => {
         <Menu open={open}>
           <MenuLink href="/">My Dashboard</MenuLink>
           <MenuLink href="/dashboard">Dashboard</MenuLink>
-          <MenuLink href="/employee">Employee</MenuLink>
+          {/* I need to change this style later */}
+          <MenuLink>
+            <Link
+              style={{ textDecoration: 'none', color: '#ececec' }}
+              to="/employee"
+            >
+              Employee
+            </Link>
+          </MenuLink>
           <MenuLink href="/contract">Contract</MenuLink>
           <MenuLink href="/company">Company</MenuLink>
           <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>

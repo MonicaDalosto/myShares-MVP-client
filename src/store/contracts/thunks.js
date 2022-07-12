@@ -1,8 +1,10 @@
 import { apiUrl } from '../../config/constants';
 import axios from 'axios';
+import moment from 'moment';
 import { showMessageWithTimeout } from '../appState/thunks';
 import {
   setMyContractsSummary,
+  setMySharesProjection,
   setEmployeeContractsSummary,
   setAllEmployeeContractsSummary
 } from './slice';
@@ -54,10 +56,32 @@ export const getMyContractsSummary = () => async (dispatch, getState) => {
   }
 };
 
+export const getSharesProjection =
+  (projectedValuation, projectedDate, id) => async (dispatch, getState) => {
+    try {
+      const token = getState().user.token;
+
+      const response = await axios.get(`${apiUrl}/contracts/calculation`, {
+        params: {
+          projectedValuation,
+          projectedDate,
+          id
+        },
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      // console.log('projection inside the thunk: ', response.data);
+      dispatch(setMySharesProjection(response.data));
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
 export const getEmployeeContractsSummary = id => async (dispatch, getState) => {
   try {
     const token = getState().user.token;
-    const response = await axios.get(`${apiUrl}/contracts/calculation/${id}`, {
+    const response = await axios.get(`${apiUrl}/contracts/calculation`, {
+      params: { id },
       headers: { Authorization: `Bearer ${token}` }
     });
     dispatch(setEmployeeContractsSummary(response.data));
