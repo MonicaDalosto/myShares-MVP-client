@@ -24,12 +24,12 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
-  console.log('user ', user);
+  // console.log('user ', user);
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
     dispatch(getCompany());
-    // dispatch(getAllEmployees());
+    dispatch(getAllEmployees());
   }, [dispatch]);
 
   return (

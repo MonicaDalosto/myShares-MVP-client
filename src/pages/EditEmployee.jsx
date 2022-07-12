@@ -25,14 +25,10 @@ const EditEmployee = () => {
   const formValid =
     name && email && startDate && department && check ? true : false;
 
-  console.log('employee inside the edit employee: ', user);
-
   useEffect(() => {
     if (token === null) {
       navigate('/login');
     }
-    // dispatch(getSpecificEmployee(id));
-
     if (user) {
       setName(user.name);
       setEmail(user.email);
@@ -44,7 +40,7 @@ const EditEmployee = () => {
       setDepartment(user.employee.department);
       setEndDate(new Date(user.employee.endDate).toISOString().split('T')[0]);
     }
-  }, [dispatch, navigate, id, token]);
+  }, [dispatch, navigate, token, user]);
 
   const submitForm = event => {
     event.preventDefault();
