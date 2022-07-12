@@ -1,31 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { BarChartShares, EmployeeTableShares } from '../components';
 import {
   getMyContractsSummary,
   getSharesProjection
 } from '../store/contracts/thunks';
-import { selectUser } from '../store/user/selectors';
+// import { selectUser } from '../store/user/selectors';
 import {
   selectMyContractsSummary,
   selectMySharesProjection
 } from '../store/contracts/selectors';
-import { BarChartShares, EmployeeTableShares } from '../components';
+import { setMySharesProjection } from '../store/contracts/slice';
 
 const EmployeeDashboard = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  // const user = useSelector(selectUser);
   const contractsSummary = useSelector(selectMyContractsSummary);
   const sharesProjection = useSelector(selectMySharesProjection);
-
-  // console.log('shares projection: ', sharesProjection);
 
   const [projectedValuation, setProjectedValuation] = useState('');
   const [projectedDate, setProjectedDate] = useState('');
 
   useEffect(() => {
-    // if (user) {
     dispatch(getMyContractsSummary());
-    // }
   }, [dispatch]);
 
   const submitForm = event => {
@@ -82,7 +79,9 @@ const EmployeeDashboard = () => {
       </form>
       {sharesProjection && (
         <div>
-          <button>Reset Projections</button>
+          <button onClick={event => dispatch(setMySharesProjection(null))}>
+            Reset Projections
+          </button>
           <h2>Projections Chart</h2>
           <div>
             <BarChartShares data={sharesProjection.grantedXOwnedShares} />

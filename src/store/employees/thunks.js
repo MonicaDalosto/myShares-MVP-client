@@ -15,6 +15,25 @@ export const getAllEmployees = () => async (dispatch, getState) => {
   }
 };
 
+export const updateEmployee =
+  ({ id, name, email, isAdmin, startDate, department, isActive, endDate }) =>
+  async (dispatch, getState) => {
+    try {
+      const token = getState().user.token;
+      await axios.put(
+        `${apiUrl}/employees/update/${id}`,
+        { name, email, isAdmin, startDate, department, isActive, endDate },
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      dispatch(getAllEmployees());
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
 // export const getSpecificEmployee = id => async (dispatch, getState) => {
 //   try {
 //     const token = getState().user.token;

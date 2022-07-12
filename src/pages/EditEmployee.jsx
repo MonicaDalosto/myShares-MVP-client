@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { selectToken } from '../store/user/selectors';
-// import { getSpecificEmployee } from '../store/employees/thunks';
+import { updateEmployee } from '../store/employees/thunks';
 import { selectSpecificEmployee } from '../store/employees/selectors';
 
 const EditEmployee = () => {
@@ -22,8 +22,12 @@ const EditEmployee = () => {
   const [department, setDepartment] = useState('');
   const [endDate, setEndDate] = useState('');
   const [check, setCheck] = useState(false);
+
+  const endDateValid = isActive || (!isActive && endDate);
   const formValid =
-    name && email && startDate && department && check ? true : false;
+    name && email && startDate && department && endDateValid && check
+      ? true
+      : false;
 
   useEffect(() => {
     if (token === null) {
@@ -38,13 +42,33 @@ const EditEmployee = () => {
       );
       setIsActive(user.employee.isActive);
       setDepartment(user.employee.department);
-      setEndDate(new Date(user.employee.endDate).toISOString().split('T')[0]);
+      setEndDate(
+        user.employee.endDate
+          ? new Date(user.employee.endDate).toISOString().split('T')[0]
+          : null
+      );
     }
   }, [dispatch, navigate, token, user]);
 
   const submitForm = event => {
     event.preventDefault();
-    // dispatch(signUp(name, email, department, isAdmin, startDate));
+    let dateToSend = endDate;
+    if (isActive) {
+      dateToSend = null;
+    }
+    dispatch(
+      updateEmployee({
+        id,
+        name,
+        email,
+        isAdmin,
+        startDate,
+        department,
+        isActive,
+        endDate: dateToSend
+      })
+    );
+    navigate('/employee');
   };
 
   if (!user) {
@@ -104,7 +128,7 @@ const EditEmployee = () => {
           is Admin
         </label>
         <label>
-          State
+          The employee
           <input
             type="checkbox"
             checked={isActive}
@@ -112,9 +136,13 @@ const EditEmployee = () => {
           />{' '}
           is Active
         </label>
-        {isActive ? (
-          ''
-        ) : (
+        {!isActive && (
+          <span>
+            Not active means the employee is not working at the company anymore!
+          </span>
+        )}
+        {!endDate && <span>You need fill an End Date to the Employee</span>}
+        {!isActive && (
           <label>
             End Date
             <input
@@ -134,7 +162,7 @@ const EditEmployee = () => {
         </label>
         <br />
         <button type="submit" disabled={!formValid}>
-          Create employee
+          Submit Edition
         </button>
       </form>
     </Container>

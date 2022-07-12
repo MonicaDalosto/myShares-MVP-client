@@ -8,6 +8,7 @@ import {
 } from 'react-table';
 import { FaRegEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
+import moment from 'moment';
 
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -54,7 +55,8 @@ const EmployeesList = ({ allEmployees }) => {
       },
       {
         Header: 'Is Admin',
-        accessor: 'isAdmin'
+        accessor: 'isAdmin',
+        Cell: ({ row }) => <span>{row.original.isAdmin ? '✅' : '❌'}</span>
       },
       {
         Header: 'Department',
@@ -62,11 +64,29 @@ const EmployeesList = ({ allEmployees }) => {
       },
       {
         Header: 'Start Date',
-        accessor: 'employee.startDate'
+        accessor: 'employee.startDate',
+        Cell: ({ row }) => (
+          <span>
+            {moment(row.original.employee.startDate).format('Do MMM YYYY')}
+          </span>
+        )
+      },
+      {
+        Header: 'Is Active',
+        accessor: 'employee.isActive',
+        Cell: ({ row }) => (
+          <span>{row.original.employee.isActive ? '✅' : '❌'}</span>
+        )
       },
       {
         Header: 'End Date',
-        accessor: 'employee.endDate'
+        accessor: 'employee.endDate',
+        Cell: ({ row }) => (
+          <span>
+            {row.original.employee.endDate &&
+              moment(row.original.employee.endDate).format('Do MMM YYYY')}
+          </span>
+        )
       },
       {
         Header: 'Edit Employee',
