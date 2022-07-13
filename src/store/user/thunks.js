@@ -6,7 +6,7 @@ import { getAllEmployees } from '../employees/thunks';
 import { appLoading, appDoneLoading, setMessage } from '../appState/slice';
 import { loginSuccess, logOut, tokenStillValid } from './slice';
 
-export const signUp = ({
+export const createEmployee = ({
   name,
   email,
   department,
@@ -21,7 +21,7 @@ export const signUp = ({
       const token = getState().user.token;
 
       const response = await axios.post(
-        `${apiUrl}/auth/signup`,
+        `${apiUrl}/auth/createEmployee`,
         {
           name,
           email,

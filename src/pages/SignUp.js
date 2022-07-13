@@ -1,64 +1,63 @@
-import styled from "styled-components"
-import { Button, Input, Title } from "../styled"
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import { signUp } from "../store/user/thunks"
-import { selectToken } from "../store/user/selectors"
+import styled from 'styled-components';
+import { Button, Input, Title } from '../styled';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { createEmployee } from '../store/user/thunks';
+import { selectToken } from '../store/user/selectors';
 
 export const SignUp = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  const token = useSelector(selectToken)
+  const token = useSelector(selectToken);
 
   useEffect(() => {
     if (token !== null) {
-      navigate("/");
+      navigate('/');
     }
   }, [token, navigate]);
 
-  const submitForm = (e) => {
-    e.preventDefault()
-    dispatch(signUp(name, email, password))
-  }
+  const submitForm = e => {
+    e.preventDefault();
+    dispatch(createEmployee(name, email, password));
+  };
 
   return (
-    <div style={{textAlign: "center"}}>
+    <div style={{ textAlign: 'center' }}>
       <Container>
         <Title>Sign Up</Title>
         <form onSubmit={submitForm}>
-          <Input 
+          <Input
             placeholder="name"
-            value={name} 
-            onChange={(e) => setName(e.target.value)}
+            value={name}
+            onChange={e => setName(e.target.value)}
           />
-          <Input 
+          <Input
             placeholder="email"
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
-          <Input 
-            type="password" 
+          <Input
+            type="password"
             placeholder="password"
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
           />
-          <br/>
+          <br />
           <Button type="submit">Sign Up</Button>
         </form>
       </Container>
     </div>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   display: 'flex';
   flex-direction: 'column';
   margin: 15%;
-`
+`;

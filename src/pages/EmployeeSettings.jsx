@@ -3,7 +3,7 @@ import { Button, Input, Title, LinkWord } from '../styled';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { signUp } from '../store/user/thunks';
+import { createEmployee } from '../store/user/thunks';
 import { selectToken } from '../store/user/selectors';
 import { getAllEmployees } from '../store/employees/thunks';
 import { selectAllEmployees } from '../store/employees/selectors';
@@ -34,7 +34,9 @@ const EmployeeSettings = () => {
 
   const submitForm = event => {
     event.preventDefault();
-    dispatch(signUp({ name, email, department, password, isAdmin, startDate }));
+    dispatch(
+      createEmployee({ name, email, department, password, isAdmin, startDate })
+    );
     setName('');
     setEmail('');
     setDepartment('');
