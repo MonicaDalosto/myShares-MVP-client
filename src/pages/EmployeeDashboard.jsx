@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { BarChartShares, EmployeeTableShares } from '../components';
 import {
   getMyContractsSummary,
   getSharesProjection
 } from '../store/contracts/thunks';
-// import { selectUser } from '../store/user/selectors';
+import { selectToken, selectUser } from '../store/user/selectors';
 import {
   selectMyContractsSummary,
   selectMySharesProjection
@@ -13,7 +14,9 @@ import {
 import { setMySharesProjection } from '../store/contracts/slice';
 
 const EmployeeDashboard = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
   // const user = useSelector(selectUser);
   const contractsSummary = useSelector(selectMyContractsSummary);
   const sharesProjection = useSelector(selectMySharesProjection);
@@ -22,8 +25,11 @@ const EmployeeDashboard = () => {
   const [projectedDate, setProjectedDate] = useState('');
 
   useEffect(() => {
+    if (token === null) {
+      navigate('/login');
+    }
     dispatch(getMyContractsSummary());
-  }, [dispatch]);
+  }, [dispatch, navigate, token]);
 
   const submitForm = event => {
     event.preventDefault();

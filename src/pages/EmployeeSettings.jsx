@@ -32,7 +32,7 @@ const EmployeeSettings = () => {
 
   const submitForm = event => {
     event.preventDefault();
-    dispatch(signUp(name, email, department, password, isAdmin, startDate));
+    dispatch(signUp({ name, email, department, password, isAdmin, startDate }));
     setName('');
     setEmail('');
     setDepartment('');
@@ -81,6 +81,7 @@ const EmployeeSettings = () => {
                 value={department}
                 onChange={event => setDepartment(event.target.value)}
               >
+                <option>Choose department</option>
                 <option value="Finance">Finance</option>
                 <option value="HR">HR</option>
                 <option value="Marketing">Marketing</option>

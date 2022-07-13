@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { getUserWithStoredToken } from './store/user/thunks';
 import { getCompany } from './store/company/thunks';
-import { selectUser } from './store/user/selectors';
+import { selectUser, selectToken } from './store/user/selectors';
 import { getAllEmployeesContractsSummary } from './store/contracts/thunks';
 import { getAllEmployees } from './store/employees/thunks';
 import { Navigation, MessageBox } from './components';
@@ -22,15 +22,17 @@ import {
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const token = useSelector(selectToken);
 
   // console.log('user ', user);
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
-    dispatch(getCompany());
-    dispatch(getAllEmployees());
-  }, [dispatch]);
+    if (token) {
+      dispatch(getCompany());
+      dispatch(getAllEmployees());
+    }
+  }, [dispatch, token]);
 
   return (
     <div>
