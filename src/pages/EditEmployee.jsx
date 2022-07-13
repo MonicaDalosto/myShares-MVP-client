@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { selectToken } from '../store/user/selectors';
-import { updateEmployee } from '../store/employees/thunks';
+import { updateEmployee, deleteEmployee } from '../store/employees/thunks';
 import { selectSpecificEmployee } from '../store/employees/selectors';
 
 const EditEmployee = () => {
@@ -22,12 +22,15 @@ const EditEmployee = () => {
   const [department, setDepartment] = useState('');
   const [endDate, setEndDate] = useState('');
   const [check, setCheck] = useState(false);
+  const [contracts, setContracts] = useState(0);
 
   const endDateValid = isActive || (!isActive && endDate);
   const formValid =
     name && email && startDate && department && endDateValid && check
       ? true
       : false;
+
+  const userCanBeDeleted = !contracts;
 
   useEffect(() => {
     if (token === null) {
@@ -47,10 +50,13 @@ const EditEmployee = () => {
           ? new Date(user.employee.endDate).toISOString().split('T')[0]
           : null
       );
+      setContracts(
+        user.employee.contracts.length > 0 ? user.employee.contracts.length : ''
+      );
     }
   }, [dispatch, navigate, token, user]);
 
-  const submitForm = event => {
+  const submitEditForm = event => {
     event.preventDefault();
     let dateToSend = endDate;
     if (isActive) {
@@ -71,6 +77,12 @@ const EditEmployee = () => {
     navigate('/employee');
   };
 
+  const submitDeleteForm = event => {
+    event.preventDefault();
+    dispatch(deleteEmployee(id));
+    navigate('/employee');
+  };
+
   if (!user) {
     return (
       <div>
@@ -84,7 +96,7 @@ const EditEmployee = () => {
       <h2>Edit Employee</h2>
       <form
         style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
-        onSubmit={submitForm}
+        onSubmit={submitEditForm}
       >
         <label>
           Name
@@ -136,12 +148,12 @@ const EditEmployee = () => {
           />{' '}
           is Active
         </label>
-        {!isActive && (
+        {!isActive && !endDate && (
           <span>
-            Not active means the employee is not working at the company anymore!
+            If the employee is not active, you need fill an End Date to the
+            them!
           </span>
         )}
-        {!endDate && <span>You need fill an End Date to the Employee</span>}
         {!isActive && (
           <label>
             End Date
@@ -163,6 +175,41 @@ const EditEmployee = () => {
         <br />
         <button type="submit" disabled={!formValid}>
           Submit Edition
+        </button>
+      </form>
+      <h2>Delete Employee</h2>
+      <form
+        style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
+        onSubmit={submitDeleteForm}
+      >
+        <label>Name: {name}</label>
+        <label>Email: {email}</label>
+        <label>Department: {department}</label>
+        <label>Start Date: {startDate}</label>
+        <label>
+          {isAdmin
+            ? 'The employee is an Admin'
+            : 'The employee is a regular user'}
+        </label>
+        <label>
+          {isActive
+            ? 'The employee is still active'
+            : 'The employee is not active'}
+        </label>
+        {!isActive && <label>End Date: {endDate}</label>}
+        {contracts && (
+          <label>
+            <strong>
+              The employee can't be deleted because has {contracts} active
+              contracts active.
+            </strong>{' '}
+            You should delete all the contracts before delete the employee.{' '}
+          </label>
+        )}
+
+        <br />
+        <button type="submit" disabled={!userCanBeDeleted}>
+          Delete employee
         </button>
       </form>
     </Container>
