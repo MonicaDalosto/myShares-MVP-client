@@ -5,8 +5,11 @@ import {
   useAsyncDebounce,
   useSortBy
 } from 'react-table';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteContract } from '../store/contracts/thunks';
 import { RiDeleteBin5Line } from 'react-icons/ri';
+import { Modal } from './Modal';
 
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -39,6 +42,18 @@ function GlobalFilter({
 }
 
 const ContractsList = ({ allEmployeeContracts }) => {
+  const dispatch = useDispatch();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [contractId, setContractId] = useState('');
+
+  const submitDeleteContract = event => {
+    event.preventDefault();
+    dispatch(deleteContract(contractId));
+    setContractId('');
+    setIsOpen(false);
+  };
+
   const data = React.useMemo(
     () => [...allEmployeeContracts],
     [allEmployeeContracts]
@@ -83,16 +98,17 @@ const ContractsList = ({ allEmployeeContracts }) => {
         Cell: ({ row }) => {
           // console.log(row.original);
           return (
-            <span>
-              <Link
-                to={{
-                  pathname: `/edit-employee/${row.original.contractId}`, // the path is not correct...
-                  state: { data: row }
-                }}
-              >
-                <RiDeleteBin5Line />
-              </Link>
-            </span>
+            <button
+              type="button"
+              value={row.original.contractId}
+              onClick={event => {
+                setContractId(Number(event.target.value));
+                setIsOpen(true);
+              }}
+            >
+              Delete
+              {/* <RiDeleteBin5Line value={row.original.contractId} /> */}
+            </button>
           );
         }
       }
@@ -108,7 +124,6 @@ const ContractsList = ({ allEmployeeContracts }) => {
     headerGroups,
     rows,
     prepareRow,
-    footerGroups,
     state,
     visibleColumns,
     preGlobalFilteredRows,
@@ -193,29 +208,14 @@ const ContractsList = ({ allEmployeeContracts }) => {
             })
           }
         </tbody>
-        <tfoot>
-          {
-            // Loop over the header rows
-            footerGroups.map(group => (
-              // Apply the header row props
-              <tr {...group.getFooterGroupProps()}>
-                {
-                  // Loop over the headers in each row
-                  group.headers.map(column => (
-                    // Apply the header cell props
-                    <td {...column.getFooterProps()}>
-                      {
-                        // Render the header
-                        column.render('Footer')
-                      }
-                    </td>
-                  ))
-                }
-              </tr>
-            ))
-          }
-        </tfoot>
       </table>
+      {isOpen && (
+        <Modal
+          setIsOpen={setIsOpen}
+          submitDeleteForm={submitDeleteContract}
+          name=" the Contract"
+        />
+      )}
     </div>
   );
 };

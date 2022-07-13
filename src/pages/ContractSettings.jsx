@@ -42,8 +42,6 @@ const ContractSettings = () => {
     if (token === null) {
       navigate('/login');
     }
-    dispatch(getAllEmployeesContractsSummary());
-    dispatch(getAllEmployees());
   }, [dispatch, token, navigate]);
 
   const submitForm = event => {

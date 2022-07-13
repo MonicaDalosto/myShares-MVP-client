@@ -46,7 +46,15 @@ export const Navigation = () => {
               Employee
             </Link>
           </MenuLink>
-          <MenuLink href="/contract">Contract</MenuLink>
+          {/* <MenuLink href="/contract">Contract</MenuLink> */}
+          <MenuLink>
+            <Link
+              style={{ textDecoration: 'none', color: '#ececec' }}
+              to="/contract"
+            >
+              Contract
+            </Link>
+          </MenuLink>
           <MenuLink href="/company">Company</MenuLink>
           <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
         </Menu>

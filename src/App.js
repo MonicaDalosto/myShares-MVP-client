@@ -24,13 +24,12 @@ function App() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
 
-  // console.log('user ', user);
-
   useEffect(() => {
     dispatch(getUserWithStoredToken());
     if (token) {
       dispatch(getCompany());
       dispatch(getAllEmployees());
+      dispatch(getAllEmployeesContractsSummary());
     }
   }, [dispatch, token]);
 
