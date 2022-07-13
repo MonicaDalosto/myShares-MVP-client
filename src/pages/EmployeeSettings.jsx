@@ -10,6 +10,11 @@ import { selectAllEmployees } from '../store/employees/selectors';
 import { EmployeesList } from '../components';
 
 const EmployeeSettings = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const allEmployees = useSelector(selectAllEmployees);
+  const token = useSelector(selectToken);
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [department, setDepartment] = useState('');
@@ -17,11 +22,8 @@ const EmployeeSettings = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [startDate, setStartDate] = useState('');
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const allEmployees = useSelector(selectAllEmployees);
-
-  const token = useSelector(selectToken);
+  const formValid =
+    name && email && department && password && startDate ? true : false;
 
   useEffect(() => {
     if (token === null) {
@@ -79,14 +81,20 @@ const EmployeeSettings = () => {
               Department
               <select
                 value={department}
-                onChange={event => setDepartment(event.target.value)}
+                onChange={event =>
+                  setDepartment(
+                    event.target.value === 'Choose department'
+                      ? ''
+                      : event.target.value
+                  )
+                }
               >
                 <option>Choose department</option>
-                <option value="Finance">Finance</option>
-                <option value="HR">HR</option>
-                <option value="Marketing">Marketing</option>
-                <option value="Operations">Operations</option>
-                <option value="R&D">R&D</option>
+                <option>Finance</option>
+                <option>HR</option>
+                <option>Marketing</option>
+                <option>Operations</option>
+                <option>R&D</option>
               </select>
             </label>
             <label>
@@ -115,7 +123,9 @@ const EmployeeSettings = () => {
               />
             </label>
             <br />
-            <button type="submit">Create employee</button>
+            <button type="submit" disabled={!formValid}>
+              Create employee
+            </button>
           </form>
         </div>
       </Container>
