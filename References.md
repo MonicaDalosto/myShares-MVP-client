@@ -19,3 +19,7 @@ https://dev.to/oaraujocesar/multi-params-axios-request-5409
 # How to add a Link to a React table Cell:
 
 https://github.com/TanStack/table/issues/89
+
+# How to create a modal:
+
+https://dev.to/franciscomendes10866/how-to-create-a-modal-in-react-3coc

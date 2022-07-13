@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { selectToken } from '../store/user/selectors';
 import { updateEmployee, deleteEmployee } from '../store/employees/thunks';
 import { selectSpecificEmployee } from '../store/employees/selectors';
+import { Modal } from '../components';
 
 const EditEmployee = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const EditEmployee = () => {
   const token = useSelector(selectToken);
   const user = useSelector(selectSpecificEmployee(parseInt(id)));
 
+  const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isAdmin, setIsAdmin] = useState('');
@@ -180,7 +182,7 @@ const EditEmployee = () => {
       <h2>Delete Employee</h2>
       <form
         style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
-        onSubmit={submitDeleteForm}
+        // onSubmit={submitDeleteForm}
       >
         <label>Name: {name}</label>
         <label>Email: {email}</label>
@@ -208,9 +210,20 @@ const EditEmployee = () => {
         )}
 
         <br />
-        <button type="submit" disabled={!userCanBeDeleted}>
+        <button
+          type="button"
+          disabled={!userCanBeDeleted}
+          onClick={() => setIsOpen(true)}
+        >
           Delete employee
         </button>
+        {isOpen && (
+          <Modal
+            setIsOpen={setIsOpen}
+            submitDeleteForm={submitDeleteForm}
+            name={name}
+          />
+        )}
       </form>
     </Container>
   );

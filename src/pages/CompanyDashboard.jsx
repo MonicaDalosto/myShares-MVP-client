@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllEmployeesContractsSummary } from '../store/contracts/thunks';
 import { selectAllEmployeeContractsSummary } from '../store/contracts/selectors';
-import { CompanyTableShares } from '../components/CompanyTableShares';
+import { CompanyTableShares } from '../components';
 
 const CompanyDashboard = () => {
   const dispatch = useDispatch();
