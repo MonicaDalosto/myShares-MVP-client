@@ -79,9 +79,9 @@ const ContractSettings = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <Container>
+      <div>
         <div>
-          <Title>Contracts Settings</Title>
+          <h2>Contracts Settings</h2>
           <ContractsList allEmployeeContracts={contractsSummary} />
         </div>
         <div>
@@ -154,7 +154,7 @@ const ContractSettings = () => {
             </button>
           </form>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

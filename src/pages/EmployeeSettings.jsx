@@ -54,13 +54,13 @@ const EmployeeSettings = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <Container>
+      <div>
         <div>
-          <Title>Employee Settings</Title>
+          <h2>Employee Settings</h2>
           <EmployeesList allEmployees={allEmployees} />
         </div>
         <div>
-          <Title>Create new employee</Title>
+          <h2>Create new employee</h2>
           <form
             style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
             onSubmit={submitForm}
@@ -130,7 +130,7 @@ const EmployeeSettings = () => {
             </button>
           </form>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

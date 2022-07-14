@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { BarChartShares, EmployeeTableShares } from '../components';
+import { Banner, BarChartShares, EmployeeTableShares } from '../components';
 import {
   getMyContractsSummary,
   getSharesProjection

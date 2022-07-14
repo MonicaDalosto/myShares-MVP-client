@@ -67,7 +67,7 @@ const EmployeesList = ({ allEmployees }) => {
         accessor: 'employee.startDate',
         Cell: ({ row }) => (
           <span>
-            {moment(row.original.employee.startDate).format('Do MMM YYYY')}
+            {moment(row.original.employee.startDate).format('DD/MM/YYYY')}
           </span>
         )
       },
@@ -84,7 +84,7 @@ const EmployeesList = ({ allEmployees }) => {
         Cell: ({ row }) => (
           <span>
             {row.original.employee.endDate &&
-              moment(row.original.employee.endDate).format('Do MMM YYYY')}
+              moment(row.original.employee.endDate).format('DD/MM/YYYY')}
           </span>
         )
       },

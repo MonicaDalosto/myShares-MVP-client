@@ -13,7 +13,7 @@ const CompanyDashboard = () => {
   const allEmployeeContracts = useSelector(selectAllEmployeeContractsSummary);
 
   useEffect(() => {
-    dispatch(getAllEmployeesContractsSummary());
+    // dispatch(getAllEmployeesContractsSummary());
   }, [dispatch]);
 
   if (!allEmployeeContracts) {
@@ -25,12 +25,12 @@ const CompanyDashboard = () => {
   }
 
   return (
-    <Container>
+    <div>
       <h2>Summary table</h2>
       <div>
         <CompanyTableShares contracts={allEmployeeContracts} />
       </div>
-    </Container>
+    </div>
   );
 };
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useTable } from 'react-table';
+import NumberFormat from 'react-number-format';
+import moment from 'moment';
 
 const EmployeeTableShares = ({ contracts }) => {
   const data = React.useMemo(() => [...contracts], [contracts]); // get the data from the parent component (props);
@@ -9,20 +11,47 @@ const EmployeeTableShares = ({ contracts }) => {
       {
         Header: 'Signature Date',
         accessor: 'signatureDate', // accessor is the "key" in the data
+        Cell: ({ row }) => (
+          <span>{moment(row.original.signatureDate).format('DD/MM/YYYY')}</span>
+        ),
         Footer: 'Total'
       },
       {
         Header: 'Granted Shares',
         accessor: 'grantedShares',
-        Footer: grantedShares =>
-          grantedShares.rows.reduce(
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={row.original.grantedShares}
+            displayType={'text'}
+            thousandSeparator={true}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        ),
+        Footer: grantedShares => {
+          const value = grantedShares.rows.reduce(
             (sum, row) => row.values.grantedShares + sum,
             0
-          )
+          );
+          return (
+            <NumberFormat
+              value={value}
+              displayType={'text'}
+              thousandSeparator={true}
+              decimalScale={2}
+              fixedDecimalScale={true}
+              renderText={(value, props) => <span {...props}>{value}</span>}
+            />
+          );
+        }
       },
       {
         Header: 'End Cliff Period',
-        accessor: 'cliffDate'
+        accessor: 'cliffDate',
+        Cell: ({ row }) => (
+          <span>{moment(row.original.cliffDate).format('DD/MM/YYYY')}</span>
+        )
       },
       {
         Header: 'Months after Signature Date',
@@ -31,21 +60,65 @@ const EmployeeTableShares = ({ contracts }) => {
       {
         Header: 'Virtual Owned Shares',
         accessor: 'virtualOwnedShares',
-        Footer: ownedShares =>
-          ownedShares.rows.reduce(
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={row.original.virtualOwnedShares}
+            displayType={'text'}
+            thousandSeparator={true}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        ),
+        Footer: ownedShares => {
+          const value = ownedShares.rows.reduce(
             (sum, row) => row.values.virtualOwnedShares + sum,
             0
-          )
+          );
+          return (
+            <NumberFormat
+              value={value}
+              displayType={'text'}
+              thousandSeparator={true}
+              decimalScale={2}
+              fixedDecimalScale={true}
+              renderText={(value, props) => <span {...props}>{value}</span>}
+            />
+          );
+        }
       },
       {
         Header: 'Shares Value based on Current valuation',
         accessor: 'sharesValueBasedCompanyCurrentValuation',
-        Footer: sharesValues =>
-          sharesValues.rows.reduce(
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={row.original.sharesValueBasedCompanyCurrentValuation}
+            displayType={'text'}
+            thousandSeparator={true}
+            prefix={'$ '}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        ),
+        Footer: sharesValues => {
+          const value = sharesValues.rows.reduce(
             (sum, row) =>
               row.values.sharesValueBasedCompanyCurrentValuation + sum,
             0
-          )
+          );
+          return (
+            <NumberFormat
+              value={value}
+              displayType={'text'}
+              thousandSeparator={true}
+              prefix={'$ '}
+              decimalScale={2}
+              fixedDecimalScale={true}
+              renderText={(value, props) => <span {...props}>{value}</span>}
+            />
+          );
+        }
       }
     ],
     []

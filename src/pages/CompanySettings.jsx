@@ -46,8 +46,8 @@ const CompanySettings = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <Container>
-        <Title>Update the Company's Data</Title>
+      <div>
+        <h2>Update the Company's Data</h2>
         <form
           style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
           onSubmit={submitForm}
@@ -87,7 +87,7 @@ const CompanySettings = () => {
             Submit update
           </button>
         </form>
-      </Container>
+      </div>
     </div>
   );
 };

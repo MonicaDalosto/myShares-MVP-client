@@ -94,7 +94,7 @@ const EditEmployee = () => {
   }
 
   return (
-    <Container>
+    <div>
       <h2>Edit Employee</h2>
       <form
         style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
@@ -225,7 +225,7 @@ const EditEmployee = () => {
           />
         )}
       </form>
-    </Container>
+    </div>
   );
 };
 

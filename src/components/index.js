@@ -6,3 +6,4 @@ export * from './EmployeesList';
 export * from './ContractsList';
 export * from './CompanyTableShares';
 export * from './Modal';
+export * from './Banner';

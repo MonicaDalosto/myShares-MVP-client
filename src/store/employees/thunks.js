@@ -27,10 +27,14 @@ export const updateEmployee =
           headers: { Authorization: `Bearer ${token}` }
         }
       );
-
+      dispatch(
+        showMessageWithTimeout('success', true, 'The employee was updated!')
+      );
       dispatch(getAllEmployees());
     } catch (error) {
-      console.log(error.message);
+      dispatch(
+        showMessageWithTimeout('danger', true, error.response.data.message)
+      );
     }
   };
 

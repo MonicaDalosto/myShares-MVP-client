@@ -7,6 +7,8 @@ import {
 } from 'react-table';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
+import NumberFormat from 'react-number-format';
 import { deleteContract } from '../store/contracts/thunks';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { Modal } from './Modal';
@@ -71,15 +73,31 @@ const ContractsList = ({ allEmployeeContracts }) => {
       },
       {
         Header: 'Signature Date',
-        accessor: 'signatureDate'
+        accessor: 'signatureDate',
+        Cell: ({ row }) => (
+          <span>{moment(row.original.signatureDate).format('DD/MM/YYYY')}</span>
+        )
       },
       {
         Header: 'Cliff Date',
-        accessor: 'cliffDate'
+        accessor: 'cliffDate',
+        Cell: ({ row }) => (
+          <span>{moment(row.original.cliffDate).format('DD/MM/YYYY')}</span>
+        )
       },
       {
         Header: 'Granted Shares',
-        accessor: 'grantedShares'
+        accessor: 'grantedShares',
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={row.original.grantedShares}
+            displayType={'text'}
+            thousandSeparator={true}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        )
       },
       {
         Header: 'Months After Signature',
@@ -87,11 +105,32 @@ const ContractsList = ({ allEmployeeContracts }) => {
       },
       {
         Header: 'Owned Shares',
-        accessor: 'virtualOwnedShares'
+        accessor: 'virtualOwnedShares',
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={row.original.virtualOwnedShares}
+            displayType={'text'}
+            thousandSeparator={true}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        )
       },
       {
         Header: 'Current valuation',
-        accessor: 'sharesValueBasedCompanyCurrentValuation'
+        accessor: 'sharesValueBasedCompanyCurrentValuation',
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={row.original.virtualOwnedShares}
+            displayType={'text'}
+            thousandSeparator={true}
+            prefix={'$ '}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        )
       },
       {
         Header: 'Delete Contract',
