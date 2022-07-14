@@ -7,6 +7,7 @@ import {
   useAsyncDebounce,
   useSortBy
 } from 'react-table';
+import { TableContainer, Table } from '../styled';
 
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -21,19 +22,18 @@ function GlobalFilter({
 
   return (
     <span>
-      Search:{' '}
-      <input
-        value={value || ''}
-        onChange={e => {
-          setValue(e.target.value);
-          onChange(e.target.value);
-        }}
-        placeholder={`${count} records...`}
-        style={{
-          fontSize: '1.1rem',
-          border: '0'
-        }}
-      />
+      <span>
+        Search:{' '}
+        <input
+          value={value || ''}
+          onChange={e => {
+            setValue(e.target.value);
+            onChange(e.target.value);
+          }}
+          // placeholder={`${count} records...`}
+        />
+        {`${count} records...`}
+      </span>
     </span>
   );
 }
@@ -205,9 +205,9 @@ const CompanyTableShares = ({ contracts }) => {
   } = tableInstance;
 
   return (
-    <div>
+    <TableContainer>
       {/* apply the table props */}
-      <table {...getTableProps()}>
+      <Table {...getTableProps()}>
         <thead>
           <tr>
             <th
@@ -304,8 +304,8 @@ const CompanyTableShares = ({ contracts }) => {
             ))
           }
         </tfoot>
-      </table>
-    </div>
+      </Table>
+    </TableContainer>
   );
 };
 

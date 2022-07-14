@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Container, Title } from '../styled';
 import { selectToken } from '../store/user/selectors';
 import { updateEmployee, deleteEmployee } from '../store/employees/thunks';
 import { selectSpecificEmployee } from '../store/employees/selectors';
@@ -87,15 +88,15 @@ const EditEmployee = () => {
 
   if (!user) {
     return (
-      <div>
-        <h2>You don't have any Employees!</h2>
-      </div>
+      <Container>
+        <Title>You don't have any Employees!</Title>
+      </Container>
     );
   }
 
   return (
-    <div>
-      <h2>Edit Employee</h2>
+    <Container>
+      <Title>Edit Employee</Title>
       <form
         style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
         onSubmit={submitEditForm}
@@ -179,7 +180,7 @@ const EditEmployee = () => {
           Submit Edition
         </button>
       </form>
-      <h2>Delete Employee</h2>
+      <Title>Delete Employee</Title>
       <form
         style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
         // onSubmit={submitDeleteForm}
@@ -225,14 +226,8 @@ const EditEmployee = () => {
           />
         )}
       </form>
-    </div>
+    </Container>
   );
 };
 
 export { EditEmployee };
-
-const Container = styled.div`
-  display: 'flex';
-  flex-direction: 'column';
-  margin: 15%;
-`;

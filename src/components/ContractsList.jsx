@@ -12,6 +12,7 @@ import NumberFormat from 'react-number-format';
 import { deleteContract } from '../store/contracts/thunks';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { Modal } from './Modal';
+import { TableContainer, Table } from '../styled';
 
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -33,12 +34,9 @@ function GlobalFilter({
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        placeholder={`${count} records...`}
-        style={{
-          fontSize: '1.1rem',
-          border: '0'
-        }}
+        // placeholder={`${count} records...`}
       />
+      {`${count} records...`}
     </span>
   );
 }
@@ -145,8 +143,7 @@ const ContractsList = ({ allEmployeeContracts }) => {
                 setIsOpen(true);
               }}
             >
-              Delete
-              {/* <RiDeleteBin5Line value={row.original.contractId} /> */}
+              🗑
             </button>
           );
         }
@@ -170,9 +167,9 @@ const ContractsList = ({ allEmployeeContracts }) => {
   } = tableInstance;
 
   return (
-    <div>
+    <TableContainer>
       {/* apply the table props */}
-      <table {...getTableProps()}>
+      <Table {...getTableProps()}>
         <thead>
           <tr>
             <th
@@ -247,7 +244,7 @@ const ContractsList = ({ allEmployeeContracts }) => {
             })
           }
         </tbody>
-      </table>
+      </Table>
       {isOpen && (
         <Modal
           setIsOpen={setIsOpen}
@@ -255,7 +252,7 @@ const ContractsList = ({ allEmployeeContracts }) => {
           name=" the Contract"
         />
       )}
-    </div>
+    </TableContainer>
   );
 };
 

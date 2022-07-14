@@ -7,11 +7,12 @@ import {
   Legend,
   Bar
 } from 'recharts';
+import { ChartContainer } from '../styled';
 
 const BarChartShares = ({ data }) => {
   return (
-    <div>
-      <BarChart width={730} height={250} data={data}>
+    <ChartContainer>
+      <BarChart style={{ margin: 'auto' }} width={800} height={300} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="signatureDate" />
         <YAxis />
@@ -20,7 +21,7 @@ const BarChartShares = ({ data }) => {
         <Bar dataKey="grantedShares" fill="#ee6a50" />
         <Bar dataKey="ownedShares" fill="#191a62" />
       </BarChart>
-    </div>
+    </ChartContainer>
   );
 };
 

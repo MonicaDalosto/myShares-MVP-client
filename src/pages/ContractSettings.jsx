@@ -80,10 +80,8 @@ const ContractSettings = () => {
   return (
     <div style={{ textAlign: 'center' }}>
       <div>
-        <div>
-          <h2>Contracts Settings</h2>
-          <ContractsList allEmployeeContracts={contractsSummary} />
-        </div>
+        <Title>Contracts Settings</Title>
+        <ContractsList allEmployeeContracts={contractsSummary} />
         <div>
           <Title>Create new contract</Title>
           <form

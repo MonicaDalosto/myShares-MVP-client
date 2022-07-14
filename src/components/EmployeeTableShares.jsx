@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTable } from 'react-table';
+import { TableContainer, Table } from '../styled';
 import NumberFormat from 'react-number-format';
 import moment from 'moment';
 
@@ -136,9 +137,9 @@ const EmployeeTableShares = ({ contracts }) => {
   } = tableInstance;
 
   return (
-    <div>
+    <TableContainer>
       {/* apply the table props */}
-      <table {...getTableProps()}>
+      <Table {...getTableProps()}>
         <thead>
           {
             // Loop over the header rows
@@ -212,8 +213,8 @@ const EmployeeTableShares = ({ contracts }) => {
             ))
           }
         </tfoot>
-      </table>
-    </div>
+      </Table>
+    </TableContainer>
   );
 };
 

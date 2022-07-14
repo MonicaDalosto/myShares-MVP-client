@@ -47,7 +47,7 @@ export const Login = () => {
           <Button type="submit">Login</Button>
         </form>
         <SubText>
-          Don't remember your password? Click{' '}
+          Don't remember your password? Click
           <Link to="/" style={LinkWord}>
             here
           </Link>{' '}

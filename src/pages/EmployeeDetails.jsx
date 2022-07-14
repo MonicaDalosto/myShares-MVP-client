@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { Container, Title } from '../styled';
 import { BarChartShares, EmployeeTableShares } from '../components';
 import { getEmployeeContractsSummary } from '../store/contracts/thunks';
 import { selectEmployeeContractsSummary } from '../store/contracts/selectors';
@@ -16,17 +17,17 @@ const EmployeeDetails = () => {
 
   if (!contractsSummary) {
     return (
-      <div>
-        <h2>The employee doesn't have any contract...</h2>
-      </div>
+      <Container>
+        <Title>The employee doesn't have any contract...</Title>
+      </Container>
     );
   }
 
   const { employeeContractsSummary, grantedXOwnedShares } = contractsSummary;
 
   return (
-    <div>
-      <h2>{contractsSummary.name}'s Details Page</h2>
+    <Container>
+      <Title>{contractsSummary.name}'s Details Page</Title>
       <div>
         <BarChartShares data={grantedXOwnedShares} />
       </div>
@@ -34,7 +35,7 @@ const EmployeeDetails = () => {
       <div>
         <EmployeeTableShares contracts={employeeContractsSummary} />
       </div>
-    </div>
+    </Container>
   );
 };
 

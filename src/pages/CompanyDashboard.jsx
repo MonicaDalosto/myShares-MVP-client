@@ -1,6 +1,6 @@
 import { Title } from '../styled';
 import { Link } from 'react-router-dom';
-import { LinkWord } from '../styled';
+import { Container, LinkWord } from '../styled';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,24 +18,18 @@ const CompanyDashboard = () => {
 
   if (!allEmployeeContracts) {
     return (
-      <div>
-        <h2>Homepage loading...</h2>
-      </div>
+      <Container>
+        <Title>Homepage loading...</Title>
+      </Container>
     );
   }
 
   return (
-    <div>
-      <h2>Summary table</h2>
-      <div>
-        <CompanyTableShares contracts={allEmployeeContracts} />
-      </div>
-    </div>
+    <Container>
+      <Title>Summary table</Title>
+      <CompanyTableShares contracts={allEmployeeContracts} />
+    </Container>
   );
 };
 
 export { CompanyDashboard };
-
-const Container = styled.div`
-  margin: 20px;
-`;

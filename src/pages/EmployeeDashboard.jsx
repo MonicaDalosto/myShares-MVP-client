@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Container, Title } from '../styled';
 import { Banner, BarChartShares, EmployeeTableShares } from '../components';
 import {
   getMyContractsSummary,
@@ -38,25 +39,21 @@ const EmployeeDashboard = () => {
 
   if (!contractsSummary) {
     return (
-      <div>
-        <h2>You don't have any contract...</h2>
-      </div>
+      <Container>
+        <Title>You don't have any contract!</Title>
+      </Container>
     );
   }
 
   const { employeeContractsSummary, grantedXOwnedShares } = contractsSummary;
 
   return (
-    <div>
-      <h2> Employee Dashboard </h2>
-      <div>
-        <BarChartShares data={grantedXOwnedShares} />
-      </div>
+    <Container>
+      <Title> Employee Dashboard </Title>
+      <BarChartShares data={grantedXOwnedShares} />
       <h2>Summary table</h2>
-      <div>
-        <EmployeeTableShares contracts={employeeContractsSummary} />
-      </div>
-      <h2>Virtual Shares Projection</h2>
+      <EmployeeTableShares contracts={employeeContractsSummary} />
+      <Title>Virtual Shares Projection</Title>
       <p>
         Do you want to see the projection of your virtual shares? Fill the form
         below:
@@ -100,7 +97,7 @@ const EmployeeDashboard = () => {
           </div>
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 

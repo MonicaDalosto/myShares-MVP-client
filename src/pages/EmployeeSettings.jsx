@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Input, Title, LinkWord } from '../styled';
+import { Button, Input, Title, Container, LinkWord } from '../styled';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +30,7 @@ const EmployeeSettings = () => {
       navigate('/login');
     }
     dispatch(getAllEmployees());
-  }, [token, navigate]);
+  }, [dispatch, token, navigate]);
 
   const submitForm = event => {
     event.preventDefault();
@@ -46,25 +46,20 @@ const EmployeeSettings = () => {
 
   if (!allEmployees) {
     return (
-      <div>
+      <Container>
         <Title>You don't have any Employees!</Title>
-      </div>
+      </Container>
     );
   }
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <Container>
       <div>
-        <div>
-          <h2>Employee Settings</h2>
-          <EmployeesList allEmployees={allEmployees} />
-        </div>
+        <Title>Employee Settings</Title>
+        <EmployeesList allEmployees={allEmployees} />
         <div>
           <h2>Create new employee</h2>
-          <form
-            style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
-            onSubmit={submitForm}
-          >
+          <form onSubmit={submitForm}>
             <label>
               Name
               <input
@@ -131,17 +126,17 @@ const EmployeeSettings = () => {
           </form>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 
 export { EmployeeSettings };
 
-const Container = styled.div`
-  display: 'flex';
-  flex-direction: 'column';
-  margin: 15%;
-`;
+// const Container = styled.div`
+//   display: 'flex';
+//   flex-direction: 'column';
+//   margin: 15%;
+// `;
 
 const SubText = styled.p`
   text-align: center;

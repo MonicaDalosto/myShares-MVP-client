@@ -6,6 +6,7 @@ import {
   useAsyncDebounce,
   useSortBy
 } from 'react-table';
+import { TableContainer, Table } from '../styled';
 import { FaRegEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import moment from 'moment';
@@ -30,12 +31,9 @@ function GlobalFilter({
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        placeholder={`${count} records...`}
-        style={{
-          fontSize: '1.1rem',
-          border: '0'
-        }}
+        // placeholder={`${count} records...`}
       />
+      {`${count} records...`}
     </span>
   );
 }
@@ -56,7 +54,7 @@ const EmployeesList = ({ allEmployees }) => {
       {
         Header: 'Is Admin',
         accessor: 'isAdmin',
-        Cell: ({ row }) => <span>{row.original.isAdmin ? '✅' : '❌'}</span>
+        Cell: ({ row }) => <span>{row.original.isAdmin ? '✔️' : '✖️'}</span>
       },
       {
         Header: 'Department',
@@ -95,21 +93,26 @@ const EmployeesList = ({ allEmployees }) => {
           return (
             <span>
               <Link
+                style={{ margin: '0 10px' }}
                 to={{
                   pathname: `/edit-employee/${row.original.id}`,
                   state: { data: row }
                 }}
               >
-                <FaRegEdit />
+                🔧
+                {/* 🖊 */}
+                {/* <FaRegEdit /> */}
               </Link>
               {''}
               <Link
+                style={{ margin: '0 10px' }}
                 to={{
                   pathname: `/edit-employee/${row.original.id}`,
                   state: { data: row }
                 }}
               >
-                <RiDeleteBin5Line />
+                🗑
+                {/* <RiDeleteBin5Line /> */}
               </Link>
             </span>
           );
@@ -135,9 +138,9 @@ const EmployeesList = ({ allEmployees }) => {
   } = tableInstance;
 
   return (
-    <div>
+    <TableContainer>
       {/* apply the table props */}
-      <table {...getTableProps()}>
+      <Table {...getTableProps()}>
         <thead>
           <tr>
             <th
@@ -212,30 +215,8 @@ const EmployeesList = ({ allEmployees }) => {
             })
           }
         </tbody>
-        <tfoot>
-          {
-            // Loop over the header rows
-            footerGroups.map(group => (
-              // Apply the header row props
-              <tr {...group.getFooterGroupProps()}>
-                {
-                  // Loop over the headers in each row
-                  group.headers.map(column => (
-                    // Apply the header cell props
-                    <td {...column.getFooterProps()}>
-                      {
-                        // Render the header
-                        column.render('Footer')
-                      }
-                    </td>
-                  ))
-                }
-              </tr>
-            ))
-          }
-        </tfoot>
-      </table>
-    </div>
+      </Table>
+    </TableContainer>
   );
 };
 

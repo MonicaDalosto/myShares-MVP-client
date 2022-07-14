@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Input, Title, LinkWord } from '../styled';
+import { Container, Title } from '../styled';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -45,9 +45,9 @@ const CompanySettings = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <Container>
       <div>
-        <h2>Update the Company's Data</h2>
+        <Title>Update the Company's Data</Title>
         <form
           style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
           onSubmit={submitForm}
@@ -88,20 +88,8 @@ const CompanySettings = () => {
           </button>
         </form>
       </div>
-    </div>
+    </Container>
   );
 };
 
 export { CompanySettings };
-
-const Container = styled.div`
-  display: 'flex';
-  flex-direction: 'column';
-  margin: 15%;
-`;
-
-const SubText = styled.p`
-  text-align: center;
-  color: #000050;
-  padding: 20px 0px 5px 0px;
-`;
