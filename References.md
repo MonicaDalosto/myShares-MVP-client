@@ -23,3 +23,11 @@ https://github.com/TanStack/table/issues/89
 # How to create a modal:
 
 https://dev.to/franciscomendes10866/how-to-create-a-modal-in-react-3coc
+
+# How to format numbers:
+
+https://github.com/s-yadav/react-number-format#readme
+
+# How to style the NavLink:
+
+https://dev.to/ridhikgovind/how-to-style-your-react-router-links-using-styled-components-2350

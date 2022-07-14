@@ -13,7 +13,7 @@ const CompanyDashboard = () => {
   const allEmployeeContracts = useSelector(selectAllEmployeeContractsSummary);
 
   useEffect(() => {
-    // dispatch(getAllEmployeesContractsSummary());
+    dispatch(getAllEmployeesContractsSummary());
   }, [dispatch]);
 
   if (!allEmployeeContracts) {

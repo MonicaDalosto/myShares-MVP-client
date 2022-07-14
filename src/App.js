@@ -1,7 +1,7 @@
 import './App.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
 import { getUserWithStoredToken } from './store/user/thunks';
 import { getCompany } from './store/company/thunks';
 import { selectUser, selectToken } from './store/user/selectors';
@@ -36,8 +36,8 @@ function App() {
   return (
     <div>
       <Navigation />
-      <Banner />
       <MessageBox />
+      {/* <Banner /> */}
       <Routes>
         <Route path="/" element={<EmployeeDashboard />} />
         <Route path="/signup" element={<SignUp />} />
