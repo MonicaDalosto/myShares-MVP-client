@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Title } from '../styled';
-import { selectToken } from '../store/user/selectors';
+import { selectToken, selectUser } from '../store/user/selectors';
 import { updateEmployee, deleteEmployee } from '../store/employees/thunks';
 import { selectSpecificEmployee } from '../store/employees/selectors';
 import { Modal } from '../components';
@@ -14,6 +14,7 @@ const EditEmployee = () => {
   const { id } = useParams();
 
   const token = useSelector(selectToken);
+  const admin = useSelector(selectUser);
   const user = useSelector(selectSpecificEmployee(parseInt(id)));
 
   const [isOpen, setIsOpen] = useState(false);
@@ -27,13 +28,12 @@ const EditEmployee = () => {
   const [check, setCheck] = useState(false);
   const [contracts, setContracts] = useState(0);
 
+  const userCanBeDeleted = !contracts;
   const endDateValid = isActive || (!isActive && endDate);
   const formValid =
     name && email && startDate && department && endDateValid && check
       ? true
       : false;
-
-  const userCanBeDeleted = !contracts;
 
   useEffect(() => {
     if (token === null) {
@@ -62,7 +62,12 @@ const EditEmployee = () => {
   const submitEditForm = event => {
     event.preventDefault();
     let dateToSend = endDate;
-    if (isActive) {
+    let isUserActive = isActive;
+    if (Number(id) === Number(admin.id)) {
+      // the Admin cannot set themselves as inactive
+      isUserActive = true;
+    }
+    if (isUserActive) {
       dateToSend = null;
     }
     dispatch(
@@ -73,7 +78,7 @@ const EditEmployee = () => {
         isAdmin,
         startDate,
         department,
-        isActive,
+        isActive: isUserActive,
         endDate: dateToSend
       })
     );

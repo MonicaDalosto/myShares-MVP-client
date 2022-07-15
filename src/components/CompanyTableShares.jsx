@@ -179,7 +179,7 @@ const CompanyTableShares = ({ contracts }) => {
                   state: { data: row }
                 }}
               >
-                See Details
+                🔍
               </Link>
             </span>
           );
