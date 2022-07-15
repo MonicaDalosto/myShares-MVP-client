@@ -29,9 +29,17 @@ const EditEmployee = () => {
   const [contracts, setContracts] = useState(0);
 
   const userCanBeDeleted = !contracts;
+  const theUserIsTheAdmin =
+    user && Number(id) === Number(admin.id) && isActive ? true : false;
   const endDateValid = isActive || (!isActive && endDate);
   const formValid =
-    name && email && startDate && department && endDateValid && check
+    name &&
+    email &&
+    startDate &&
+    department &&
+    endDateValid &&
+    theUserIsTheAdmin &&
+    check
       ? true
       : false;
 
