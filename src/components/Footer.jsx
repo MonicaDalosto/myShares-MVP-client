@@ -7,12 +7,15 @@ const Footer = () => {
         <p>&copy; 2022 Mônica Dalosto - Codaisseur</p>
         <ul class="setDisplayFlex">
           <li>
-            <a href="https://www.linkedin.com/in/monica-dalosto/">
+            <a
+              target="blank"
+              href="https://www.linkedin.com/in/monica-dalosto/"
+            >
               <FaLinkedin />
             </a>
           </li>
           <li>
-            <a href="https://github.com/MonicaDalosto">
+            <a target="blank" href="https://github.com/MonicaDalosto">
               <FaGithubSquare />
             </a>
           </li>
