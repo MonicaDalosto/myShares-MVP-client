@@ -106,16 +106,17 @@ const MenuLink = styled.ul`
 `;
 
 const Nav = styled.div`
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+  height: 70px;
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: #000050;
-  /* position: absolute; */
-  top: 0;
-  left: 0;
-  right: 0;
+  background: var(--color-primary);
 `;
 
 const Logo = styled.ul`
@@ -126,7 +127,7 @@ const Logo = styled.ul`
   li {
     font-weight: 800;
     font-size: 1.7rem;
-    color: #ececec;
+    color: var(--color-secondary);
     list-style: none;
     transition: all 0.3s ease-in;
   }
@@ -143,12 +144,12 @@ const Hamburger = styled.div`
   span {
     height: 2px;
     width: 25px;
-    background-color: #ececec;
+    background-color: var(--color-secondary);
     margin-bottom: 4px;
     border-radius: 5px;
   }
 
-  @media (max-width: 780px) {
+  @media (max-width: 1050px) {
     display: flex;
   }
 `;
@@ -159,7 +160,7 @@ const Menu = styled.div`
   align-items: center;
   position: relative;
 
-  @media (max-width: 780px) {
+  @media (max-width: 1050px) {
     overflow: hidden;
     flex-direction: column;
     width: 100%;

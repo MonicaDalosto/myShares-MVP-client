@@ -7,7 +7,7 @@ import { getCompany } from './store/company/thunks';
 import { selectUser, selectToken } from './store/user/selectors';
 import { getAllEmployeesContractsSummary } from './store/contracts/thunks';
 import { getAllEmployees } from './store/employees/thunks';
-import { Navigation, MessageBox, Banner } from './components';
+import { Navigation, MessageBox, Banner, Footer } from './components';
 import {
   CompanyDashboard,
   CompanySettings,
@@ -49,6 +49,7 @@ function App() {
         <Route path="/employee-details/:id" element={<EmployeeDetails />} />
         <Route path="/dashboard" element={<CompanyDashboard />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

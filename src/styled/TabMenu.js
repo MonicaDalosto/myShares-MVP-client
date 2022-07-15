@@ -29,9 +29,9 @@ export const Tabs = styled.div`
 export const Panels = styled.div`
   .panel {
     display: none;
-    padding: 0 0 0 30px;
-    height: 250px;
-    text-align: left;
+    // padding: 0 0 0 30px;
+    // height: 250px;
+    // text-align: left;
   }
 
   & .active {

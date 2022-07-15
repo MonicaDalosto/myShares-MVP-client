@@ -18,8 +18,8 @@ const BarChartShares = ({ data }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="grantedShares" fill="#ee6a50" />
-        <Bar dataKey="ownedShares" fill="#191a62" />
+        <Bar dataKey="grantedShares" fill="var(--color-chart-1" />
+        <Bar dataKey="ownedShares" fill="var(--color-chart-2" />
       </BarChart>
     </ChartContainer>
   );

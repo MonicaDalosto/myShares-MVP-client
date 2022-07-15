@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: 'flex';
-  flex-direction: 'column';
-  width: 90%;
-  margin: 0 auto;
-  padding-bottom: 50px;
-  box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+  min-height: 100rem;
+  margin: 70px auto 80px;
+  // display: 'flex';
+  // flex-direction: 'column';
+  // width: 100%;
+  // heigth: 100%
+  // box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
 `;

@@ -24,4 +24,6 @@ html {
   --color-primary: #000050; /* Dark blue */
   --color-secondary: #ececec; /* kind of White */
   --color-bg-table: #f8f8f8; /* Light gray */
+  --color-chart-1: #f07a61; /* Orange */
+  --color-chart-2: #333373; /* Blue */
 }

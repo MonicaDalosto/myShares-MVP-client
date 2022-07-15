@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const TableContainer = styled.div`
-  margin: 100px auto;
+  margin: auto;
   // padding: 5%;
   // border-radius: 5px;
   // box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);

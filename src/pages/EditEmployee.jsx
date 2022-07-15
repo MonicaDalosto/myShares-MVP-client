@@ -113,7 +113,7 @@ const EditEmployee = () => {
   }
 
   return (
-    <div>
+    <Container>
       <Tabs>
         <button
           className={`tab ${checkActive(0, 'active')}`}
@@ -266,7 +266,7 @@ const EditEmployee = () => {
           </form>
         </div>
       </Panels>
-    </div>
+    </Container>
   );
 };
 

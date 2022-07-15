@@ -31,7 +31,7 @@ const EmployeeDetails = () => {
       <div>
         <BarChartShares data={grantedXOwnedShares} />
       </div>
-      <h2>{contractsSummary.name}'s summary table</h2>
+      <Title>{contractsSummary.name}'s summary table</Title>
       <div>
         <EmployeeTableShares contracts={employeeContractsSummary} />
       </div>

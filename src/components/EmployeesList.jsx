@@ -53,7 +53,7 @@ const EmployeesList = ({ allEmployees }) => {
       },
       {
         Header: 'Is Admin',
-        accessor: 'isAdmin',
+        // accessor: 'isAdmin',
         Cell: ({ row }) => <span>{row.original.isAdmin ? '✔️' : '✖️'}</span>
       },
       {
@@ -71,9 +71,9 @@ const EmployeesList = ({ allEmployees }) => {
       },
       {
         Header: 'Is Active',
-        accessor: 'employee.isActive',
+        // accessor: 'employee.isActive',
         Cell: ({ row }) => (
-          <span>{row.original.employee.isActive ? '✅' : '❌'}</span>
+          <span>{row.original.employee.isActive ? '✔️' : '❌'}</span>
         )
       },
       {

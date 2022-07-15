@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Input, Title, LinkWord } from '../styled';
+import { Title, Tabs, Panels, Container } from '../styled';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +20,11 @@ const ContractSettings = () => {
   const token = useSelector(selectToken);
   const allEmployees = useSelector(selectAllEmployees);
   const allEmployeeContracts = useSelector(selectAllEmployeeContractsSummary);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const handleClick = index => setActiveIndex(index);
+  const checkActive = (index, className) =>
+    activeIndex === index ? className : '';
 
   const [employeeId, setEmployeeId] = useState('');
   const [signatureDate, setSignatureDate] = useState('');
@@ -66,9 +71,9 @@ const ContractSettings = () => {
 
   if (!allEmployeeContracts) {
     return (
-      <div>
+      <Container>
         <Title> You don't have any Contracts!</Title>
-      </div>
+      </Container>
     );
   }
 
@@ -78,11 +83,27 @@ const ContractSettings = () => {
   );
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <div>
-        <Title>Contracts Settings</Title>
-        <ContractsList allEmployeeContracts={contractsSummary} />
-        <div>
+    <Container>
+      <Tabs>
+        <button
+          className={`tab ${checkActive(0, 'active')}`}
+          onClick={() => handleClick(0)}
+        >
+          Contracts List
+        </button>
+        <button
+          className={`tab ${checkActive(1, 'active')}`}
+          onClick={() => handleClick(1)}
+        >
+          Create new Contract
+        </button>
+      </Tabs>
+      <Panels>
+        <div className={`panel ${checkActive(0, 'active')}`}>
+          <Title>Contracts Settings</Title>
+          <ContractsList allEmployeeContracts={contractsSummary} />
+        </div>
+        <div className={`panel ${checkActive(1, 'active')}`}>
           <Title>Create new contract</Title>
           <form
             style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
@@ -152,21 +173,21 @@ const ContractSettings = () => {
             </button>
           </form>
         </div>
-      </div>
-    </div>
+      </Panels>
+    </Container>
   );
 };
 
 export { ContractSettings };
 
-const Container = styled.div`
-  display: 'flex';
-  flex-direction: 'column';
-  margin: 15%;
-`;
+// const Container = styled.div`
+//   display: 'flex';
+//   flex-direction: 'column';
+//   margin: 15%;
+// `;
 
-const SubText = styled.p`
-  text-align: center;
-  color: #000050;
-  padding: 20px 0px 5px 0px;
-`;
+// const SubText = styled.p`
+//   text-align: center;
+//   color: #000050;
+//   padding: 20px 0px 5px 0px;
+// `;
