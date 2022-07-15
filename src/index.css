@@ -19,3 +19,9 @@ code {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
+
+html {
+  --color-primary: #000050; /* Dark blue */
+  --color-secondary: #ececec; /* kind of White */
+  --color-bg-table: #f8f8f8; /* Light gray */
+}

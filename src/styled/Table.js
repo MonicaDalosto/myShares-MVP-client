@@ -12,12 +12,10 @@ export const Table = styled.table`
   font-size: 0.9rem;
   width: 100%;
   max-width: 100%;
-  color: #000050;
-  // border-radius: 5px;
+  color: var(--color-primary);
   // white-space: nowrap;
   // font-weight: normal;
   // border: none;
-  // background-color: white;
   td,
   th {
     text-align: center;
@@ -25,23 +23,23 @@ export const Table = styled.table`
   }
 
   td {
-    border-right: 1px solid #f8f8f8;
+    border-right: 1px solid var(--color-bg-table);
   }
 
   thead tr {
-    background-color: #000050;
-    color: #ececec;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
     text-align: left;
     font-size: 1rem;
   }
 
   tbody tr:nth-child(even) {
-    background: #f8f8f8;
+    background: var(--color-bg-table);
   }
 
   tfoot tr {
     font-weight: bold;
-    background: #f8f8f8;
+    background: var(--color-bg-table);
   }
 
   input {
@@ -57,5 +55,9 @@ export const Table = styled.table`
     border: none;
     background-color: transparent;
     cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
   }
 `;

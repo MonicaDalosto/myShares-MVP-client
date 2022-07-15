@@ -87,7 +87,7 @@ const EmployeesList = ({ allEmployees }) => {
         )
       },
       {
-        Header: 'Edit Employee',
+        Header: 'Settings',
         Cell: ({ row }) => {
           // console.log(row.original);
           return (
@@ -95,24 +95,21 @@ const EmployeesList = ({ allEmployees }) => {
               <Link
                 style={{ margin: '0 10px' }}
                 to={{
-                  pathname: `/edit-employee/${row.original.id}`,
+                  pathname: `/edit-employee/${row.original.id}/0`,
                   state: { data: row }
                 }}
               >
                 🔧
-                {/* 🖊 */}
-                {/* <FaRegEdit /> */}
               </Link>
               {''}
               <Link
                 style={{ margin: '0 10px' }}
                 to={{
-                  pathname: `/edit-employee/${row.original.id}`,
+                  pathname: `/edit-employee/${row.original.id}/1`,
                   state: { data: row }
                 }}
               >
                 🗑
-                {/* <RiDeleteBin5Line /> */}
               </Link>
             </span>
           );
@@ -130,7 +127,6 @@ const EmployeesList = ({ allEmployees }) => {
     headerGroups,
     rows,
     prepareRow,
-    footerGroups,
     state,
     visibleColumns,
     preGlobalFilteredRows,
