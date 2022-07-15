@@ -6,3 +6,4 @@ export * from './CompanySettings';
 export * from './EmployeeDashboard';
 export * from './CompanyDashboard';
 export * from './EditEmployee';
+export * from './EmployeeDetails';

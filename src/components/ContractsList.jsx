@@ -5,6 +5,14 @@ import {
   useAsyncDebounce,
   useSortBy
 } from 'react-table';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import moment from 'moment';
+import NumberFormat from 'react-number-format';
+import { deleteContract } from '../store/contracts/thunks';
+import { RiDeleteBin5Line } from 'react-icons/ri';
+import { Modal } from './Modal';
+import { TableContainer, Table } from '../styled';
 
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -26,34 +34,30 @@ function GlobalFilter({
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        placeholder={`${count} records...`}
-        style={{
-          fontSize: '1.1rem',
-          border: '0'
-        }}
+        // placeholder={`${count} records...`}
       />
+      {`${count} records...`}
     </span>
   );
 }
 
 const ContractsList = ({ allEmployeeContracts }) => {
+  const dispatch = useDispatch();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [contractId, setContractId] = useState('');
+
+  const submitDeleteContract = event => {
+    event.preventDefault();
+    dispatch(deleteContract(contractId));
+    setContractId('');
+    setIsOpen(false);
+  };
+
   const data = React.useMemo(
     () => [...allEmployeeContracts],
     [allEmployeeContracts]
   ); // get the data from the parent component (props);
-  console.log(allEmployeeContracts);
-
-  const teste = (data, key) => {
-    return data.reduce(
-      (result, item) => ({
-        ...result,
-        [item[key]]: [...(result[item[key]] || []), item]
-      }),
-      {}
-    );
-  };
-
-  console.log(teste, 'here');
 
   const columns = React.useMemo(
     () => [
@@ -67,43 +71,82 @@ const ContractsList = ({ allEmployeeContracts }) => {
       },
       {
         Header: 'Signature Date',
-        accessor: 'signatureDate'
+        accessor: 'signatureDate',
+        Cell: ({ row }) => (
+          <span>{moment(row.original.signatureDate).format('DD/MM/YYYY')}</span>
+        )
       },
-
+      {
+        Header: 'Cliff Date',
+        accessor: 'cliffDate',
+        Cell: ({ row }) => (
+          <span>{moment(row.original.cliffDate).format('DD/MM/YYYY')}</span>
+        )
+      },
       {
         Header: 'Granted Shares',
-        accessor: 'grantedShares'
-        // Footer: grantedShares =>
-        //   grantedShares.rows.reduce(
-        //     (sum, row) =>
-        //       row.values['totalOfEmployeeShares.totalOfVirtualGrantedShares'] +
-        //       sum,
-        //     0
-        //   )
+        accessor: 'grantedShares',
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={row.original.grantedShares}
+            displayType={'text'}
+            thousandSeparator={true}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        )
+      },
+      {
+        Header: 'Months After Signature',
+        accessor: 'numberOfMonthsAfterSignatureDate'
       },
       {
         Header: 'Owned Shares',
-        accessor: 'virtualOwnedShares'
-        // Footer: ownedShares =>
-        //   ownedShares.rows.reduce(
-        //     (sum, row) =>
-        //       row.values['totalOfEmployeeShares.totalOfVirtualOwnedShares'] +
-        //       sum,
-        //     0
-        //   )
+        accessor: 'virtualOwnedShares',
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={row.original.virtualOwnedShares}
+            displayType={'text'}
+            thousandSeparator={true}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        )
       },
       {
         Header: 'Current valuation',
-        accessor:
-          'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation',
-        Footer: currentValuation =>
-          currentValuation.rows.reduce(
-            (sum, row) =>
-              row.values[
-                'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation'
-              ] + sum,
-            0
-          )
+        accessor: 'sharesValueBasedCompanyCurrentValuation',
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={row.original.virtualOwnedShares}
+            displayType={'text'}
+            thousandSeparator={true}
+            prefix={'$ '}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        )
+      },
+      {
+        Header: 'Delete Contract',
+        Cell: ({ row }) => {
+          // console.log(row.original);
+          return (
+            <button
+              type="button"
+              value={row.original.contractId}
+              onClick={event => {
+                setContractId(Number(event.target.value));
+                setIsOpen(true);
+              }}
+            >
+              🗑
+            </button>
+          );
+        }
       }
     ],
     []
@@ -117,7 +160,6 @@ const ContractsList = ({ allEmployeeContracts }) => {
     headerGroups,
     rows,
     prepareRow,
-    footerGroups,
     state,
     visibleColumns,
     preGlobalFilteredRows,
@@ -125,9 +167,9 @@ const ContractsList = ({ allEmployeeContracts }) => {
   } = tableInstance;
 
   return (
-    <div>
+    <TableContainer>
       {/* apply the table props */}
-      <table {...getTableProps()}>
+      <Table {...getTableProps()}>
         <thead>
           <tr>
             <th
@@ -202,30 +244,15 @@ const ContractsList = ({ allEmployeeContracts }) => {
             })
           }
         </tbody>
-        <tfoot>
-          {
-            // Loop over the header rows
-            footerGroups.map(group => (
-              // Apply the header row props
-              <tr {...group.getFooterGroupProps()}>
-                {
-                  // Loop over the headers in each row
-                  group.headers.map(column => (
-                    // Apply the header cell props
-                    <td {...column.getFooterProps()}>
-                      {
-                        // Render the header
-                        column.render('Footer')
-                      }
-                    </td>
-                  ))
-                }
-              </tr>
-            ))
-          }
-        </tfoot>
-      </table>
-    </div>
+      </Table>
+      {isOpen && (
+        <Modal
+          setIsOpen={setIsOpen}
+          submitDeleteForm={submitDeleteContract}
+          name=" the Contract"
+        />
+      )}
+    </TableContainer>
   );
 };
 

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectToken, selectUser } from '../store/user/selectors';
 import { logOut } from '../store/user/slice';
+import { NavLink } from 'react-router-dom';
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -15,8 +16,12 @@ export const Navigation = () => {
 
   return (
     <Nav>
-      <Logo href={isAdmin ? '/dashboard' : '/'}>
-        myCompany<span>BV</span>
+      <Logo>
+        <NavLink to={isAdmin ? '/dashboard' : '/'}>
+          <li>
+            myCompany<span>BV</span>
+          </li>
+        </NavLink>
       </Logo>
       <Hamburger onClick={() => setOpen(!open)}>
         <span />
@@ -25,38 +30,78 @@ export const Navigation = () => {
       </Hamburger>
       {!token ? (
         <Menu open={open}>
-          <MenuLink href="/login">Login</MenuLink>
+          <MenuLink>
+            <NavLink to="/login">
+              <li>Login</li>
+            </NavLink>
+          </MenuLink>
         </Menu>
       ) : !isAdmin ? (
         <Menu open={open}>
-          <MenuLink href="/">Dashboard</MenuLink>
-          <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
+          <MenuLink>
+            <NavLink to="/">
+              <li>Dashboard</li>
+            </NavLink>
+          </MenuLink>
+          <MenuLink onClick={() => dispatch(logOut())}>
+            <li>Logout</li>
+          </MenuLink>
         </Menu>
       ) : (
         <Menu open={open}>
-          <MenuLink href="/">My Dashboard</MenuLink>
-          <MenuLink href="/dashboard">Dashboard</MenuLink>
-          <MenuLink href="/employee">Employee</MenuLink>
-          <MenuLink href="/contract">Contract</MenuLink>
-          <MenuLink href="/company">Company</MenuLink>
-          <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
+          <MenuLink>
+            <NavLink to="/">
+              <li>My Dashboard</li>
+            </NavLink>
+          </MenuLink>
+          <MenuLink>
+            <NavLink to="/dashboard">
+              <li>Dashboard</li>
+            </NavLink>
+          </MenuLink>
+          <MenuLink>
+            <NavLink to="/employee">
+              <li>Employee</li>
+            </NavLink>
+          </MenuLink>
+          <MenuLink>
+            <NavLink to="/contract">
+              <li>Contract</li>
+            </NavLink>
+          </MenuLink>
+          <MenuLink>
+            <NavLink to="/company">
+              <li>Company</li>
+            </NavLink>
+          </MenuLink>
+          <MenuLink onClick={() => dispatch(logOut())}>
+            <li>Logout</li>
+          </MenuLink>
         </Menu>
       )}
     </Nav>
   );
 };
 
-const MenuLink = styled.a`
+const MenuLink = styled.ul`
   padding: 1rem 2rem;
-  cursor: pointer;
   text-align: center;
-  text-decoration: none;
-  color: #ececec;
-  transition: all 0.3s ease-in;
-  font-size: 0.9rem;
+  cursor: pointer;
 
-  &:hover {
+  a {
+    text-decoration: none;
+  }
+
+  li {
+    list-style: none;
+    transition: all 0.5s ease-in;
+    color: #ececec;
+    font-size: 0.9rem;
+  }
+
+  &:hover li {
     color: #9cc094;
+    // text-decoration: underline;
   }
 `;
 
@@ -73,13 +118,18 @@ const Nav = styled.div`
   right: 0;
 `;
 
-const Logo = styled.a`
+const Logo = styled.ul`
   padding: 1rem 0;
-  color: #ececec;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 1.7rem;
-
+  a {
+    text-decoration: none;
+  }
+  li {
+    font-weight: 800;
+    font-size: 1.7rem;
+    color: #ececec;
+    list-style: none;
+    transition: all 0.3s ease-in;
+  }
   span {
     font-weight: 300;
     font-size: 1.3rem;

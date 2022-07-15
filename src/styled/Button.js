@@ -16,6 +16,3 @@ export const Button = styled.button`
     // border: 3px solid #000050;
   }
 `;
-
-// &:hover {
-// }

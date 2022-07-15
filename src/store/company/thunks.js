@@ -5,7 +5,10 @@ import { setCompany } from './slice';
 
 export const getCompany = () => async (dispatch, getState) => {
   try {
-    const response = await axios.get(`${apiUrl}/company`);
+    const token = getState().user.token;
+    const response = await axios.get(`${apiUrl}/company`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     dispatch(setCompany(response.data));
   } catch (error) {
     console.log(error.message);

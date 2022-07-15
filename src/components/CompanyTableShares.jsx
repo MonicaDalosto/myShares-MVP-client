@@ -1,10 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import NumberFormat from 'react-number-format';
 import {
   useTable,
   useGlobalFilter,
   useAsyncDebounce,
   useSortBy
 } from 'react-table';
+import { TableContainer, Table } from '../styled';
 
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -19,19 +22,18 @@ function GlobalFilter({
 
   return (
     <span>
-      Search:{' '}
-      <input
-        value={value || ''}
-        onChange={e => {
-          setValue(e.target.value);
-          onChange(e.target.value);
-        }}
-        placeholder={`${count} records...`}
-        style={{
-          fontSize: '1.1rem',
-          border: '0'
-        }}
-      />
+      <span>
+        Search:{' '}
+        <input
+          value={value || ''}
+          onChange={e => {
+            setValue(e.target.value);
+            onChange(e.target.value);
+          }}
+          // placeholder={`${count} records...`}
+        />
+        {`${count} records...`}
+      </span>
     </span>
   );
 }
@@ -63,37 +65,125 @@ const CompanyTableShares = ({ contracts }) => {
       {
         Header: 'Granted Shares',
         accessor: 'totalOfEmployeeShares.totalOfVirtualGrantedShares',
-        Footer: grantedShares =>
-          grantedShares.rows.reduce(
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={
+              row.original.totalOfEmployeeShares.totalOfVirtualGrantedShares
+            }
+            displayType={'text'}
+            thousandSeparator={true}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        ),
+        Footer: grantedShares => {
+          const value = grantedShares.rows.reduce(
             (sum, row) =>
               row.values['totalOfEmployeeShares.totalOfVirtualGrantedShares'] +
               sum,
             0
-          )
+          );
+          return (
+            <NumberFormat
+              value={value}
+              displayType={'text'}
+              thousandSeparator={true}
+              decimalScale={2}
+              fixedDecimalScale={true}
+              renderText={(value, props) => <span {...props}>{value}</span>}
+            />
+          );
+        }
       },
       {
         Header: 'Owned Shares',
         accessor: 'totalOfEmployeeShares.totalOfVirtualOwnedShares',
-        Footer: ownedShares =>
-          ownedShares.rows.reduce(
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={row.original.totalOfEmployeeShares.totalOfVirtualOwnedShares}
+            displayType={'text'}
+            thousandSeparator={true}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        ),
+        Footer: ownedShares => {
+          const value = ownedShares.rows.reduce(
             (sum, row) =>
               row.values['totalOfEmployeeShares.totalOfVirtualOwnedShares'] +
               sum,
             0
-          )
+          );
+          return (
+            <NumberFormat
+              value={value}
+              displayType={'text'}
+              thousandSeparator={true}
+              decimalScale={2}
+              fixedDecimalScale={true}
+              renderText={(value, props) => <span {...props}>{value}</span>}
+            />
+          );
+        }
       },
       {
         Header: 'Current valuation',
         accessor:
           'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation',
-        Footer: currentValuation =>
-          currentValuation.rows.reduce(
+        Cell: ({ row }) => (
+          <NumberFormat
+            value={
+              row.original.totalOfEmployeeShares
+                .totalOfSharesValueBasedCompanyCurrentValuation
+            }
+            displayType={'text'}
+            thousandSeparator={true}
+            prefix={'$ '}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            renderText={(value, props) => <span {...props}>{value}</span>}
+          />
+        ),
+        Footer: currentValuation => {
+          const value = currentValuation.rows.reduce(
             (sum, row) =>
               row.values[
                 'totalOfEmployeeShares.totalOfSharesValueBasedCompanyCurrentValuation'
               ] + sum,
             0
-          )
+          );
+          return (
+            <NumberFormat
+              value={value}
+              displayType={'text'}
+              thousandSeparator={true}
+              prefix={'$ '}
+              decimalScale={2}
+              fixedDecimalScale={true}
+              renderText={(value, props) => <span {...props}>{value}</span>}
+            />
+          );
+        }
+      },
+      {
+        Header: 'Details Page',
+        Cell: ({ row }) => {
+          // console.log(row);
+          return (
+            <span>
+              <Link
+                to={{
+                  pathname: `/employee-details/${row.original.totalOfEmployeeShares.userId}`,
+                  state: { data: row }
+                }}
+              >
+                🔍
+              </Link>
+            </span>
+          );
+        }
       }
     ],
     []
@@ -115,9 +205,9 @@ const CompanyTableShares = ({ contracts }) => {
   } = tableInstance;
 
   return (
-    <div>
+    <TableContainer>
       {/* apply the table props */}
-      <table {...getTableProps()}>
+      <Table {...getTableProps()}>
         <thead>
           <tr>
             <th
@@ -214,8 +304,8 @@ const CompanyTableShares = ({ contracts }) => {
             ))
           }
         </tfoot>
-      </table>
-    </div>
+      </Table>
+    </TableContainer>
   );
 };
 

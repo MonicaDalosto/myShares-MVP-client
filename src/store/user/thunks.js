@@ -1,25 +1,27 @@
 import { apiUrl } from '../../config/constants';
 import axios from 'axios';
 import { selectToken } from './selectors';
-import { appLoading, appDoneLoading, setMessage } from '../appState/slice';
 import { showMessageWithTimeout } from '../appState/thunks';
+import { getAllEmployees } from '../employees/thunks';
+import { appLoading, appDoneLoading, setMessage } from '../appState/slice';
 import { loginSuccess, logOut, tokenStillValid } from './slice';
 
-export const signUp = (
+export const createEmployee = ({
   name,
   email,
   department,
   password,
   isAdmin,
   startDate
-) => {
+}) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
-      const token = selectToken(getState()); // it's the same const token = getState().user.token;
+      // const token = selectToken(getState()); // it's the same
+      const token = getState().user.token;
 
       const response = await axios.post(
-        `${apiUrl}/auth/signup`,
+        `${apiUrl}/auth/createEmployee`,
         {
           name,
           email,
@@ -33,10 +35,9 @@ export const signUp = (
         }
       );
 
-      dispatch(
-        loginSuccess({ token: response.data.token, user: response.data.user })
-      );
-      dispatch(showMessageWithTimeout('success', true, 'account created'));
+      dispatch(showMessageWithTimeout('success', true, response.data.message));
+
+      dispatch(getAllEmployees());
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {

@@ -1,18 +1,20 @@
 import './App.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
 import { getUserWithStoredToken } from './store/user/thunks';
-import { getCompany } from '../src/store/company/thunks';
-import { selectUser } from '../src/store/user/selectors';
-import { getAllEmployeesContractsSummary } from '../src/store/contracts/thunks';
-import { Navigation, MessageBox } from './components';
+import { getCompany } from './store/company/thunks';
+import { selectUser, selectToken } from './store/user/selectors';
+import { getAllEmployeesContractsSummary } from './store/contracts/thunks';
+import { getAllEmployees } from './store/employees/thunks';
+import { Navigation, MessageBox, Banner } from './components';
 import {
   CompanyDashboard,
   CompanySettings,
   ContractSettings,
   EditEmployee,
   EmployeeDashboard,
+  EmployeeDetails,
   EmployeeSettings,
   Login,
   SignUp
@@ -20,20 +22,22 @@ import {
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const token = useSelector(selectToken);
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
-    dispatch(getCompany());
-    // if (user && user.isAdmin) {
-    //   dispatch(getAllEmployeesContractsSummary());
-    // }
-  }, [dispatch]);
+    if (token) {
+      dispatch(getCompany());
+      dispatch(getAllEmployees());
+      dispatch(getAllEmployeesContractsSummary());
+    }
+  }, [dispatch, token]);
 
   return (
     <div>
       <Navigation />
       <MessageBox />
+      {/* <Banner /> */}
       <Routes>
         <Route path="/" element={<EmployeeDashboard />} />
         <Route path="/signup" element={<SignUp />} />
@@ -42,6 +46,7 @@ function App() {
         <Route path="/edit-employee/:id" element={<EditEmployee />} />
         <Route path="/contract" element={<ContractSettings />} />
         <Route path="/company" element={<CompanySettings />} />
+        <Route path="/employee-details/:id" element={<EmployeeDetails />} />
         <Route path="/dashboard" element={<CompanyDashboard />} />
       </Routes>
     </div>
