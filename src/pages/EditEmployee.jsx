@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Title, Tabs, Panels } from '../styled';
+import {
+  Container,
+  Title,
+  Tabs,
+  Panels,
+  Formulary,
+  TabContainer,
+  Button
+} from '../styled';
 import { selectToken, selectUser } from '../store/user/selectors';
 import { updateEmployee, deleteEmployee } from '../store/employees/thunks';
 import { selectSpecificEmployee } from '../store/employees/selectors';
@@ -114,158 +122,155 @@ const EditEmployee = () => {
 
   return (
     <Container>
-      <Tabs>
-        <button
-          className={`tab ${checkActive(0, 'active')}`}
-          onClick={() => handleClick(0)}
-        >
-          Edit Employee
-        </button>
-        <button
-          className={`tab ${checkActive(1, 'active')}`}
-          onClick={() => handleClick(1)}
-        >
-          Delete Employee
-        </button>
-      </Tabs>
-      <Panels>
-        <div className={`panel ${checkActive(0, 'active')}`}>
-          <Title>Edit Employee</Title>
-          <form
-            style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
-            onSubmit={submitEditForm}
+      <TabContainer forms>
+        <Tabs>
+          <button
+            className={`tab ${checkActive(0, 'active')}`}
+            onClick={() => handleClick(0)}
           >
-            <label>
-              Name
-              <input
-                value={name}
-                onChange={event => setName(event.target.value)}
-              />
-            </label>
-            <label>
-              Email
-              <input
-                value={email}
-                onChange={event => setEmail(event.target.value)}
-              />
-            </label>
-            <label>
-              Department
-              <select
-                value={department}
-                onChange={event => setDepartment(event.target.value)}
-              >
-                <option value="Finance">Finance</option>
-                <option value="HR">HR</option>
-                <option value="Marketing">Marketing</option>
-                <option value="Operations">Operations</option>
-                <option value="R&D">R&D</option>
-              </select>
-            </label>
-            <label>
-              Start Date
-              <input
-                type="date"
-                value={startDate}
-                onChange={event => setStartDate(event.target.value)}
-              />
-            </label>
-            <label>
-              Access
-              <input
-                type="checkbox"
-                checked={isAdmin}
-                onChange={event => setIsAdmin(!isAdmin)}
-              />{' '}
-              is Admin
-            </label>
-            <label>
-              The employee
-              <input
-                type="checkbox"
-                checked={isActive}
-                onChange={event => setIsActive(!isActive)}
-              />{' '}
-              is Active
-            </label>
-            {!isActive && !endDate && (
-              <span>
-                If the employee is not active, you need fill an End Date to the
-                them!
-              </span>
-            )}
-            {!isActive && (
+            Edit Employee
+          </button>
+          <button
+            className={`tab ${checkActive(1, 'active')}`}
+            onClick={() => handleClick(1)}
+          >
+            Delete Employee
+          </button>
+        </Tabs>
+        <Panels>
+          <div className={`panel ${checkActive(0, 'active')}`}>
+            <Formulary onSubmit={submitEditForm} s>
               <label>
-                End Date
+                Name
                 <input
-                  type="date"
-                  value={endDate}
-                  onChange={event => setEndDate(event.target.value)}
+                  value={name}
+                  onChange={event => setName(event.target.value)}
                 />
               </label>
-            )}
-            <label>
-              <input
-                type="checkbox"
-                value={check}
-                onChange={event => setCheck(!check)}
-              />{' '}
-              Confirm the Employee's changes
-            </label>
-            <br />
-            <button type="submit" disabled={!formValid}>
-              Submit Edition
-            </button>
-          </form>
-        </div>
-        <div className={`panel ${checkActive(1, 'active')}`}>
-          <Title>Delete Employee</Title>
-          <form
-            style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
-            // onSubmit={submitDeleteForm}
-          >
-            <label>Name: {name}</label>
-            <label>Email: {email}</label>
-            <label>Department: {department}</label>
-            <label>Start Date: {startDate}</label>
-            <label>
-              {isAdmin
-                ? 'The employee is an Admin'
-                : 'The employee is a regular user'}
-            </label>
-            <label>
-              {isActive
-                ? 'The employee is still active'
-                : 'The employee is not active'}
-            </label>
-            {!isActive && <label>End Date: {endDate}</label>}
-            {contracts && (
               <label>
-                <strong>
-                  The employee can't be deleted because has {contracts} active
-                  contracts active.
-                </strong>{' '}
-                You should delete all the contracts before delete the employee.{' '}
+                Email
+                <input
+                  value={email}
+                  onChange={event => setEmail(event.target.value)}
+                />
               </label>
-            )}
-            <br />
-            <button
-              type="button"
-              disabled={!userCanBeDeleted}
-              onClick={() => setIsOpen(true)}
+              <label>
+                Department
+                <select
+                  value={department}
+                  onChange={event => setDepartment(event.target.value)}
+                >
+                  <option value="Finance">Finance</option>
+                  <option value="HR">HR</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Operations">Operations</option>
+                  <option value="R&D">R&D</option>
+                </select>
+              </label>
+              <label>
+                Start Date
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={event => setStartDate(event.target.value)}
+                />
+              </label>
+              <label>
+                Is the Employee Admin?
+                <input
+                  checkbox
+                  type="checkbox"
+                  checked={isAdmin}
+                  onChange={event => setIsAdmin(!isAdmin)}
+                />
+              </label>
+              <label>
+                Is the Employee Active?
+                <input
+                  checkbox
+                  type="checkbox"
+                  checked={isActive}
+                  onChange={event => setIsActive(!isActive)}
+                />
+              </label>
+              {!isActive && (
+                <label>
+                  End Date
+                  <input
+                    type="date"
+                    value={endDate}
+                    onChange={event => setEndDate(event.target.value)}
+                  />
+                </label>
+              )}
+              {!isActive && !endDate && (
+                <span>
+                  If the employee is not active, you need fill an End Date!
+                </span>
+              )}
+              <label>
+                Confirm the changes?
+                <input
+                  checkbox
+                  type="checkbox"
+                  value={check}
+                  onChange={event => setCheck(!check)}
+                />
+              </label>
+              <br />
+              <Button type="submit" disabled={!formValid}>
+                Submit Edition
+              </Button>
+            </Formulary>
+          </div>
+          <div className={`panel ${checkActive(1, 'active')}`}>
+            <Formulary
+            // onSubmit={submitDeleteForm}
             >
-              Delete employee
-            </button>
-            {isOpen && (
-              <Modal
-                setIsOpen={setIsOpen}
-                submitDeleteForm={submitDeleteForm}
-                name={name}
-              />
-            )}
-          </form>
-        </div>
-      </Panels>
+              <label>Name: {name}</label>
+              <label>Email: {email}</label>
+              <label>Department: {department}</label>
+              <label>Start Date: {startDate}</label>
+              <label>
+                {isAdmin
+                  ? 'The employee is an Admin!'
+                  : 'The employee is a regular user!'}
+              </label>
+              <label>
+                {isActive
+                  ? 'The employee is still active!'
+                  : 'The employee is not active!'}
+              </label>
+              {!isActive && <label>End Date: {endDate}</label>}
+              {contracts && (
+                <label>
+                  <strong>
+                    The employee can't be deleted because has {contracts} active
+                    contracts active.
+                  </strong>{' '}
+                  You should delete all the contracts before delete the
+                  employee.{' '}
+                </label>
+              )}
+              <br />
+              <Button
+                type="button"
+                disabled={!userCanBeDeleted}
+                onClick={() => setIsOpen(true)}
+              >
+                Delete employee
+              </Button>
+              {isOpen && (
+                <Modal
+                  setIsOpen={setIsOpen}
+                  submitDeleteForm={submitDeleteForm}
+                  name={name}
+                />
+              )}
+            </Formulary>
+          </div>
+        </Panels>
+      </TabContainer>
     </Container>
   );
 };

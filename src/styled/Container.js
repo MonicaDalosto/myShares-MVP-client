@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  min-height: 70vh;
   box-sizing: content-box;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
@@ -10,5 +11,4 @@ export const Container = styled.div`
   padding: 80px 10px 140px;
   display: flex;
   flex-direction: column;
-  // box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
 `;

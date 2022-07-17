@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import { Button, Input, Title, LinkWord } from '../styled';
+import {
+  Button,
+  Input,
+  Title,
+  LinkWord,
+  Container,
+  Formulary
+} from '../styled';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,10 +35,9 @@ export const Login = () => {
   };
 
   return (
-    // <div style={{ textAlign: 'center' }}>
     <Container>
       <Title>Login</Title>
-      <form onSubmit={submitForm}>
+      <Formulary login onSubmit={submitForm}>
         <Input
           placeholder="email"
           value={email}
@@ -45,7 +51,7 @@ export const Login = () => {
         />
         <br />
         <Button type="submit">Login</Button>
-      </form>
+      </Formulary>
       <SubText>
         Don't remember your password? Click
         <Link to="/" style={LinkWord}>
@@ -54,20 +60,8 @@ export const Login = () => {
         </Link>{' '}
       </SubText>
     </Container>
-    // </div>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 15%;
-
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-`;
 
 const SubText = styled.p`
   text-align: center;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '../styled';
 import NumberFormat from 'react-number-format';
 
 const ProjectionForm = ({
@@ -33,9 +34,9 @@ const ProjectionForm = ({
             onChange={event => setProjectedDate(event.target.value)}
           />
         </label>
-        <button type="submit" disabled={!formValid}>
+        <Button dashboard type="submit" disabled={!formValid}>
           Submit
-        </button>
+        </Button>
       </Form>
     </FormContainer>
   );
@@ -72,31 +73,11 @@ const Form = styled.form`
     padding: 10px;
     margin: auto 0 auto 10px;
     border: 2px solid var(--color-primary);
-    border-radius: 4px;
+    border-radius: 5px;
 
     :focus {
       outline: 2px solid var(--color-nav-hover);
       border: 2px solid transparent;
-    }
-  }
-
-  button {
-    width: 150px;
-    font-size: 1rem;
-    padding: 10px;
-    border-radius: 4px;
-    border: 2px solid var(--color-primary);
-    background-color: var(--color-primary);
-    color: var(--color-white);
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &:disabled {
-      border: 2px solid var(--color-primary);
-      background-color: var(--color-white);
-      color: var(--color-primary);
     }
   }
 `;

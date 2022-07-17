@@ -31,9 +31,9 @@ function GlobalFilter({
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        // placeholder={`${count} records...`}
+        placeholder={`${count} records...`}
       />
-      {`${count} records...`}
+      {/* {`${count} records...`} */}
     </span>
   );
 }
@@ -73,7 +73,8 @@ const EmployeesList = ({ allEmployees }) => {
         Header: 'Is Active',
         // accessor: 'employee.isActive',
         Cell: ({ row }) => (
-          <span>{row.original.employee.isActive ? '✔️' : '❌'}</span>
+          // <span>{row.original.employee.isActive ? '✔️' : '❌'}</span>
+          <span>{row.original.employee.isActive ? '✔️' : '✖️'}</span>
         )
       },
       {
@@ -135,6 +136,7 @@ const EmployeesList = ({ allEmployees }) => {
 
   return (
     <TableContainer>
+      <h2>Employees</h2>
       {/* apply the table props */}
       <Table {...getTableProps()}>
         <thead>

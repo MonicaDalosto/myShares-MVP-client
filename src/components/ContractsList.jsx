@@ -10,7 +10,6 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import { deleteContract } from '../store/contracts/thunks';
-import { RiDeleteBin5Line } from 'react-icons/ri';
 import { Modal } from './Modal';
 import { TableContainer, Table } from '../styled';
 
@@ -34,9 +33,9 @@ function GlobalFilter({
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        // placeholder={`${count} records...`}
+        placeholder={`${count} records...`}
       />
-      {`${count} records...`}
+      {/* {`${count} records...`} */}
     </span>
   );
 }
@@ -168,7 +167,7 @@ const ContractsList = ({ allEmployeeContracts }) => {
 
   return (
     <TableContainer>
-      {/* apply the table props */}
+      <h2>Contracts</h2>
       <Table {...getTableProps()}>
         <thead>
           <tr>
@@ -185,64 +184,36 @@ const ContractsList = ({ allEmployeeContracts }) => {
               />
             </th>
           </tr>
-          {
-            // Loop over the header rows
-            headerGroups.map(headerGroup => (
-              // Apply the header row props
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {
-                  // Loop over the headers in each row
-                  headerGroup.headers.map(column => (
-                    // Apply the header cell props
-                    <th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                    >
-                      {
-                        // Render the header
-                        column.render('Header')
-                      }
-                      <span>
-                        {column.isSorted
-                          ? column.isSortedDesc
-                            ? ' 🔽'
-                            : ' 🔼'
-                          : ''}
-                      </span>
-                    </th>
-                  ))
-                }
-              </tr>
-            ))
-          }
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
+                  <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? ' 🔽'
+                        : ' 🔼'
+                      : ''}
+                  </span>
+                </th>
+              ))}
+            </tr>
+          ))}
         </thead>
-        {/* Apply the table body props */}
         <tbody {...getTableBodyProps()}>
-          {
-            // Loop over the table rows
-            rows.map(row => {
-              // Prepare the row for display
-              prepareRow(row);
-              return (
-                // Apply the row props
-                <tr {...row.getRowProps()}>
-                  {
-                    // Loop over the rows cells
-                    row.cells.map(cell => {
-                      // Apply the cell props
-                      return (
-                        <td {...cell.getCellProps()}>
-                          {
-                            // Render the cell contents
-                            cell.render('Cell')
-                          }
-                        </td>
-                      );
-                    })
-                  }
-                </tr>
-              );
-            })
-          }
+          {rows.map(row => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
       {isOpen && (
