@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Tabs = styled.div`
   display: flex;
   width: 100%;
-  // background-color: var(--color-white);
 
   .tab {
     justify-content: left;
@@ -30,9 +29,7 @@ export const Tabs = styled.div`
 export const Panels = styled.div`
   .panel {
     display: none;
-    // padding: 0 0 0 30px;
-    // height: 250px;
-    // text-align: left;
+    background: var(--color-white);
   }
 
   & .active {

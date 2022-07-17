@@ -99,7 +99,7 @@ export { EmployeeDashboard };
 const Button = styled.button`
   width: 150px;
   position: absolute;
-  top: 50px;
+  top: 25px;
   right: 0;
   font-size: 0.8rem;
   padding: 8px;
