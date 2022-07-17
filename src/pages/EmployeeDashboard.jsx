@@ -30,6 +30,8 @@ const EmployeeDashboard = () => {
   const [projectedValuation, setProjectedValuation] = useState('');
   const [projectedDate, setProjectedDate] = useState('');
 
+  const formValid = projectedValuation || projectedDate;
+
   useEffect(() => {
     if (token === null) {
       navigate('/login');
@@ -68,29 +70,8 @@ const EmployeeDashboard = () => {
         setProjectedValuation={setProjectedValuation}
         projectedDate={projectedDate}
         setProjectedDate={setProjectedDate}
+        formValid={formValid}
       />
-      {/* <form
-        style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
-        onSubmit={submitForm}
-      >
-        <label>
-          Projected Company valuation
-          <input
-            value={projectedValuation}
-            placeholder="1000000.00"
-            onChange={event => setProjectedValuation(event.target.value)}
-          />
-        </label>
-        <label>
-          Projected Date
-          <input
-            type="date"
-            value={projectedDate}
-            onChange={event => setProjectedDate(event.target.value)}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form> */}
       {sharesProjection && (
         <div>
           <Title>Virtual Shares Projection</Title>
