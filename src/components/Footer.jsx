@@ -5,7 +5,7 @@ const Footer = () => {
     <MyFooter>
       <div className="footerContent">
         <p>&copy; 2022 Mônica Dalosto - Codaisseur</p>
-        <ul class="setDisplayFlex">
+        <ul>
           <li>
             <a
               target="blank"
@@ -28,10 +28,12 @@ const Footer = () => {
 export { Footer };
 
 const MyFooter = styled.div`
+  position: absolute;
+  width: 100%;
+  bottom: 0;
   background-position: center bottom;
   background-color: var(--color-primary);
   color: var(--color-secondary);
-  margin: 50px 0 0 0;
 
   .footerContent {
     height: 80px;

@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Container, Title } from '../styled';
-import { Banner, BarChartShares, EmployeeTableShares } from '../components';
+import {
+  BarChartShares,
+  Cards,
+  EmployeeTableShares,
+  ProjectionForm
+} from '../components';
 import {
   getMyContractsSummary,
   getSharesProjection
@@ -45,20 +50,26 @@ const EmployeeDashboard = () => {
     );
   }
 
-  const { employeeContractsSummary, grantedXOwnedShares } = contractsSummary;
+  const {
+    employeeContractsSummary,
+    totalContractsSummary,
+    grantedXOwnedShares
+  } = contractsSummary;
 
   return (
-    <Container>
-      <Title> Employee Dashboard </Title>
+    <Container dashboard>
+      <Cards totalContracts={totalContractsSummary} />
       <BarChartShares data={grantedXOwnedShares} />
-      <h2>Summary table</h2>
       <EmployeeTableShares contracts={employeeContractsSummary} />
-      <Title>Virtual Shares Projection</Title>
-      <p>
-        Do you want to see the projection of your virtual shares? Fill the form
-        below:
-      </p>
-      <form
+
+      <ProjectionForm
+        submitForm={submitForm}
+        projectedValuation={projectedValuation}
+        setProjectedValuation={setProjectedValuation}
+        projectedDate={projectedDate}
+        setProjectedDate={setProjectedDate}
+      />
+      {/* <form
         style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
         onSubmit={submitForm}
       >
@@ -79,22 +90,17 @@ const EmployeeDashboard = () => {
           />
         </label>
         <button type="submit">Submit</button>
-      </form>
+      </form> */}
       {sharesProjection && (
         <div>
+          <Title>Virtual Shares Projection</Title>
           <button onClick={event => dispatch(setMySharesProjection(null))}>
             Reset Projections
           </button>
-          <h2>Projections Chart</h2>
-          <div>
-            <BarChartShares data={sharesProjection.grantedXOwnedShares} />
-          </div>
-          <h2>Projections table</h2>
-          <div>
-            <EmployeeTableShares
-              contracts={sharesProjection.employeeContractsSummary}
-            />
-          </div>
+          <BarChartShares data={sharesProjection.grantedXOwnedShares} />
+          <EmployeeTableShares
+            contracts={sharesProjection.employeeContractsSummary}
+          />
         </div>
       )}
     </Container>

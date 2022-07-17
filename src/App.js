@@ -1,5 +1,5 @@
-import './App.css';
-import { useEffect } from 'react';
+import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { getUserWithStoredToken } from './store/user/thunks';
@@ -24,6 +24,8 @@ function App() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
 
+  // const [windowSize, setWindowSize] = useState(getWindowSize());
+
   useEffect(() => {
     dispatch(getUserWithStoredToken());
     if (token) {
@@ -34,10 +36,11 @@ function App() {
   }, [dispatch, token]);
 
   return (
-    <div>
+    <AppContainer>
       <Navigation />
       <MessageBox />
-      {/* <Banner /> */}
+      {/* <p>Height: {windowSize.innerHeight}</p>
+      <p>Width: {windowSize.innerWidth}</p> */}
       <Routes>
         <Route path="/" element={<EmployeeDashboard />} />
         <Route path="/signup" element={<SignUp />} />
@@ -50,8 +53,13 @@ function App() {
         <Route path="/dashboard" element={<CompanyDashboard />} />
       </Routes>
       <Footer />
-    </div>
+    </AppContainer>
   );
 }
+
+const AppContainer = styled.div`
+  min-height: 100vh;
+  position: relative;
+`;
 
 export default App;

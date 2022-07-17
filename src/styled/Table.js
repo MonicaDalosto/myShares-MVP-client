@@ -1,10 +1,19 @@
 import styled from 'styled-components';
 
 export const TableContainer = styled.div`
-  margin: auto;
-  // padding: 5%;
-  // border-radius: 5px;
-  // box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+  background-color: var(--color-white);
+  padding: 40px 20px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%);
+  box-shadow: 0 0.75rem 1.5remrgba (18, 38, 63, 0.03);
+
+  h2 {
+    color: var(--color-title);
+    font-size: 1.1rem;
+    width: 730px;
+    margin: 0 auto 30px;
+  }
 `;
 
 export const Table = styled.table`
@@ -12,34 +21,24 @@ export const Table = styled.table`
   font-size: 0.9rem;
   width: 100%;
   max-width: 100%;
-  color: var(--color-primary);
-  // white-space: nowrap;
-  // font-weight: normal;
-  // border: none;
+  color: var(--color-title);
+
+  tr:nth-child(even) {
+    background: var(--color-bg-table);
+  }
+
   td,
   th {
     text-align: center;
     padding: 12px 15px;
   }
 
-  td {
-    border-right: 1px solid var(--color-bg-table);
-  }
-
   thead tr {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    text-align: left;
     font-size: 1rem;
-  }
-
-  tbody tr:nth-child(even) {
-    background: var(--color-bg-table);
   }
 
   tfoot tr {
     font-weight: bold;
-    background: var(--color-bg-table);
   }
 
   input {

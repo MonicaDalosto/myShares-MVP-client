@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+import { ChartContainer } from '../styled';
 import {
   BarChart,
   CartesianGrid,
@@ -7,12 +9,20 @@ import {
   Legend,
   Bar
 } from 'recharts';
-import { ChartContainer } from '../styled';
 
 const BarChartShares = ({ data }) => {
   return (
     <ChartContainer>
-      <BarChart style={{ margin: 'auto' }} width={800} height={300} data={data}>
+      <h2>Granted Shares X Owned Shares</h2>
+      <BarChart
+        style={{
+          margin: 'auto',
+          color: 'var(--color-paragraph)'
+        }}
+        width={730}
+        height={250}
+        data={data}
+      >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="signatureDate" />
         <YAxis />

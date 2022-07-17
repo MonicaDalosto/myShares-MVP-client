@@ -25,7 +25,7 @@ const CompanyDashboard = () => {
   }
 
   return (
-    <Container>
+    <Container dashboard>
       <Title>Summary table</Title>
       <CompanyTableShares contracts={allEmployeeContracts} />
     </Container>

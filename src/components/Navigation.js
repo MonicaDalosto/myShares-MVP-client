@@ -100,7 +100,7 @@ const MenuLink = styled.ul`
   }
 
   &:hover li {
-    color: #9cc094;
+    color: var(--color-nav-hover);
     // text-decoration: underline;
   }
 `;
@@ -110,7 +110,7 @@ const Nav = styled.div`
   width: 100%;
   top: 0;
   z-index: 1;
-  height: 70px;
+  // height: 70px;
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;

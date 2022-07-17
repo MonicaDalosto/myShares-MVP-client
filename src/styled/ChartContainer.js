@@ -1,8 +1,19 @@
 import styled from 'styled-components';
 
 export const ChartContainer = styled.div`
-  margin: 100px auto;
-  // padding: 5%;
-  // border-radius: 10px;
-  // box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  min-width: 780px;
+  margin: 20px auto;
+  background-color: var(--color-white);
+  padding: 40px 0;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%);
+  box-shadow: 0 0.75rem 1.5remrgba (18, 38, 63, 0.03);
+
+  h2 {
+    color: var(--color-title);
+    font-size: 1.1rem;
+    width: 730px;
+    margin: 0 auto 30px;
+  }
 `;

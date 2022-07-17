@@ -28,43 +28,49 @@ export const Login = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <Container>
-        <Title>Login</Title>
-        <form onSubmit={submitForm}>
-          <Input
-            placeholder="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-          <br />
-          <Button type="submit">Login</Button>
-        </form>
-        <SubText>
-          Don't remember your password? Click
-          <Link to="/" style={LinkWord}>
-            here
-          </Link>{' '}
-        </SubText>
-      </Container>
-    </div>
+    // <div style={{ textAlign: 'center' }}>
+    <Container>
+      <Title>Login</Title>
+      <form onSubmit={submitForm}>
+        <Input
+          placeholder="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <Input
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <br />
+        <Button type="submit">Login</Button>
+      </form>
+      <SubText>
+        Don't remember your password? Click
+        <Link to="/" style={LinkWord}>
+          {' '}
+          here
+        </Link>{' '}
+      </SubText>
+    </Container>
+    // </div>
   );
 };
 
 const Container = styled.div`
-  display: 'flex';
-  flex-direction: 'column';
+  display: flex;
+  flex-direction: column;
   margin: 15%;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const SubText = styled.p`
   text-align: center;
-  color: #000050;
+  color: var(--color-title);
   padding: 20px 0px 5px 0px;
 `;
