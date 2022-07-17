@@ -110,13 +110,14 @@ const Nav = styled.div`
   width: 100%;
   top: 0;
   z-index: 1;
-  // height: 70px;
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   background: var(--color-primary);
+  -webkit-box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%);
+  box-shadow: 0 0.75rem 1.5remrgba (18, 38, 63, 0.03);
 `;
 
 const Logo = styled.ul`

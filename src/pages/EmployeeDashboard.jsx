@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import styled from 'styled-components';
 import { Container, Title } from '../styled';
 import {
   BarChartShares,
@@ -8,11 +10,12 @@ import {
   EmployeeTableShares,
   ProjectionForm
 } from '../components';
+import { selectToken, selectUser } from '../store/user/selectors';
+import { selectCompany } from '../store/company/selectors';
 import {
   getMyContractsSummary,
   getSharesProjection
 } from '../store/contracts/thunks';
-import { selectToken, selectUser } from '../store/user/selectors';
 import {
   selectMyContractsSummary,
   selectMySharesProjection
@@ -26,11 +29,13 @@ const EmployeeDashboard = () => {
   // const user = useSelector(selectUser);
   const contractsSummary = useSelector(selectMyContractsSummary);
   const sharesProjection = useSelector(selectMySharesProjection);
+  const company = useSelector(selectCompany);
 
   const [projectedValuation, setProjectedValuation] = useState('');
   const [projectedDate, setProjectedDate] = useState('');
-
-  const formValid = projectedValuation || projectedDate;
+  const formValid = moment(new Date()).isBefore(
+    moment(projectedDate).endOf('day')
+  );
 
   useEffect(() => {
     if (token === null) {
@@ -71,13 +76,14 @@ const EmployeeDashboard = () => {
         projectedDate={projectedDate}
         setProjectedDate={setProjectedDate}
         formValid={formValid}
+        currentValuation={company && company.currentValuation}
       />
       {sharesProjection && (
-        <div>
+        <div style={{ position: 'relative' }}>
           <Title>Virtual Shares Projection</Title>
-          <button onClick={event => dispatch(setMySharesProjection(null))}>
+          <Button onClick={event => dispatch(setMySharesProjection(null))}>
             Reset Projections
-          </button>
+          </Button>
           <BarChartShares data={sharesProjection.grantedXOwnedShares} />
           <EmployeeTableShares
             contracts={sharesProjection.employeeContractsSummary}
@@ -89,3 +95,20 @@ const EmployeeDashboard = () => {
 };
 
 export { EmployeeDashboard };
+
+const Button = styled.button`
+  width: 150px;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  font-size: 0.8rem;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+  background-color: var(--color-nav-hover);
+  color: var(--color-white);
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
