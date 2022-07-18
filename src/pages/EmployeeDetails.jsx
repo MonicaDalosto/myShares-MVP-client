@@ -26,15 +26,10 @@ const EmployeeDetails = () => {
   const { employeeContractsSummary, grantedXOwnedShares } = contractsSummary;
 
   return (
-    <Container>
+    <Container dashboard>
       <Title>{contractsSummary.name}'s Details Page</Title>
-      <div>
-        <BarChartShares data={grantedXOwnedShares} />
-      </div>
-      <Title>{contractsSummary.name}'s summary table</Title>
-      <div>
-        <EmployeeTableShares contracts={employeeContractsSummary} />
-      </div>
+      <BarChartShares data={grantedXOwnedShares} />
+      <EmployeeTableShares contracts={employeeContractsSummary} />
     </Container>
   );
 };

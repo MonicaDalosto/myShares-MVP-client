@@ -121,7 +121,7 @@ const ContractSettings = () => {
                   value={employeeId}
                   onChange={event => setEmployeeId(event.target.value)}
                 >
-                  <option>All Employees</option>
+                  <option value={''}>All Employees</option>
                   {!allEmployees ? (
                     <option>You don't have employees</option>
                   ) : (

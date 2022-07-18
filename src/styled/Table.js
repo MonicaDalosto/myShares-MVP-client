@@ -42,7 +42,7 @@ export const Table = styled.table`
   }
 
   input {
-    border: 2px solid var(--color-primary);
+    border: 1px solid var(--color-paragraph);
     padding: 5px;
     margin-left: 10px;
     margin-right: 10px;

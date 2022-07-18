@@ -103,7 +103,7 @@ const Button = styled.button`
   right: 0;
   font-size: 0.8rem;
   padding: 8px;
-  border-radius: 4px;
+  border-radius: 5px;
   border: none;
   background-color: var(--color-nav-hover);
   color: var(--color-white);

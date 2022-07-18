@@ -1,12 +1,5 @@
 import styled from 'styled-components';
-import {
-  Button,
-  Input,
-  Title,
-  LinkWord,
-  Container,
-  Formulary
-} from '../styled';
+import { Button, Title, LinkWord, Container, Formulary } from '../styled';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,12 +31,12 @@ export const Login = () => {
     <Container>
       <Title>Login</Title>
       <Formulary login onSubmit={submitForm}>
-        <Input
+        <input
           placeholder="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
-        <Input
+        <input
           type="password"
           placeholder="password"
           value={password}
@@ -66,5 +59,4 @@ export const Login = () => {
 const SubText = styled.p`
   text-align: center;
   color: var(--color-title);
-  padding: 20px 0px 5px 0px;
 `;

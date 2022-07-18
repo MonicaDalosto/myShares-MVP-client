@@ -5,8 +5,8 @@ export const Button = styled.button`
   font-size: 1rem;
   padding: 10px;
   border-radius: 5px;
-  border: 2px solid var(--color-primary);
-  background-color: var(--color-primary);
+  border: 1px solid var(--color-paragraph);
+  background-color: var(--color-paragraph);
   color: var(--color-white);
 
   &:hover {
@@ -14,8 +14,8 @@ export const Button = styled.button`
   }
 
   &:disabled {
-    border: 2px solid var(--color-primary);
+    border: 1px solid var(--color-paragraph);
     background-color: var(--color-white);
-    color: var(--color-primary);
+    color: var(--color-paragraph);
   }
 `;

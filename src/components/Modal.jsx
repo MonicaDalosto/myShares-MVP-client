@@ -8,14 +8,14 @@ const Modal = ({ setIsOpen, submitDeleteForm, name }) => {
       <div className="centered">
         <div className="modal">
           <div className="modalHeader">
-            <h5 className="heading">Dialog</h5>
+            <h5 className="heading">Warning</h5>
           </div>
           <button className="closeBtn" onClick={() => setIsOpen(false)}>
             <RiCloseLine style={{ marginBottom: '-3px' }} />
           </button>
           <div className="modalContent">
-            This action can't be undo. Are you sure you want to{' '}
-            <strong>delete</strong> {name}?
+            This action can't be undo. Are you sure you want to
+            <strong> delete</strong> {name}?
           </div>
           <div className="modalActions">
             <div className="actionsContainer">

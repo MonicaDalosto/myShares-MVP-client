@@ -7,8 +7,6 @@ import {
   useSortBy
 } from 'react-table';
 import { TableContainer, Table } from '../styled';
-import { FaRegEdit } from 'react-icons/fa';
-import { RiDeleteBin5Line } from 'react-icons/ri';
 import moment from 'moment';
 
 function GlobalFilter({

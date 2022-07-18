@@ -1,12 +1,11 @@
-import styled from 'styled-components';
 import {
-  Button,
-  Input,
   Title,
   Container,
   Tabs,
   Panels,
-  TabContainer
+  TabContainer,
+  Formulary,
+  Button
 } from '../styled';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -87,8 +86,7 @@ const EmployeeSettings = () => {
             <EmployeesList allEmployees={allEmployees} />
           </div>
           <div className={`panel ${checkActive(1, 'active')}`}>
-            <Title>Create new employee</Title>
-            <form onSubmit={submitForm}>
+            <Formulary onSubmit={submitForm}>
               <label>
                 Name
                 <input
@@ -149,10 +147,10 @@ const EmployeeSettings = () => {
                 />
               </label>
               <br />
-              <button type="submit" disabled={!formValid}>
+              <Button type="submit" disabled={!formValid}>
                 Create employee
-              </button>
-            </form>
+              </Button>
+            </Formulary>
           </div>
         </Panels>
       </TabContainer>

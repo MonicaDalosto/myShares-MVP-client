@@ -220,7 +220,7 @@ const ContractsList = ({ allEmployeeContracts }) => {
         <Modal
           setIsOpen={setIsOpen}
           submitDeleteForm={submitDeleteContract}
-          name=" the Contract"
+          name=" this Contract"
         />
       )}
     </TableContainer>

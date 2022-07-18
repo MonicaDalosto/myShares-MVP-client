@@ -13,40 +13,27 @@ export const Formulary = styled.form`
 
   select,
   input {
-    border: 2px solid var(--color-primary);
-    padding: 8px;
+    margin: ${props => (props.login ? '10px 0px' : '0')};
+    font-size: 1rem;
+    border: 1px solid var(--color-paragraph);
+    padding: ${props => (props.login ? '12px' : '8px')};
     float: right;
     border-radius: 5px;
     width: ${props => (props.login ? '100%' : '300px')};
-  }
 
-  input :focus {
-    outline: var(--color-nav-hover);
-    border: 2px solid transparent;
+    ::placeholder {
+      color: var(--color-paragraph);
+    }
+
+    :focus {
+      outline: ${props =>
+        props.checkbox ? 'none' : '2px solid var(--color-nav-hover)'};
+      border: 2px solid transparent;
+    }
   }
 
   span {
     color: red;
     font-size: 0.8rem;
-  }
-
-  button {
-    width: 100%;
-    font-size: 1rem;
-    padding: 10px;
-    border-radius: 4px;
-    border: 2px solid var(--color-primary);
-    background-color: var(--color-primary);
-    color: var(--color-white);
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &:disabled {
-      border: 2px solid var(--color-primary);
-      background-color: var(--color-white);
-      color: var(--color-primary);
-    }
   }
 `;

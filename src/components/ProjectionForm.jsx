@@ -72,12 +72,15 @@ const Form = styled.form`
     width: 150px;
     padding: 10px;
     margin: auto 0 auto 10px;
-    border: 2px solid var(--color-primary);
+    border: 1px solid var(--color-paragraph);
     border-radius: 5px;
 
     :focus {
-      outline: 2px solid var(--color-nav-hover);
-      border: 2px solid transparent;
+      outline: var(--color-nav-hover);
+    }
+
+    ::placeholder {
+      color: var(--color-paragraph);
     }
   }
 `;

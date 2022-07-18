@@ -11,3 +11,5 @@ export const Input = styled.input`
     color: var(--color-primary);
   }
 `;
+
+// Só está sendo usado no Signup;
