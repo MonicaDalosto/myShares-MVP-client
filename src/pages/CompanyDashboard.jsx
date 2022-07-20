@@ -1,7 +1,5 @@
 import { Title } from '../styled';
-import { Link } from 'react-router-dom';
-import { Container, LinkWord } from '../styled';
-import styled from 'styled-components';
+import { Container } from '../styled';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllEmployeesContractsSummary } from '../store/contracts/thunks';
@@ -25,8 +23,7 @@ const CompanyDashboard = () => {
   }
 
   return (
-    <Container>
-      <Title>Summary table</Title>
+    <Container dashboard>
       <CompanyTableShares contracts={allEmployeeContracts} />
     </Container>
   );

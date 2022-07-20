@@ -1,5 +1,12 @@
-import styled from 'styled-components';
-import { Button, Input, Title, LinkWord } from '../styled';
+import {
+  Title,
+  Tabs,
+  Panels,
+  Container,
+  TabContainer,
+  Formulary,
+  Button
+} from '../styled';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +27,11 @@ const ContractSettings = () => {
   const token = useSelector(selectToken);
   const allEmployees = useSelector(selectAllEmployees);
   const allEmployeeContracts = useSelector(selectAllEmployeeContractsSummary);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const handleClick = index => setActiveIndex(index);
+  const checkActive = (index, className) =>
+    activeIndex === index ? className : '';
 
   const [employeeId, setEmployeeId] = useState('');
   const [signatureDate, setSignatureDate] = useState('');
@@ -66,9 +78,9 @@ const ContractSettings = () => {
 
   if (!allEmployeeContracts) {
     return (
-      <div>
+      <Container>
         <Title> You don't have any Contracts!</Title>
-      </div>
+      </Container>
     );
   }
 
@@ -78,95 +90,99 @@ const ContractSettings = () => {
   );
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <div>
-        <Title>Contracts Settings</Title>
-        <ContractsList allEmployeeContracts={contractsSummary} />
-        <div>
-          <Title>Create new contract</Title>
-          <form
-            style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
-            onSubmit={submitForm}
+    <Container>
+      <TabContainer>
+        <Tabs>
+          <button
+            className={`tab ${checkActive(0, 'active')}`}
+            onClick={() => handleClick(0)}
           >
-            <label>
-              Employee
-              <select
-                value={employeeId}
-                onChange={event => setEmployeeId(event.target.value)}
-              >
-                <option>All Employees</option>
-                {!allEmployees ? (
-                  <option>You don't have employees</option>
-                ) : (
-                  allEmployees.map(employee => (
-                    <option
-                      key={employee.employee.id}
-                      value={employee.employee.id}
-                    >
-                      {employee.name}
-                    </option>
-                  ))
-                )}
-              </select>
-            </label>
-            <label>
-              Signature Date
-              <input
-                type="date"
-                value={signatureDate}
-                onChange={event => setSignatureDate(event.target.value)}
-              />
-            </label>
-            <label>
-              Granted Shares
-              <input
-                value={grantedShares}
-                onChange={event => setGrantedShares(event.target.value)}
-              />
-            </label>
-            <label>
-              Company Valuation:
-              <input
-                value={companyValuation}
-                onChange={event => setCompanyValuation(event.target.value)}
-              />
-            </label>
-            <label>
-              Total Company's Shares
-              <input
-                value={totalCompanyShares}
-                onChange={event => setTotalCompanyShares(event.target.value)}
-              />
-            </label>
-            <label>
-              Cliffing Date
-              <input
-                type="date"
-                value={cliffDate}
-                onChange={event => setCliffDate(event.target.value)}
-              />
-            </label>
-            <br />
-            <button type="submit" disabled={!formValid}>
-              Create contract
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+            Contracts List
+          </button>
+          <button
+            className={`tab ${checkActive(1, 'active')}`}
+            onClick={() => handleClick(1)}
+          >
+            Create new Contract
+          </button>
+        </Tabs>
+        <Panels>
+          <div className={`panel ${checkActive(0, 'active')}`}>
+            <ContractsList allEmployeeContracts={contractsSummary} />
+          </div>
+          <div className={`panel ${checkActive(1, 'active')}`}>
+            <Formulary
+              style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
+              onSubmit={submitForm}
+            >
+              <label>
+                Employee
+                <select
+                  value={employeeId}
+                  onChange={event => setEmployeeId(event.target.value)}
+                >
+                  <option value={''}>All Employees</option>
+                  {!allEmployees ? (
+                    <option>You don't have employees</option>
+                  ) : (
+                    allEmployees.map(employee => (
+                      <option
+                        key={employee.employee.id}
+                        value={employee.employee.id}
+                      >
+                        {employee.name}
+                      </option>
+                    ))
+                  )}
+                </select>
+              </label>
+              <label>
+                Signature Date
+                <input
+                  type="date"
+                  value={signatureDate}
+                  onChange={event => setSignatureDate(event.target.value)}
+                />
+              </label>
+              <label>
+                Granted Shares
+                <input
+                  value={grantedShares}
+                  onChange={event => setGrantedShares(event.target.value)}
+                />
+              </label>
+              <label>
+                Company Valuation
+                <input
+                  value={companyValuation}
+                  onChange={event => setCompanyValuation(event.target.value)}
+                />
+              </label>
+              <label>
+                Total Company's Shares
+                <input
+                  value={totalCompanyShares}
+                  onChange={event => setTotalCompanyShares(event.target.value)}
+                />
+              </label>
+              <label>
+                Cliffing Date
+                <input
+                  type="date"
+                  value={cliffDate}
+                  onChange={event => setCliffDate(event.target.value)}
+                />
+              </label>
+              <br />
+              <Button type="submit" disabled={!formValid}>
+                Create contract
+              </Button>
+            </Formulary>
+          </div>
+        </Panels>
+      </TabContainer>
+    </Container>
   );
 };
 
 export { ContractSettings };
-
-const Container = styled.div`
-  display: 'flex';
-  flex-direction: 'column';
-  margin: 15%;
-`;
-
-const SubText = styled.p`
-  text-align: center;
-  color: #000050;
-  padding: 20px 0px 5px 0px;
-`;

@@ -1,10 +1,19 @@
 import styled from 'styled-components';
 
 export const TableContainer = styled.div`
-  margin: 100px auto;
-  // padding: 5%;
-  // border-radius: 5px;
-  // box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+  margin: 20px auto 0;
+  background-color: var(--color-white);
+  padding: 40px 20px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%);
+  box-shadow: 0 0.75rem 1.5remrgba (18, 38, 63, 0.03);
+
+  h2 {
+    color: var(--color-title);
+    font-size: 1.1rem;
+    width: 730px;
+    margin: 0 auto 30px;
+  }
 `;
 
 export const Table = styled.table`
@@ -12,50 +21,47 @@ export const Table = styled.table`
   font-size: 0.9rem;
   width: 100%;
   max-width: 100%;
-  color: #000050;
-  // border-radius: 5px;
-  // white-space: nowrap;
-  // font-weight: normal;
-  // border: none;
-  // background-color: white;
+  color: var(--color-title);
+
+  tr:nth-child(even) {
+    background: var(--color-bg-table);
+  }
+
   td,
   th {
     text-align: center;
     padding: 12px 15px;
   }
 
-  td {
-    border-right: 1px solid #f8f8f8;
-  }
-
   thead tr {
-    background-color: #000050;
-    color: #ececec;
-    text-align: left;
     font-size: 1rem;
-  }
-
-  tbody tr:nth-child(even) {
-    background: #f8f8f8;
   }
 
   tfoot tr {
     font-weight: bold;
-    background: #f8f8f8;
   }
 
   input {
-    border: 0;
+    border: 1px solid var(--color-paragraph);
     padding: 5px;
     margin-left: 10px;
     margin-right: 10px;
     border-radius: 5px;
     width: 200px;
+
+    :focus {
+      outline: 2px solid var(--color-nav-hover);
+      border: 2px solid transparent;
+    }
   }
 
   button {
     border: none;
     background-color: transparent;
     cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
   }
 `;

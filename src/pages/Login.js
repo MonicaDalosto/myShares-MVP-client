@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Input, Title, LinkWord } from '../styled';
+import { Button, Title, LinkWord, Container, Formulary } from '../styled';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,43 +28,35 @@ export const Login = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <Container>
-        <Title>Login</Title>
-        <form onSubmit={submitForm}>
-          <Input
-            placeholder="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-          <br />
-          <Button type="submit">Login</Button>
-        </form>
-        <SubText>
-          Don't remember your password? Click
-          <Link to="/" style={LinkWord}>
-            here
-          </Link>{' '}
-        </SubText>
-      </Container>
-    </div>
+    <Container>
+      <Title>Login</Title>
+      <Formulary login onSubmit={submitForm}>
+        <input
+          placeholder="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <br />
+        <Button type="submit">Login</Button>
+      </Formulary>
+      <SubText>
+        Don't remember your password? Click
+        <Link to="/" style={LinkWord}>
+          {' '}
+          here
+        </Link>{' '}
+      </SubText>
+    </Container>
   );
 };
 
-const Container = styled.div`
-  display: 'flex';
-  flex-direction: 'column';
-  margin: 15%;
-`;
-
 const SubText = styled.p`
   text-align: center;
-  color: #000050;
-  padding: 20px 0px 5px 0px;
+  color: var(--color-title);
 `;

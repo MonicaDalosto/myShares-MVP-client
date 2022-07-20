@@ -1,18 +1,21 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  background: ${props => (props.primary ? '#000050' : 'white')};
-  color: ${props => (props.primary ? 'white' : '#000050')};
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid #000050;
+  width: ${props => (props.dashboard ? '150px' : '100%')};
+  font-size: 1rem;
+  padding: 10px;
   border-radius: 5px;
-  width: 50%;
+  border: 1px solid var(--color-paragraph);
+  background-color: var(--color-paragraph);
+  color: var(--color-white);
 
   &:hover {
-    background-color: #000050;
-    color: white;
-    // border: 3px solid #000050;
+    cursor: pointer;
+  }
+
+  &:disabled {
+    border: 1px solid var(--color-paragraph);
+    background-color: var(--color-white);
+    color: var(--color-paragraph);
   }
 `;

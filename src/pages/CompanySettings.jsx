@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { Container, Title } from '../styled';
+import { Container, Title, Formulary, Button, TabContainer } from '../styled';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -46,12 +45,9 @@ const CompanySettings = () => {
 
   return (
     <Container>
-      <div>
-        <Title>Update the Company's Data</Title>
-        <form
-          style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
-          onSubmit={submitForm}
-        >
+      <TabContainer forms>
+        <Title>Update the Company's Valuation</Title>
+        <Formulary onSubmit={submitForm}>
           <label>
             Company's name
             <input
@@ -79,15 +75,15 @@ const CompanySettings = () => {
               value={check}
               onChange={event => setCheck(!check)}
             />{' '}
-            I am aware that if I change the Company's valuation, all the
-            Employees shares will be updated!
+            I am aware that if I change the valuation, all the Employees virtual
+            shares will be updated!
           </label>
           <br />
-          <button type="submit" disabled={!formValid}>
+          <Button type="submit" disabled={!formValid}>
             Submit update
-          </button>
-        </form>
-      </div>
+          </Button>
+        </Formulary>
+      </TabContainer>
     </Container>
   );
 };
