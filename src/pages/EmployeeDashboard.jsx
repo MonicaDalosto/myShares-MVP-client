@@ -10,7 +10,7 @@ import {
   EmployeeTableShares,
   ProjectionForm
 } from '../components';
-import { selectToken, selectUser } from '../store/user/selectors';
+import { selectToken } from '../store/user/selectors';
 import { selectCompany } from '../store/company/selectors';
 import {
   getMyContractsSummary,

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Button } from '../styled';
-import NumberFormat from 'react-number-format';
 
 const ProjectionForm = ({
   submitForm,
@@ -22,7 +21,6 @@ const ProjectionForm = ({
           Company valuation
           <input
             defaultValue={currentValuation}
-            // value={projectedValuation}
             onChange={event => setProjectedValuation(event.target.value)}
           />
         </label>

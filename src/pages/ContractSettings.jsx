@@ -10,11 +10,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  createNewContract,
-  getAllEmployeesContractsSummary
-} from '../store/contracts/thunks';
-import { getAllEmployees } from '../store/employees/thunks';
+import { createNewContract } from '../store/contracts/thunks';
 import { selectToken } from '../store/user/selectors';
 import { selectAllEmployeeContractsSummary } from '../store/contracts/selectors';
 import { selectAllEmployees } from '../store/employees/selectors';

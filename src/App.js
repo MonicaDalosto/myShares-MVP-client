@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { getUserWithStoredToken } from './store/user/thunks';
 import { getCompany } from './store/company/thunks';
-import { selectUser, selectToken } from './store/user/selectors';
+import { selectToken } from './store/user/selectors';
 import { getAllEmployeesContractsSummary } from './store/contracts/thunks';
 import { getAllEmployees } from './store/employees/thunks';
-import { Navigation, MessageBox, Banner, Footer } from './components';
+import { Navigation, MessageBox, Footer } from './components';
 import {
   CompanyDashboard,
   CompanySettings,
@@ -24,8 +24,6 @@ function App() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
 
-  // const [windowSize, setWindowSize] = useState(getWindowSize());
-
   useEffect(() => {
     dispatch(getUserWithStoredToken());
     if (token) {
@@ -39,8 +37,6 @@ function App() {
     <AppContainer>
       <Navigation />
       <MessageBox />
-      {/* <p>Height: {windowSize.innerHeight}</p>
-      <p>Width: {windowSize.innerWidth}</p> */}
       <Routes>
         <Route path="/" element={<EmployeeDashboard />} />
         <Route path="/signup" element={<SignUp />} />

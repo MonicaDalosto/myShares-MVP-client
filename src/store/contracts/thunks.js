@@ -1,6 +1,5 @@
 import { apiUrl } from '../../config/constants';
 import axios from 'axios';
-import moment from 'moment';
 import { showMessageWithTimeout } from '../appState/thunks';
 import {
   setMyContractsSummary,
