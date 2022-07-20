@@ -7,3 +7,6 @@ export * from './ContractsList';
 export * from './CompanyTableShares';
 export * from './Modal';
 export * from './Banner';
+export * from './Footer';
+export * from './Cards';
+export * from './ProjectionForm';

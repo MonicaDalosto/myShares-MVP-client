@@ -1,5 +1,5 @@
-import './App.css';
-import { useEffect } from 'react';
+import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { getUserWithStoredToken } from './store/user/thunks';
@@ -7,7 +7,7 @@ import { getCompany } from './store/company/thunks';
 import { selectUser, selectToken } from './store/user/selectors';
 import { getAllEmployeesContractsSummary } from './store/contracts/thunks';
 import { getAllEmployees } from './store/employees/thunks';
-import { Navigation, MessageBox, Banner } from './components';
+import { Navigation, MessageBox, Banner, Footer } from './components';
 import {
   CompanyDashboard,
   CompanySettings,
@@ -24,6 +24,8 @@ function App() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
 
+  // const [windowSize, setWindowSize] = useState(getWindowSize());
+
   useEffect(() => {
     dispatch(getUserWithStoredToken());
     if (token) {
@@ -34,23 +36,30 @@ function App() {
   }, [dispatch, token]);
 
   return (
-    <div>
+    <AppContainer>
       <Navigation />
       <MessageBox />
-      {/* <Banner /> */}
+      {/* <p>Height: {windowSize.innerHeight}</p>
+      <p>Width: {windowSize.innerWidth}</p> */}
       <Routes>
         <Route path="/" element={<EmployeeDashboard />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/employee" element={<EmployeeSettings />} />
-        <Route path="/edit-employee/:id" element={<EditEmployee />} />
+        <Route path="/edit-employee/:id/:index" element={<EditEmployee />} />
         <Route path="/contract" element={<ContractSettings />} />
         <Route path="/company" element={<CompanySettings />} />
         <Route path="/employee-details/:id" element={<EmployeeDetails />} />
         <Route path="/dashboard" element={<CompanyDashboard />} />
       </Routes>
-    </div>
+      <Footer />
+    </AppContainer>
   );
 }
+
+const AppContainer = styled.div`
+  min-height: 100vh;
+  position: relative;
+`;
 
 export default App;

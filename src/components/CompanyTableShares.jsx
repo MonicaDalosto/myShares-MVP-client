@@ -30,16 +30,15 @@ function GlobalFilter({
             setValue(e.target.value);
             onChange(e.target.value);
           }}
-          // placeholder={`${count} records...`}
+          placeholder={`${count} records...`}
         />
-        {`${count} records...`}
       </span>
     </span>
   );
 }
 
 const CompanyTableShares = ({ contracts }) => {
-  const data = React.useMemo(() => [...contracts], [contracts]); // get the data from the parent component (props);
+  const data = React.useMemo(() => [...contracts], [contracts]);
 
   const columns = React.useMemo(
     () => [
@@ -206,7 +205,7 @@ const CompanyTableShares = ({ contracts }) => {
 
   return (
     <TableContainer>
-      {/* apply the table props */}
+      <h2>Employee's Contracts summary</h2>
       <Table {...getTableProps()}>
         <thead>
           <tr>
@@ -223,86 +222,45 @@ const CompanyTableShares = ({ contracts }) => {
               />
             </th>
           </tr>
-          {
-            // Loop over the header rows
-            headerGroups.map(headerGroup => (
-              // Apply the header row props
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {
-                  // Loop over the headers in each row
-                  headerGroup.headers.map(column => (
-                    // Apply the header cell props
-                    <th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                    >
-                      {
-                        // Render the header
-                        column.render('Header')
-                      }
-                      <span>
-                        {column.isSorted
-                          ? column.isSortedDesc
-                            ? ' 🔽'
-                            : ' 🔼'
-                          : ''}
-                      </span>
-                    </th>
-                  ))
-                }
-              </tr>
-            ))
-          }
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
+                  <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? ' 🔽'
+                        : ' 🔼'
+                      : ''}
+                  </span>
+                </th>
+              ))}
+            </tr>
+          ))}
         </thead>
-        {/* Apply the table body props */}
         <tbody {...getTableBodyProps()}>
-          {
-            // Loop over the table rows
-            rows.map(row => {
-              // Prepare the row for display
-              prepareRow(row);
-              return (
-                // Apply the row props
-                <tr {...row.getRowProps()}>
-                  {
-                    // Loop over the rows cells
-                    row.cells.map(cell => {
-                      // Apply the cell props
-                      return (
-                        <td {...cell.getCellProps()}>
-                          {
-                            // Render the cell contents
-                            cell.render('Cell')
-                          }
-                        </td>
-                      );
-                    })
-                  }
-                </tr>
-              );
-            })
-          }
+          {rows.map(row => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
         <tfoot>
-          {
-            // Loop over the header rows
-            footerGroups.map(group => (
-              // Apply the header row props
-              <tr {...group.getFooterGroupProps()}>
-                {
-                  // Loop over the headers in each row
-                  group.headers.map(column => (
-                    // Apply the header cell props
-                    <td {...column.getFooterProps()}>
-                      {
-                        // Render the header
-                        column.render('Footer')
-                      }
-                    </td>
-                  ))
-                }
-              </tr>
-            ))
-          }
+          {footerGroups.map(group => (
+            <tr {...group.getFooterGroupProps()}>
+              {group.headers.map(column => (
+                <td {...column.getFooterProps()}>{column.render('Footer')}</td>
+              ))}
+            </tr>
+          ))}
         </tfoot>
       </Table>
     </TableContainer>

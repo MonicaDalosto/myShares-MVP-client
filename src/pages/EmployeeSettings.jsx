@@ -1,5 +1,12 @@
-import styled from 'styled-components';
-import { Button, Input, Title, Container, LinkWord } from '../styled';
+import {
+  Title,
+  Container,
+  Tabs,
+  Panels,
+  TabContainer,
+  Formulary,
+  Button
+} from '../styled';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +21,11 @@ const EmployeeSettings = () => {
   const dispatch = useDispatch();
   const allEmployees = useSelector(selectAllEmployees);
   const token = useSelector(selectToken);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const handleClick = index => setActiveIndex(index);
+  const checkActive = (index, className) =>
+    activeIndex === index ? className : '';
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -54,92 +66,96 @@ const EmployeeSettings = () => {
 
   return (
     <Container>
-      <div>
-        <Title>Employee Settings</Title>
-        <EmployeesList allEmployees={allEmployees} />
-        <div>
-          <h2>Create new employee</h2>
-          <form onSubmit={submitForm}>
-            <label>
-              Name
-              <input
-                value={name}
-                onChange={event => setName(event.target.value)}
-              />
-            </label>
-            <label>
-              Email
-              <input
-                value={email}
-                onChange={event => setEmail(event.target.value)}
-              />
-            </label>
-            <label>
-              Department
-              <select
-                value={department}
-                onChange={event =>
-                  setDepartment(
-                    event.target.value === 'Choose department'
-                      ? ''
-                      : event.target.value
-                  )
-                }
-              >
-                <option>Choose department</option>
-                <option>Finance</option>
-                <option>HR</option>
-                <option>Marketing</option>
-                <option>Operations</option>
-                <option>R&D</option>
-              </select>
-            </label>
-            <label>
-              Initial Password
-              <input
-                type="password"
-                value={password}
-                onChange={event => setPassword(event.target.value)}
-              />
-            </label>
-            <label>
-              Access
-              <input
-                type="checkbox"
-                value={isAdmin}
-                onChange={event => setIsAdmin(!isAdmin)}
-              />{' '}
-              is Admin
-            </label>
-            <label>
-              Start Date
-              <input
-                type="date"
-                value={startDate}
-                onChange={event => setStartDate(event.target.value)}
-              />
-            </label>
-            <br />
-            <button type="submit" disabled={!formValid}>
-              Create employee
-            </button>
-          </form>
-        </div>
-      </div>
+      <TabContainer>
+        <Tabs>
+          <button
+            className={`tab ${checkActive(0, 'active')}`}
+            onClick={() => handleClick(0)}
+          >
+            Employees List
+          </button>
+          <button
+            className={`tab ${checkActive(1, 'active')}`}
+            onClick={() => handleClick(1)}
+          >
+            Create new Employee
+          </button>
+        </Tabs>
+        <Panels>
+          <div className={`panel ${checkActive(0, 'active')}`}>
+            <EmployeesList allEmployees={allEmployees} />
+          </div>
+          <div className={`panel ${checkActive(1, 'active')}`}>
+            <Formulary onSubmit={submitForm}>
+              <label>
+                Name
+                <input
+                  value={name}
+                  onChange={event => setName(event.target.value)}
+                />
+              </label>
+              <label>
+                Email
+                <input
+                  value={email}
+                  onChange={event => setEmail(event.target.value)}
+                />
+              </label>
+              <label>
+                Department
+                <select
+                  value={department}
+                  onChange={event =>
+                    setDepartment(
+                      event.target.value === 'Choose department'
+                        ? ''
+                        : event.target.value
+                    )
+                  }
+                >
+                  <option>Choose department</option>
+                  <option>Finance</option>
+                  <option>HR</option>
+                  <option>Marketing</option>
+                  <option>Operations</option>
+                  <option>R&D</option>
+                </select>
+              </label>
+              <label>
+                Initial Password
+                <input
+                  type="password"
+                  value={password}
+                  onChange={event => setPassword(event.target.value)}
+                />
+              </label>
+              <label>
+                Access
+                <input
+                  type="checkbox"
+                  value={isAdmin}
+                  onChange={event => setIsAdmin(!isAdmin)}
+                />{' '}
+                is Admin
+              </label>
+              <label>
+                Start Date
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={event => setStartDate(event.target.value)}
+                />
+              </label>
+              <br />
+              <Button type="submit" disabled={!formValid}>
+                Create employee
+              </Button>
+            </Formulary>
+          </div>
+        </Panels>
+      </TabContainer>
     </Container>
   );
 };
 
 export { EmployeeSettings };
-
-// const Container = styled.div`
-//   display: 'flex';
-//   flex-direction: 'column';
-//   margin: 15%;
-// `;
-
-const SubText = styled.p`
-  text-align: center;
-  color: #000050;
-  padding: 20px 0px 5px 0px;
-`;
