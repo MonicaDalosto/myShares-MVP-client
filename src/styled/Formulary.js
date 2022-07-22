@@ -27,7 +27,9 @@ export const Formulary = styled.form`
 
     :focus {
       outline: ${props =>
-        props.checkbox ? 'none' : '2px solid var(--color-nav-hover)'};
+        props.noOutline
+          ? '2px solid transparent'
+          : '2px solid var(--color-nav-hover)'};
       border: 2px solid transparent;
     }
   }

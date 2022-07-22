@@ -178,7 +178,7 @@ const EditEmployee = () => {
               <label>
                 Is the Employee Admin?
                 <input
-                  checkbox
+                  noOutline
                   type="checkbox"
                   checked={isAdmin}
                   onChange={event => setIsAdmin(!isAdmin)}
@@ -187,7 +187,7 @@ const EditEmployee = () => {
               <label>
                 Is the Employee Active?
                 <input
-                  checkbox
+                  noOutline
                   type="checkbox"
                   checked={isActive}
                   onChange={event => setIsActive(!isActive)}
@@ -246,7 +246,7 @@ const EditEmployee = () => {
                 <label>
                   <strong>
                     The employee can't be deleted because has {contracts} active
-                    contracts active.
+                    contracts.
                   </strong>{' '}
                   You should delete all the contracts before delete the
                   employee.{' '}
