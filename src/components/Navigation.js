@@ -19,7 +19,7 @@ export const Navigation = () => {
       <Logo>
         <NavLink to={isAdmin ? '/dashboard' : '/'}>
           <li>
-            myCompany<span>BV</span>
+            myShares<span>BV</span>
           </li>
         </NavLink>
       </Logo>
