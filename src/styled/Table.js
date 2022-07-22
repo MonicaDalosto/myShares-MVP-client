@@ -27,6 +27,11 @@ export const Table = styled.table`
     background: var(--color-bg-table);
   }
 
+  tfoot tr,
+  thead tr {
+    background: var(--color-bg-table);
+  }
+
   td,
   th {
     text-align: center;
