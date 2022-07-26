@@ -75,7 +75,7 @@ const ContractSettings = () => {
   if (!allEmployeeContracts) {
     return (
       <Container>
-        <Title> You don't have any Contracts!</Title>
+        <Title> The Company doesn't have any Contracts!</Title>
       </Container>
     );
   }
