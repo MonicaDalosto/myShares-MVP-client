@@ -9,6 +9,9 @@ export const selectMySharesProjection = reduxState =>
 export const selectEmployeeContractsSummary = reduxState =>
   reduxState.contracts.employeeContractsSummary;
 
+export const selectEmployeeSharesProjection = reduxState =>
+  reduxState.contracts.employeeSharesProjection;
+
 export const selectAllEmployeeContractsSummary = reduxState =>
   reduxState.contracts.allEmployeeContractsSummary;
 

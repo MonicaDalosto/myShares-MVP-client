@@ -26,7 +26,6 @@ const EmployeeDashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  // const user = useSelector(selectUser);
   const contractsSummary = useSelector(selectMyContractsSummary);
   const sharesProjection = useSelector(selectMySharesProjection);
   const company = useSelector(selectCompany);
@@ -38,10 +37,10 @@ const EmployeeDashboard = () => {
   );
 
   useEffect(() => {
+    dispatch(getMyContractsSummary());
     if (token === null) {
       navigate('/login');
     }
-    dispatch(getMyContractsSummary());
   }, [dispatch, navigate, token]);
 
   const submitForm = event => {
