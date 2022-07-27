@@ -5,6 +5,7 @@ import {
   setMyContractsSummary,
   setMySharesProjection,
   setEmployeeContractsSummary,
+  setEmployeeSharesProjection,
   setAllEmployeeContractsSummary
 } from './slice';
 
@@ -69,8 +70,11 @@ export const getSharesProjection =
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      // console.log('projection inside the thunk: ', response.data);
-      dispatch(setMySharesProjection(response.data));
+      if (id) {
+        dispatch(setEmployeeSharesProjection(response.data));
+      } else {
+        dispatch(setMySharesProjection(response.data));
+      }
     } catch (error) {
       console.log(error.response);
     }

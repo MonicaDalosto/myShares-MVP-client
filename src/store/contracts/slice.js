@@ -4,6 +4,7 @@ const initialState = {
   myContractsSummary: null,
   mySharesProjection: null,
   employeeContractsSummary: null,
+  employeeSharesProjection: null,
   allEmployeeContractsSummary: null
 };
 
@@ -20,6 +21,9 @@ export const contractsSlice = createSlice({
     setEmployeeContractsSummary: (state, action) => {
       state.employeeContractsSummary = action.payload;
     },
+    setEmployeeSharesProjection: (state, action) => {
+      state.employeeSharesProjection = action.payload;
+    },
     setAllEmployeeContractsSummary: (state, action) => {
       state.allEmployeeContractsSummary = action.payload;
     }
@@ -30,6 +34,7 @@ export const {
   setMyContractsSummary,
   setMySharesProjection,
   setEmployeeContractsSummary,
+  setEmployeeSharesProjection,
   setAllEmployeeContractsSummary
 } = contractsSlice.actions;
 
