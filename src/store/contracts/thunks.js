@@ -36,7 +36,7 @@ export const createNewContract =
           headers: { Authorization: `Bearer ${token}` }
         }
       );
-      // console.log(response.data);
+      dispatch(getAllEmployeesContractsSummary());
       dispatch(showMessageWithTimeout('success', true, 'Contract created!'));
     } catch (error) {
       console.log(error.response);

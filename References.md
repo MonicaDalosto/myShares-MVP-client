@@ -41,3 +41,7 @@ https://dreamyguy.github.io/react-emojis/
 https://freefrontend.com/css-tables/#tables
 This is responive: https://codepen.io/florantara/pen/dROvdb
 https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l
+
+# How to Style the sendgrid e-mail
+
+https://docs.sendgrid.com/ui/sending-email/cross-platform-html-design
