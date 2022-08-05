@@ -183,7 +183,7 @@ export const checkResetPasswordToken =
         showMessageWithTimeout(
           'danger',
           true,
-          'The url expired! Please, request for your password to be reset again. '
+          'The url is expired! Please, request for your password to be reset again. '
         )
       );
       navigate('/forgot-password');
