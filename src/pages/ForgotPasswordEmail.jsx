@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button, Title, LinkWord, Container, Formulary } from '../styled';
 import { validEmail } from '../config/regex';
+import { forgotPassword } from '../store/user/thunks';
 
 const ForgotPasswordEmail = () => {
   const dispatch = useDispatch();
@@ -12,8 +13,8 @@ const ForgotPasswordEmail = () => {
 
   const submitForm = event => {
     event.preventDefault();
-    console.log('Passou');
-    dispatch(); // add the thunk;
+    dispatch(forgotPassword(email));
+    setEmail('');
   };
   return (
     <Container>
