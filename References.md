@@ -42,6 +42,12 @@ https://freefrontend.com/css-tables/#tables
 This is responive: https://codepen.io/florantara/pen/dROvdb
 https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l
 
-# How to Style the sendgrid e-mail
+# How to Style the sendgrid e-mail:
 
 https://docs.sendgrid.com/ui/sending-email/cross-platform-html-design
+
+# How to create Forgot Password path:
+
+https://codevoweb.com/crud-api-node-prisma-postgresql-reset-password/#:~:text=To%20reset%20the%20password%2C%20the,token%20to%20the%20user's%20email.
+
+https://dev.to/cyberwolves/how-to-implement-password-reset-via-email-in-node-js-132m
