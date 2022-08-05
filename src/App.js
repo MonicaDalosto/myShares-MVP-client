@@ -13,11 +13,11 @@ import {
   CompanySettings,
   ContractSettings,
   EditEmployee,
+  EmployeeChangePassword,
   EmployeeDashboard,
   EmployeeDetails,
   EmployeeSettings,
-  Login,
-  SignUp
+  Login
 } from './pages';
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
       <MessageBox />
       <Routes>
         <Route path="/" element={<EmployeeDashboard />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/employee-password" element={<EmployeeChangePassword />} />
         <Route path="/login" element={<Login />} />
         <Route path="/employee" element={<EmployeeSettings />} />
         <Route path="/edit-employee/:id/:index" element={<EditEmployee />} />

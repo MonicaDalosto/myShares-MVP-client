@@ -43,6 +43,11 @@ export const Navigation = () => {
               <li>Dashboard</li>
             </NavLink>
           </MenuLink>
+          <MenuLink>
+            <NavLink to="/employee-password">
+              <li>Settings</li>
+            </NavLink>
+          </MenuLink>
           <MenuLink onClick={() => dispatch(logOut())}>
             <li>Logout</li>
           </MenuLink>
@@ -52,6 +57,11 @@ export const Navigation = () => {
           <MenuLink>
             <NavLink to="/">
               <li>My Dashboard</li>
+            </NavLink>
+          </MenuLink>
+          <MenuLink>
+            <NavLink to="/employee-password">
+              <li>My Settings</li>
             </NavLink>
           </MenuLink>
           <MenuLink>
