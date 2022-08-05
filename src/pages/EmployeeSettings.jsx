@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import {
   Title,
   Container,
@@ -15,6 +16,14 @@ import { selectToken } from '../store/user/selectors';
 import { getAllEmployees } from '../store/employees/thunks';
 import { selectAllEmployees } from '../store/employees/selectors';
 import { EmployeesList } from '../components';
+import {
+  validPassword,
+  lowercaseLetter,
+  uppercaseLetter,
+  specialCharacter,
+  numberCharacter,
+  minimumLength
+} from '../config/regex';
 
 const EmployeeSettings = () => {
   const navigate = useNavigate();
@@ -33,9 +42,12 @@ const EmployeeSettings = () => {
   const [password, setPassword] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const [startDate, setStartDate] = useState('');
+  const [pwdError, setPwdError] = useState(false);
 
   const formValid =
-    name && email && department && password && startDate ? true : false;
+    name && email && department && password && !pwdError && startDate
+      ? true
+      : false;
 
   useEffect(() => {
     if (token === null) {
@@ -127,6 +139,10 @@ const EmployeeSettings = () => {
                   type="password"
                   value={password}
                   onChange={event => setPassword(event.target.value)}
+                  onBlur={event =>
+                    setPwdError(!validPassword.test(event.target.value))
+                  }
+                  className={pwdError ? 'invalid-data' : undefined}
                 />
               </label>
               <label>
@@ -150,6 +166,46 @@ const EmployeeSettings = () => {
               <Button type="submit" disabled={!formValid}>
                 Create employee
               </Button>
+              {pwdError && (
+                <Ul>
+                  {/* The "New Password" is invalid: */}
+                  <li
+                    className={
+                      password.length >= minimumLength ? 'valid' : 'invalid'
+                    }
+                  >
+                    The password must be at least 8 characters
+                  </li>
+                  <li
+                    className={
+                      password.match(lowercaseLetter) ? 'valid' : 'invalid'
+                    }
+                  >
+                    The password must contain at least one lowercase letter
+                  </li>
+                  <li
+                    className={
+                      password.match(uppercaseLetter) ? 'valid' : 'invalid'
+                    }
+                  >
+                    The password must contain at least one uppercase letter
+                  </li>
+                  <li
+                    className={
+                      password.match(numberCharacter) ? 'valid' : 'invalid'
+                    }
+                  >
+                    The password must contain at least one number
+                  </li>
+                  <li
+                    className={
+                      password.match(specialCharacter) ? 'valid' : 'invalid'
+                    }
+                  >
+                    The password must contain at least one special character
+                  </li>
+                </Ul>
+              )}
             </Formulary>
           </div>
         </Panels>
@@ -159,3 +215,18 @@ const EmployeeSettings = () => {
 };
 
 export { EmployeeSettings };
+
+const Ul = styled.ul`
+  margin: 10px 0;
+  color: var(--color-alert-red);
+  font-size: 0.9rem;
+  list-style: none;
+
+  li {
+    margin: 5px 0;
+
+    &.valid {
+      color: green;
+    }
+  }
+`;

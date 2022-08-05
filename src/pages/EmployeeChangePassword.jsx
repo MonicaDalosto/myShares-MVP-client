@@ -31,7 +31,7 @@ const EmployeeChangePassword = () => {
     password &&
     newPassword &&
     confirmNewPassword &&
-    // !pwdError &&
+    !pwdError &&
     !newPwdError &&
     !confirmNewPwdError;
 
