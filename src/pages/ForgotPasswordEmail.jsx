@@ -3,13 +3,16 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button, Title, LinkWord, Container, Formulary } from '../styled';
+import { validEmail } from '../config/regex';
 
 const ForgotPasswordEmail = () => {
-  const [email, setEmail] = useState('');
   const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
 
   const submitForm = event => {
     event.preventDefault();
+    console.log('Passou');
     dispatch(); // add the thunk;
   };
   return (
@@ -22,9 +25,18 @@ const ForgotPasswordEmail = () => {
       <Formulary login onSubmit={submitForm}>
         <label>
           Email Address
-          <input value={email} onChange={e => setEmail(e.target.value)} />
+          <input
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+            onBlur={event =>
+              setEmailError(!validEmail.test(event.target.value))
+            }
+          />
         </label>
-        <Button type="submit">Retrieve Password</Button>
+        <Button type="submit" disabled={emailError || !email}>
+          Retrieve Password
+        </Button>
+        {emailError && <Paragraph>The informed Email is invalid!</Paragraph>}
       </Formulary>
       <SubText>
         Back to
@@ -44,4 +56,10 @@ const SubText = styled.p`
   color: var(--color-title);
   margin: ${props => (props.caption ? '20px 0 -20px' : '-20px 0 0')};
   font-size: ${props => props.caption && '0.9rem'};
+`;
+
+const Paragraph = styled.p`
+  margin: 10px 0;
+  color: var(--color-alert-red);
+  font-size: 0.9rem;
 `;
