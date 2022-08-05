@@ -170,3 +170,22 @@ export const forgotPassword = email => async (dispatch, getState) => {
     );
   }
 };
+
+export const checkResetPasswordToken =
+  (resetToken, navigate) => async (dispatch, getState) => {
+    try {
+      await axios.post(`${apiUrl}/auth/checkResetPasswordToken`, {
+        resetToken
+      });
+    } catch (error) {
+      console.log(error.response.data);
+      dispatch(
+        showMessageWithTimeout(
+          'danger',
+          true,
+          'The url expired! Please, request for your password to be reset again. '
+        )
+      );
+      navigate('/forgot-password');
+    }
+  };

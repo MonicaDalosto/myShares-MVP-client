@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button, Title, Container, Formulary } from '../styled';
 import {
@@ -10,10 +11,12 @@ import {
   numberCharacter,
   minimumLength
 } from '../config/regex';
-import { useEffect } from 'react';
+import { checkResetPasswordToken } from '../store/user/thunks';
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { resetToken } = useParams();
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -21,8 +24,9 @@ const ResetPassword = () => {
   const [confirmPwdError, setConfirmPwdError] = useState('');
 
   useEffect(() => {
+    dispatch(checkResetPasswordToken(resetToken, navigate));
     setPwdError(!validPassword.test(password));
-  }, []);
+  }, [dispatch, resetToken]);
 
   const submitForm = event => {
     event.preventDefault();
@@ -39,6 +43,7 @@ const ResetPassword = () => {
         <label>
           Password
           <input
+            autoFocus
             type="password"
             value={password}
             onChange={event => setPassword(event.target.value)}
