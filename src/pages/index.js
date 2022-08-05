@@ -8,3 +8,4 @@ export * from './EditEmployee';
 export * from './EmployeeDetails';
 export * from './EmployeeChangePassword';
 export * from './ForgotPasswordEmail';
+export * from './ResetPassword';

@@ -18,7 +18,8 @@ import {
   EmployeeDetails,
   EmployeeSettings,
   ForgotPasswordEmail,
-  Login
+  Login,
+  ResetPassword
 } from './pages';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Route path="/employee-password" element={<EmployeeChangePassword />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPasswordEmail />} />
+        <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
         <Route path="/employee" element={<EmployeeSettings />} />
         <Route path="/edit-employee/:id/:index" element={<EditEmployee />} />
         <Route path="/contract" element={<ContractSettings />} />
