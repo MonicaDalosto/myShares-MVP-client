@@ -22,20 +22,27 @@ export const Formulary = styled.form`
     width: ${props => (props.login ? '100%' : '300px')};
 
     ::placeholder {
-      color: var(--color-paragraph);
+      border: var(--color-paragraph);
     }
 
     :focus {
-      outline: ${props =>
-        props.noOutline
-          ? '2px solid transparent'
-          : '2px solid var(--color-nav-hover)'};
-      border: 2px solid transparent;
+      border: 2px solid var(--color-nav-hover);
+    }
+
+    &.invalid-data {
+      border: 2px solid var(--color-alert-red);
     }
   }
 
   span {
-    color: red;
+    color: var(--color-alert-red);
     font-size: 0.8rem;
   }
 `;
+
+// outline: ${props =>
+// props.noOutline
+// ? '2px solid transparent'
+// : '2px solid var(--color-nav-hover)'};
+// border: 2px solid transparent;
+// }

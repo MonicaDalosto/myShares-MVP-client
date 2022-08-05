@@ -103,6 +103,27 @@ export const login = (email, password) => {
   };
 };
 
+export const changePassword =
+  ({ password, newPassword, confirmNewPassword }) =>
+  async (dispatch, getState) => {
+    try {
+      const token = getState().user.token;
+      const response = await axios.patch(
+        `${apiUrl}/auth/changePassword`,
+        { password, newPassword, confirmNewPassword },
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      dispatch(showMessageWithTimeout('success', true, response.data.message));
+    } catch (error) {
+      dispatch(
+        showMessageWithTimeout('danger', true, error.response.data.message)
+      );
+    }
+  };
+
 export const getUserWithStoredToken = () => {
   return async (dispatch, getState) => {
     // get token from the state
