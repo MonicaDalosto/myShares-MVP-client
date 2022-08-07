@@ -103,27 +103,6 @@ export const login = (email, password) => {
   };
 };
 
-export const changePassword =
-  ({ password, newPassword, confirmNewPassword }) =>
-  async (dispatch, getState) => {
-    try {
-      const token = getState().user.token;
-      const response = await axios.patch(
-        `${apiUrl}/auth/changePassword`,
-        { password, newPassword, confirmNewPassword },
-        {
-          headers: { Authorization: `Bearer ${token}` }
-        }
-      );
-
-      dispatch(showMessageWithTimeout('success', true, response.data.message));
-    } catch (error) {
-      dispatch(
-        showMessageWithTimeout('danger', true, error.response.data.message)
-      );
-    }
-  };
-
 export const getUserWithStoredToken = () => {
   return async (dispatch, getState) => {
     // get token from the state
@@ -156,3 +135,122 @@ export const getUserWithStoredToken = () => {
     }
   };
 };
+
+export const changePassword =
+  ({ password, newPassword, confirmNewPassword }) =>
+  async (dispatch, getState) => {
+    try {
+      const token = getState().user.token;
+      const response = await axios.patch(
+        `${apiUrl}/auth/changePassword`,
+        { password, newPassword, confirmNewPassword },
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      dispatch(showMessageWithTimeout('success', true, response.data.message));
+    } catch (error) {
+      dispatch(
+        showMessageWithTimeout('danger', true, error.response.data.message)
+      );
+    }
+  };
+
+export const forgotPassword = email => async (dispatch, getState) => {
+  try {
+    const response = await axios.post(`${apiUrl}/auth/forgotPassword`, {
+      email
+    });
+
+    dispatch(showMessageWithTimeout('success', true, response.data.message));
+  } catch (error) {
+    dispatch(
+      showMessageWithTimeout('danger', true, error.response.data.message)
+    );
+  }
+};
+
+export const checkResetPasswordToken =
+  (resetToken, navigate) => async (dispatch, getState) => {
+    try {
+      const response = await axios.post(
+        `${apiUrl}/auth/checkResetPasswordToken`,
+        {
+          resetToken
+        }
+      );
+
+      console.log(response.data.message);
+    } catch (error) {
+      console.log(error.response);
+      dispatch(
+        showMessageWithTimeout(
+          'danger',
+          true,
+          'The url is expired! Please, request for your password to be reset again. '
+        )
+      );
+      navigate('/forgot-password');
+    }
+  };
+
+export const resetPassword =
+  ({ resetToken, password, confirmPassword, navigate }) =>
+  async (dispatch, getState) => {
+    try {
+      const response = await axios.patch(`${apiUrl}/auth/resetPassword`, {
+        resetToken,
+        password,
+        confirmPassword
+      });
+
+      console.log(response.data);
+      dispatch(showMessageWithTimeout('success', true, response.data.message));
+      navigate('/login');
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data.name === 'PasswordError') {
+        dispatch(
+          showMessageWithTimeout('danger', true, error.response.data.message)
+        );
+      } else if (
+        error.response &&
+        error.response.data.name === 'UserNotFound'
+      ) {
+        dispatch(
+          showMessageWithTimeout('danger', true, error.response.data.message)
+        );
+        navigate('/forgot-password');
+      } else if (
+        error.response &&
+        error.response.data.name === 'UrlTokenAlreadyUsed'
+      ) {
+        dispatch(
+          showMessageWithTimeout('danger', true, error.response.data.message)
+        );
+        navigate('/forgot-password');
+      } else if (
+        error.response &&
+        error.response.data.name === 'TokenExpiredError'
+      ) {
+        dispatch(
+          showMessageWithTimeout(
+            'danger',
+            true,
+            'The url is expired! Please, request for your password to be reset again.'
+          )
+        );
+        navigate('/forgot-password');
+      } else {
+        dispatch(
+          showMessageWithTimeout(
+            'danger',
+            true,
+            'Something went wrong! Please, request for your password to be reset again.'
+          )
+        );
+        navigate('/forgot-password');
+      }
+    }
+  };

@@ -47,7 +47,7 @@ export const Login = () => {
       </Formulary>
       <SubText>
         Don't remember your password? Click
-        <Link to="/" style={LinkWord}>
+        <Link to="/forgot-password" style={LinkWord}>
           {' '}
           here
         </Link>{' '}
