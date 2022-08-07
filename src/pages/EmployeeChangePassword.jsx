@@ -43,7 +43,7 @@ const EmployeeChangePassword = () => {
 
   const submitForm = event => {
     event.preventDefault();
-    dispatch(changePassword({ password, newPassword, confirmNewPassword })); // add the thunk...
+    dispatch(changePassword({ password, newPassword, confirmNewPassword }));
     setPassword('');
     setNewPassword('');
     setConfirmNewPassword('');
@@ -79,7 +79,10 @@ const EmployeeChangePassword = () => {
             <input
               type="password"
               value={newPassword}
-              onChange={event => setNewPassword(event.target.value)}
+              onChange={event => {
+                setNewPassword(event.target.value);
+                setNewPwdError(!validPassword.test(event.target.value));
+              }}
               onBlur={event =>
                 setNewPwdError(
                   !validPassword.test(event.target.value) ||
