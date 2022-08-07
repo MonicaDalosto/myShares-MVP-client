@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button, Title, Container, Formulary } from '../styled';
@@ -11,7 +11,7 @@ import {
   numberCharacter,
   minimumLength
 } from '../config/regex';
-import { checkResetPasswordToken } from '../store/user/thunks';
+import { checkResetPasswordToken, resetPassword } from '../store/user/thunks';
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
@@ -30,9 +30,11 @@ const ResetPassword = () => {
 
   const submitForm = event => {
     event.preventDefault();
-    dispatch(); // add the thunk...
-    // setPassword('');
-    // setConfirmPassword('');
+    dispatch(
+      resetPassword({ resetToken, password, confirmPassword, navigate })
+    );
+    setPassword('');
+    setConfirmPassword('');
   };
 
   return (
