@@ -25,8 +25,7 @@ const ResetPassword = () => {
 
   useEffect(() => {
     dispatch(checkResetPasswordToken(resetToken, navigate));
-    setPwdError(!validPassword.test(password));
-  }, [dispatch, resetToken]);
+  }, [dispatch, resetToken, navigate]);
 
   const submitForm = event => {
     event.preventDefault();
@@ -48,7 +47,10 @@ const ResetPassword = () => {
             autoFocus
             type="password"
             value={password}
-            onChange={event => setPassword(event.target.value)}
+            onChange={event => {
+              setPassword(event.target.value);
+              setPwdError(!validPassword.test(event.target.value));
+            }}
             onBlur={event =>
               setPwdError(!validPassword.test(event.target.value))
             }
