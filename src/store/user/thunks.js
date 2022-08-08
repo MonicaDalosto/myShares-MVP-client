@@ -10,14 +10,12 @@ export const createEmployee = ({
   name,
   email,
   department,
-  password,
   isAdmin,
   startDate
 }) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
-      // const token = selectToken(getState()); // it's the same
       const token = getState().user.token;
 
       const response = await axios.post(
@@ -26,7 +24,6 @@ export const createEmployee = ({
           name,
           email,
           department,
-          password,
           isAdmin,
           startDate
         },
