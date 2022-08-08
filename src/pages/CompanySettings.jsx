@@ -41,6 +41,7 @@ const CompanySettings = () => {
         Number(totalCompanyShares)
       )
     );
+    setCheck(false);
   };
 
   return (
@@ -72,6 +73,7 @@ const CompanySettings = () => {
           <label>
             <input
               type="checkbox"
+              checked={check}
               value={check}
               onChange={event => setCheck(!check)}
             />{' '}
