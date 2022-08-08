@@ -119,7 +119,7 @@ const ContractsList = ({ allEmployeeContracts }) => {
         accessor: 'sharesValueBasedCompanyCurrentValuation',
         Cell: ({ row }) => (
           <NumberFormat
-            value={row.original.virtualOwnedShares}
+            value={row.original.sharesValueBasedCompanyCurrentValuation}
             displayType={'text'}
             thousandSeparator={true}
             prefix={'$ '}
@@ -132,7 +132,6 @@ const ContractsList = ({ allEmployeeContracts }) => {
       {
         Header: 'Delete Contract',
         Cell: ({ row }) => {
-          // console.log(row.original);
           return (
             <button
               type="button"
