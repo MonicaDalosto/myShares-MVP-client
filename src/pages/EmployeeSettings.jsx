@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import {
   Title,
   Container,
@@ -16,14 +15,6 @@ import { selectToken } from '../store/user/selectors';
 import { getAllEmployees } from '../store/employees/thunks';
 import { selectAllEmployees } from '../store/employees/selectors';
 import { EmployeesList } from '../components';
-import {
-  validPassword,
-  lowercaseLetter,
-  uppercaseLetter,
-  specialCharacter,
-  numberCharacter,
-  minimumLength
-} from '../config/regex';
 
 const EmployeeSettings = () => {
   const navigate = useNavigate();
@@ -39,15 +30,10 @@ const EmployeeSettings = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [department, setDepartment] = useState('');
-  const [password, setPassword] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const [startDate, setStartDate] = useState('');
-  const [pwdError, setPwdError] = useState(false);
 
-  const formValid =
-    name && email && department && password && !pwdError && startDate
-      ? true
-      : false;
+  const formValid = name && email && department && startDate;
 
   useEffect(() => {
     if (token === null) {
@@ -58,13 +44,10 @@ const EmployeeSettings = () => {
 
   const submitForm = event => {
     event.preventDefault();
-    dispatch(
-      createEmployee({ name, email, department, password, isAdmin, startDate })
-    );
+    dispatch(createEmployee({ name, email, department, isAdmin, startDate }));
     setName('');
     setEmail('');
     setDepartment('');
-    setPassword('');
     setStartDate('');
   };
 
@@ -134,18 +117,6 @@ const EmployeeSettings = () => {
                 </select>
               </label>
               <label>
-                Initial Password
-                <input
-                  type="password"
-                  value={password}
-                  onChange={event => setPassword(event.target.value)}
-                  onBlur={event =>
-                    setPwdError(!validPassword.test(event.target.value))
-                  }
-                  className={pwdError ? 'invalid-data' : undefined}
-                />
-              </label>
-              <label>
                 Access
                 <input
                   type="checkbox"
@@ -166,46 +137,6 @@ const EmployeeSettings = () => {
               <Button type="submit" disabled={!formValid}>
                 Create employee
               </Button>
-              {pwdError && (
-                <Ul>
-                  {/* The "New Password" is invalid: */}
-                  <li
-                    className={
-                      password.length >= minimumLength ? 'valid' : 'invalid'
-                    }
-                  >
-                    The password must be at least 8 characters
-                  </li>
-                  <li
-                    className={
-                      password.match(lowercaseLetter) ? 'valid' : 'invalid'
-                    }
-                  >
-                    The password must contain at least one lowercase letter
-                  </li>
-                  <li
-                    className={
-                      password.match(uppercaseLetter) ? 'valid' : 'invalid'
-                    }
-                  >
-                    The password must contain at least one uppercase letter
-                  </li>
-                  <li
-                    className={
-                      password.match(numberCharacter) ? 'valid' : 'invalid'
-                    }
-                  >
-                    The password must contain at least one number
-                  </li>
-                  <li
-                    className={
-                      password.match(specialCharacter) ? 'valid' : 'invalid'
-                    }
-                  >
-                    The password must contain at least one special character
-                  </li>
-                </Ul>
-              )}
             </Formulary>
           </div>
         </Panels>
@@ -215,18 +146,3 @@ const EmployeeSettings = () => {
 };
 
 export { EmployeeSettings };
-
-const Ul = styled.ul`
-  margin: 10px 0;
-  color: var(--color-alert-red);
-  font-size: 0.9rem;
-  list-style: none;
-
-  li {
-    margin: 5px 0;
-
-    &.valid {
-      color: green;
-    }
-  }
-`;
