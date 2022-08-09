@@ -118,7 +118,6 @@ export const deleteContract = id => async (dispatch, getState) => {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    console.log(response.data.message);
     dispatch(getAllEmployeesContractsSummary());
     dispatch(showMessageWithTimeout('success', true, response.data.message));
   } catch (error) {
