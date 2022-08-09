@@ -171,16 +171,10 @@ export const forgotPassword = email => async (dispatch, getState) => {
 export const checkResetPasswordToken =
   (resetToken, navigate) => async (dispatch, getState) => {
     try {
-      const response = await axios.post(
-        `${apiUrl}/auth/checkResetPasswordToken`,
-        {
-          resetToken
-        }
-      );
-
-      console.log(response.data.message);
+      await axios.post(`${apiUrl}/auth/checkResetPasswordToken`, {
+        resetToken
+      });
     } catch (error) {
-      console.log(error.response);
       dispatch(
         showMessageWithTimeout(
           'danger',
@@ -202,11 +196,9 @@ export const resetPassword =
         confirmPassword
       });
 
-      console.log(response.data);
       dispatch(showMessageWithTimeout('success', true, response.data.message));
       navigate('/login');
     } catch (error) {
-      console.log(error);
       if (error.response && error.response.data.name === 'PasswordError') {
         dispatch(
           showMessageWithTimeout('danger', true, error.response.data.message)
