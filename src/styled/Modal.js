@@ -1,4 +1,6 @@
-.darkBG {
+import styled from 'styled-components';
+
+export const BGDiv = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
   width: 100vw;
   height: 100vh;
@@ -7,16 +9,16 @@
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-}
+`;
 
-.centered {
+export const CenteredDiv = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+`;
 
-.modal {
+export const ModalDiv = styled.div`
   width: 250px;
   height: 170px;
   background: white;
@@ -24,46 +26,46 @@
   z-index: 10;
   border-radius: 16px;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-}
+`;
 
-.modalHeader {
+export const ModalHeader = styled.div`
   height: 50px;
   background: white;
   overflow: hidden;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-}
+`;
 
-.heading {
+export const Heading = styled.h5`
   margin: 0;
   padding: 10px;
   color: #2c3e50;
   font-weight: 500;
   font-size: 18px;
   text-align: center;
-}
+`;
 
-.modalContent {
+export const ModalContent = styled.div`
   padding: 10px;
   font-size: 14px;
   color: #2c3e50;
   text-align: center;
-}
+`;
 
-.modalActions {
+export const ModalActions = styled.div`
   position: absolute;
   bottom: 2px;
   margin-bottom: 10px;
   width: 100%;
-}
+`;
 
-.actionsContainer {
+export const ActionsContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
+`;
 
-.closeBtn {
+export const CloseBtn = styled.button`
   cursor: pointer;
   font-weight: 500;
   padding: 4px 8px;
@@ -80,14 +82,13 @@
   align-self: flex-end;
   margin-top: -7px;
   margin-right: -7px;
-}
 
-.closeBtn:hover {
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-  transform: translate(-4px, 4px);
-}
+  :hover {
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    transform: translate(-4px, 4px);
+`;
 
-.deleteBtn {
+export const DeleteBtn = styled.button`
   margin-top: 10px;
   cursor: pointer;
   font-weight: 500;
@@ -98,15 +99,14 @@
   color: #fff;
   background: #ff3e4e;
   transition: all 0.25s ease;
-}
 
-.deleteBtn:hover {
-  box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
-  transform: translateY(-5px);
-  background: #ff3e4e;
-}
+  :hover {
+    box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
+    transform: translateY(-5px);
+  }
+`;
 
-.cancelBtn {
+export const CancelBtn = styled.button`
   margin-top: 10px;
   cursor: pointer;
   font-weight: 500;
@@ -117,10 +117,10 @@
   color: #2c3e50;
   background: #fcfcfc;
   transition: all 0.25s ease;
-}
 
-.cancelBtn:hover {
-  box-shadow: none;
-  transform: none;
-  background: whitesmoke;
-}
+  :hover {
+    box-shadow: none;
+    transform: none;
+    background: whitesmoke;
+  }
+`;
