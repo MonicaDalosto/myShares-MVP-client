@@ -8,3 +8,4 @@ export * from './ChartContainer';
 export * from './TabMenu';
 export * from './CardBox';
 export * from './Formulary';
+export * from './Modal';

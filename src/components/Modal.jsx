@@ -1,34 +1,42 @@
-import '../modal.css';
 import { RiCloseLine } from 'react-icons/ri';
+import {
+  BGDiv,
+  CenteredDiv,
+  ModalDiv,
+  ModalHeader,
+  Heading,
+  ModalContent,
+  ModalActions,
+  ActionsContainer,
+  CloseBtn,
+  DeleteBtn,
+  CancelBtn
+} from '../styled';
 
 const Modal = ({ setIsOpen, submitDeleteForm, name }) => {
   return (
     <>
-      <div className="darkBG" onClick={() => setIsOpen(false)} />
-      <div className="centered">
-        <div className="modal">
-          <div className="modalHeader">
-            <h5 className="heading">Warning</h5>
-          </div>
-          <button className="closeBtn" onClick={() => setIsOpen(false)}>
+      <BGDiv onClick={() => setIsOpen(false)} />
+      <CenteredDiv>
+        <ModalDiv>
+          <ModalHeader>
+            <Heading>Warning</Heading>
+          </ModalHeader>
+          <CloseBtn onClick={() => setIsOpen(false)}>
             <RiCloseLine style={{ marginBottom: '-3px' }} />
-          </button>
-          <div className="modalContent">
+          </CloseBtn>
+          <ModalContent>
             This action can't be undo. Are you sure you want to
             <strong> delete</strong> {name}?
-          </div>
-          <div className="modalActions">
-            <div className="actionsContainer">
-              <button className="deleteBtn" onClick={submitDeleteForm}>
-                Delete
-              </button>
-              <button className="cancelBtn" onClick={() => setIsOpen(false)}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+          </ModalContent>
+          <ModalActions>
+            <ActionsContainer>
+              <DeleteBtn onClick={submitDeleteForm}>Delete</DeleteBtn>
+              <CancelBtn onClick={() => setIsOpen(false)}>Cancel</CancelBtn>
+            </ActionsContainer>
+          </ModalActions>
+        </ModalDiv>
+      </CenteredDiv>
     </>
   );
 };
