@@ -1,10 +1,8 @@
-import { Title } from '../styled';
-import { Container } from '../styled';
+import { Container, Title } from '../styled';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { selectToken } from '../store/user/selectors';
-import { getAllEmployeesContractsSummary } from '../store/contracts/thunks';
+import { selectToken, selectUser } from '../store/user/selectors';
 import {
   selectAllEmployeeContractsSummary,
   selectTheTotalOfCompanyShares,
@@ -16,6 +14,8 @@ const CompanyDashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
+  const isAdmin = !user ? false : user.isAdmin;
   const allEmployeeContracts = useSelector(selectAllEmployeeContractsSummary);
   const theTotalOfCompanyShares = useSelector(selectTheTotalOfCompanyShares);
   const totalOfContractsPerYear = useSelector(
@@ -25,14 +25,15 @@ const CompanyDashboard = () => {
   useEffect(() => {
     if (token === null) {
       navigate('/login');
+    } else if (!isAdmin) {
+      navigate('/');
     }
-    dispatch(getAllEmployeesContractsSummary());
-  }, [dispatch, token, navigate]);
+  }, [dispatch, token, navigate, isAdmin]);
 
   if (!allEmployeeContracts) {
     return (
       <Container>
-        <Title>Homepage loading...</Title>
+        <Title>Company's Dashboard loading...</Title>
       </Container>
     );
   }
