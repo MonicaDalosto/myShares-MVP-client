@@ -111,7 +111,6 @@ const MenuLink = styled.ul`
 
   &:hover li {
     color: var(--color-nav-hover);
-    // text-decoration: underline;
   }
 `;
 

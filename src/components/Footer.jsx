@@ -55,8 +55,6 @@ const MyFooter = styled.div`
   }
 
   a {
-    // text-decoration: none;
-
     padding: 1em;
     color: var(--color-secondary);
     font-size: 150%;
