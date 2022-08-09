@@ -113,7 +113,6 @@ const EmployeeChangePassword = () => {
           {pwdError && <Paragraph>The "Password" is invalid</Paragraph>}
           {newPwdError && (
             <Ul>
-              {/* The "New Password" is invalid: */}
               <li className={password !== newPassword ? 'valid' : 'invalid'}>
                 The "New Password" must be different from the current password
               </li>

@@ -37,9 +37,10 @@ const EmployeeDashboard = () => {
   );
 
   useEffect(() => {
-    dispatch(getMyContractsSummary());
     if (token === null) {
       navigate('/login');
+    } else {
+      dispatch(getMyContractsSummary());
     }
   }, [dispatch, navigate, token]);
 

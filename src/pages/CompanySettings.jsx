@@ -18,13 +18,13 @@ const CompanySettings = () => {
   const [totalCompanyShares, setTotalCompanyShares] = useState('');
   const [check, setCheck] = useState(false);
 
-  const formValid =
-    name && currentValuation && totalCompanyShares && check ? true : false;
+  const formValid = name && currentValuation && totalCompanyShares && check;
 
   useEffect(() => {
     if (token === null) {
       navigate('/login');
     }
+
     if (company) {
       setName(company.name);
       setCurrentValuation(company.currentValuation);

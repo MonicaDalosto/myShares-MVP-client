@@ -169,7 +169,6 @@ const CompanyTableShares = ({ contracts }) => {
       {
         Header: 'Details Page',
         Cell: ({ row }) => {
-          // console.log(row);
           return (
             <span>
               <Link

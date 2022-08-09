@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createEmployee } from '../store/user/thunks';
 import { selectToken } from '../store/user/selectors';
-import { getAllEmployees } from '../store/employees/thunks';
 import { selectAllEmployees } from '../store/employees/selectors';
 import { EmployeesList } from '../components';
 
@@ -39,7 +38,6 @@ const EmployeeSettings = () => {
     if (token === null) {
       navigate('/login');
     }
-    dispatch(getAllEmployees());
   }, [dispatch, token, navigate]);
 
   const submitForm = event => {

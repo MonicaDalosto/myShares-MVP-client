@@ -39,10 +39,3 @@ export const Formulary = styled.form`
     font-size: 0.8rem;
   }
 `;
-
-// outline: ${props =>
-// props.noOutline
-// ? '2px solid transparent'
-// : '2px solid var(--color-nav-hover)'};
-// border: 2px solid transparent;
-// }

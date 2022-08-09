@@ -111,7 +111,6 @@ const MenuLink = styled.ul`
 
   &:hover li {
     color: var(--color-nav-hover);
-    // text-decoration: underline;
   }
 `;
 
@@ -175,7 +174,7 @@ const Menu = styled.div`
     overflow: hidden;
     flex-direction: column;
     width: 100%;
-    max-height: ${({ open }) => (open ? '300px' : '0')};
+    max-height: ${({ open }) => (open ? '400px' : '0')};
     transition: max-height 0.3s ease-in;
   }
 `;

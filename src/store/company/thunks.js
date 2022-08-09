@@ -33,8 +33,6 @@ export const updateCompanyData =
         }
       );
 
-      // console.log(response.data);
-
       dispatch(setCompany(response.data));
       dispatch(
         showMessageWithTimeout(

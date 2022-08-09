@@ -1,10 +1,8 @@
-import { Title } from '../styled';
-import { Container } from '../styled';
+import { Container, Title } from '../styled';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectToken } from '../store/user/selectors';
-import { getAllEmployeesContractsSummary } from '../store/contracts/thunks';
 import {
   selectAllEmployeeContractsSummary,
   selectTheTotalOfCompanyShares,
@@ -26,13 +24,12 @@ const CompanyDashboard = () => {
     if (token === null) {
       navigate('/login');
     }
-    dispatch(getAllEmployeesContractsSummary());
   }, [dispatch, token, navigate]);
 
   if (!allEmployeeContracts) {
     return (
       <Container>
-        <Title>Homepage loading...</Title>
+        <Title>Company's Dashboard loading...</Title>
       </Container>
     );
   }
