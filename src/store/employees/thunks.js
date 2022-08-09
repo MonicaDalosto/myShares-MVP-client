@@ -52,15 +52,3 @@ export const deleteEmployee = id => async (dispatch, getState) => {
     console.log(error.message);
   }
 };
-
-// export const getSpecificEmployee = id => async (dispatch, getState) => {
-//   try {
-//     const token = getState().user.token;
-//     const response = await axios.get(`${apiUrl}/employees/${id}`, {
-//       headers: { Authorization: `Bearer ${token}` }
-//     });
-//     dispatch(setSpecificEmployee(response.data));
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
