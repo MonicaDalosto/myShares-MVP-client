@@ -107,10 +107,7 @@ const ContractSettings = () => {
             <ContractsList allEmployeeContracts={contractsSummary} />
           </div>
           <div className={`panel ${checkActive(1, 'active')}`}>
-            <Formulary
-              style={{ display: 'flex', flexDirection: 'column' }} // in the future, I should change this style for styled components.
-              onSubmit={submitForm}
-            >
+            <Formulary onSubmit={submitForm}>
               <label>
                 Employee
                 <select

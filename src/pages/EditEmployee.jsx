@@ -37,7 +37,7 @@ const EditEmployee = () => {
   const [isActive, setIsActive] = useState('');
   const [department, setDepartment] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState('');
   const [contracts, setContracts] = useState(0);
 
   const userCanBeDeleted = !contracts;
@@ -51,9 +51,7 @@ const EditEmployee = () => {
     department &&
     endDateValid &&
     !theUserIsTheAdmin &&
-    check
-      ? true
-      : false;
+    check;
 
   useEffect(() => {
     if (token === null) {
@@ -178,7 +176,6 @@ const EditEmployee = () => {
               <label>
                 Is the Employee Admin?
                 <input
-                  noOutline
                   type="checkbox"
                   checked={isAdmin}
                   onChange={event => setIsAdmin(!isAdmin)}
@@ -187,7 +184,6 @@ const EditEmployee = () => {
               <label>
                 Is the Employee Active?
                 <input
-                  noOutline
                   type="checkbox"
                   checked={isActive}
                   onChange={event => setIsActive(!isActive)}
@@ -211,7 +207,7 @@ const EditEmployee = () => {
               <label>
                 Confirm the changes?
                 <input
-                  checkbox
+                  checkbox={check ? 'true' : 'false'}
                   type="checkbox"
                   value={check}
                   onChange={event => setCheck(!check)}
@@ -224,9 +220,7 @@ const EditEmployee = () => {
             </Formulary>
           </div>
           <div className={`panel ${checkActive(1, 'active')}`}>
-            <Formulary
-            // onSubmit={submitDeleteForm}
-            >
+            <Formulary>
               <label>Name: {name}</label>
               <label>Email: {email}</label>
               <label>Department: {department}</label>
