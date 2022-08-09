@@ -68,5 +68,6 @@ export const Table = styled.table`
 
   a {
     text-decoration: none;
+    margin: 0 5px;
   }
 `;

@@ -35,7 +35,6 @@ function GlobalFilter({
         }}
         placeholder={`${count} records...`}
       />
-      {/* {`${count} records...`} */}
     </span>
   );
 }
