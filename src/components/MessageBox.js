@@ -27,15 +27,22 @@ const MessageContainer = styled.div`
   justify-content: space-between;
   margin-top: 64px;
   background-color: ${props =>
-    props.message.variant === 'success' ? '#C2DED1' : '#F4BFBF'};
+    props.message.variant === 'success'
+      ? 'var(--color-success-bg)'
+      : 'var(--color-danger-bg)'};
   height: 50px;
   border-bottom: 1px solid
-    ${props => (props.message.variant === 'success' ? '#6D8B74' : '#F32424')};
+    ${props =>
+      props.message.variant === 'success'
+        ? 'var(--color-success-border)'
+        : 'var(--color-danger-border)'};
 `;
 
 const Text = styled.p`
   color: ${props =>
-    props.message.variant === 'success' ? '#6D8B74' : 'black'};
+    props.message.variant === 'success'
+      ? 'var(--color-success-text)'
+      : 'var(--color-danger-text)'};
   font-weight: bold;
   margin-top: 0px;
   padding: 15px;
