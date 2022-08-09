@@ -2,7 +2,7 @@ import { Container, Title } from '../styled';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { selectToken, selectUser } from '../store/user/selectors';
+import { selectToken } from '../store/user/selectors';
 import {
   selectAllEmployeeContractsSummary,
   selectTheTotalOfCompanyShares,
@@ -14,8 +14,6 @@ const CompanyDashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  const user = useSelector(selectUser);
-  const isAdmin = !user ? false : user.isAdmin;
   const allEmployeeContracts = useSelector(selectAllEmployeeContractsSummary);
   const theTotalOfCompanyShares = useSelector(selectTheTotalOfCompanyShares);
   const totalOfContractsPerYear = useSelector(
@@ -25,10 +23,8 @@ const CompanyDashboard = () => {
   useEffect(() => {
     if (token === null) {
       navigate('/login');
-    } else if (!isAdmin) {
-      navigate('/');
     }
-  }, [dispatch, token, navigate, isAdmin]);
+  }, [dispatch, token, navigate]);
 
   if (!allEmployeeContracts) {
     return (
