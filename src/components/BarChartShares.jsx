@@ -12,7 +12,7 @@ import {
 const BarChartShares = ({ data }) => {
   return (
     <ChartContainer>
-      <h2>Granted Shares X Owned Shares</h2>
+      <h2>Granted Shares &amp; Owned Shares</h2>
       <BarChart
         style={{
           margin: 'auto',
