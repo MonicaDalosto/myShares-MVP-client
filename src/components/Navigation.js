@@ -19,7 +19,10 @@ export const Navigation = () => {
       <Logo>
         <NavLink to={isAdmin ? '/dashboard' : '/'}>
           <li>
-            myShares<span>BV</span>
+            <img
+              src={require('../images/temporaryLogo.png')}
+              alt="chart logo"
+            />
           </li>
         </NavLink>
       </Logo>
@@ -71,12 +74,12 @@ export const Navigation = () => {
           </MenuLink>
           <MenuLink>
             <NavLink to="/employee">
-              <li>Employee</li>
+              <li>Employees</li>
             </NavLink>
           </MenuLink>
           <MenuLink>
             <NavLink to="/contract">
-              <li>Contract</li>
+              <li>Contracts</li>
             </NavLink>
           </MenuLink>
           <MenuLink>
@@ -130,20 +133,17 @@ const Nav = styled.div`
 `;
 
 const Logo = styled.ul`
-  padding: 1rem 0;
+  padding: 5px 0;
   a {
     text-decoration: none;
   }
+  img {
+    height: 60px;
+  }
   li {
-    font-weight: 800;
-    font-size: 1.7rem;
     color: var(--color-secondary);
     list-style: none;
     transition: all 0.3s ease-in;
-  }
-  span {
-    font-weight: 300;
-    font-size: 1.3rem;
   }
 `;
 

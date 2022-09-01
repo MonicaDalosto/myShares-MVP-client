@@ -28,7 +28,10 @@ const ForgotPasswordEmail = () => {
           Email Address
           <input
             value={email}
-            onChange={event => setEmail(event.target.value)}
+            onChange={event => {
+              setEmail(event.target.value);
+              setEmailError(!validEmail.test(event.target.value));
+            }}
             onBlur={event =>
               setEmailError(!validEmail.test(event.target.value))
             }

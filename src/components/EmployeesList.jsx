@@ -49,7 +49,7 @@ const EmployeesList = ({ allEmployees }) => {
         accessor: 'email'
       },
       {
-        Header: 'Is Admin',
+        Header: 'Admin',
         Cell: ({ row }) => <span>{row.original.isAdmin ? '✔️' : '✖️'}</span>
       },
       {
@@ -66,7 +66,7 @@ const EmployeesList = ({ allEmployees }) => {
         )
       },
       {
-        Header: 'Is Active',
+        Header: 'Active',
         Cell: ({ row }) => (
           <span>{row.original.employee.isActive ? '✔️' : '✖️'}</span>
         )
